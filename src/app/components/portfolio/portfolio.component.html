@@ -1,0 +1,153 @@
+<section class="h-full overflow-y-auto">
+  <app-navbar [title]="'Profile'"></app-navbar>
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+    <section class="bg-white rounded-lg p-5 flex flex-col items-center gap-5">
+
+      <div class="flex flex-col items-center gap-1 font-medium">
+        <img [src]="detailsService.details.imagePath" alt="" class="w-20 h-20 rounded-full">
+        <p>{{detailsService.details.name}}</p>
+        <button class="bg-orange-500 text-white rounded-lg w-fit px-3">Vip</button>
+      </div>
+      <div class="flex justify-evenly items-center w-full">
+        <p class="flex flex-col items-center gap-1">
+          <span class="font-medium w-10 h-10 flex justify-center items-center text-violet-500 bg-violet-500 bg-opacity-10 text-xl rounded-full">08</span>
+          <span>Course in progress</span>
+        </p>
+        <p class="flex flex-col items-center gap-1">
+          <span class="font-medium w-10 h-10 flex justify-center items-center text-green-500 bg-green-500 bg-opacity-10 text-xl rounded-full">25</span>
+          <span>Course Complete</span>
+        </p>
+      </div>
+      <div class="w-full">
+        <h1 class="text-xl font-medium mb-2">Last Achievement</h1>
+        <p class="flex gap-1 justify-between">
+          <span class="flex justify-center items-center w-16 h-16 bg-red-500 bg-opacity-10 p-2 rounded-full">
+            <img class="w-12" src="https://th.bing.com/th/id/R.9a1d3d82821bbad21acb213eb324e60d?rik=fWI2hRHCiBIryQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2fcrown%2fcrown_PNG23847.png&ehk=KvM7rIAiS4KyRFnXovWqurcfn8cOYRH1LyGSadeLybM%3d&risl=&pid=ImgRaw&r=0" alt="">
+          </span>
+          <span class="flex justify-center items-center w-16 h-16 bg-red-500 bg-opacity-10 p-2 rounded-full">
+            <img class="h-12" src="https://www.pngall.com/wp-content/uploads/4/Golden-Cup-PNG-Picture.png" alt="">
+          </span>
+          <span class="flex justify-center items-center w-16 h-16 bg-red-500 bg-opacity-10 p-2 rounded-full">
+            <img class="w-12" src="https://cdn-icons-png.flaticon.com/512/727/727573.png" alt="">
+          </span>
+          <span class="flex justify-center items-center w-16 h-16 bg-red-500 bg-opacity-10 p-2 rounded-full">
+            <img class="w-12" src="https://png.pngtree.com/png-clipart/20230402/original/pngtree-gold-medal-number-one-png-image_9018890.png" alt="">
+          </span>
+        </p>
+      </div>
+      <div class="w-full">
+        <h1 class="text-xl font-medium mb-2">Support</h1>
+        <ul class="flex flex-col gap-2">
+          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-blue-500 text-blue-500 bg-opacity-10"><i class="fa-solid fa-user"></i></span> Become a mentor</li>
+          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-green-500 text-green-500 bg-opacity-10"><i class="fa-regular fa-life-ring"></i></span> Support</li>
+          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-violet-500 text-violet-500 bg-opacity-10"><i class="fa-solid fa-user-group"></i></span> Invite friend</li>
+          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-red-500 text-red-500 bg-opacity-10"><i class="fa-solid fa-trash-can"></i></span> Delete Account</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="lg:col-span-2 bg-white rounded-lg p-5">
+
+      <h1 class="text-xl font-medium mb-5">Profile Setting</h1>
+      <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
+        <li (click)="handleActiveLink('personalDetails')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='personalDetails'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Personal Details</li>
+        <li (click)="handleActiveLink('notification')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='notification'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Notification</li>
+        <li (click)="handleActiveLink('privacy')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='privacy'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Privacy</li>
+        <li (click)="handleActiveLink('payment')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='payment'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Payment</li>
+      </ul>
+
+      <div *ngIf="activeProfileSetting=='personalDetails'" >
+        <form #myForm="ngForm" (submit)="submitChanges(myForm)" class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-7">
+          <div class="relative w-fit mx-auto cursor-pointer lg:col-span-2">
+            <p class="absolute -bottom-1 -right-1 bg-violet-500 text-white w-7 h-7 rounded-full flex justify-center items-center"><i class="fa-solid fa-camera"></i></p>
+            <label for="imagePath"><img [src]="detailsService.details.imagePath" alt="" class="w-20 h-20 rounded-full" ></label>
+            <input id="imagePath" name="imagePath" type="file" ngModel required [value]="detailsService.details.imagePath" class="hidden">
+          </div>
+          <div class="relative">
+            <label for="name" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Full Name</label>
+            <input id="name" name="name" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.name" placeholder="full name">
+          </div>
+          <div class="relative">
+            <label for="email" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Email Address</label>
+            <input id="email" name="email" type="email" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.email" placeholder="your email">
+          </div>
+          <div class="relative lg:col-span-2">
+            <label for="address" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Address</label>
+            <input id="address" name="address" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.address" placeholder="your address">
+          </div>
+          <div class="relative">
+            <label for="city" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">City</label>
+            <input id="city" name="city" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.city" placeholder="your city">
+          </div>
+          <div class="relative">
+            <label for="state" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">State</label>
+            <input id="state" name="state" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.state" placeholder="state">
+          </div>
+          <div class="relative">
+            <label for="zipCode" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Zip Code</label>
+            <input id="zipCode" name="zipCode" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.zipCode" placeholder="00000">
+          </div>
+          <div class="relative">
+            <label for="country" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Country</label>
+            <input id="country" name="country" type="text" class="duration-300 focus:border-green-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.country" placeholder="your country">
+          </div>
+          <div class="flex gap-5">
+            <button type="submit" class="flex-1 bg-green-500 text-white py-3 rounded-lg duration-300 hover:shadow-green-500 hover:shadow">Save Profile</button>
+            <button class="flex-1 border-2 border-green-500 text-green-500 py-3 rounded-lg duration-300 hover:shadow-green-500 hover:shadow">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="activeProfileSetting=='notification'" class="" >
+          <h2 class="text-xl font-medium mb-5">Notifications</h2>
+          <ul class="flex flex-col gap-5">
+            <li *ngFor="let notification of detailsService.notifications" class="flex justify-between items-center border-2 border-neutral-200 text-neutral-500 py-2 px-4 rounded-lg cursor-pointer">
+              <p class="flex items-center gap-2"><span class="block w-3 h-3 bg-green-500 rounded-full"></span>{{notification.message}}</p>
+              <p>{{notification.time}}</p>
+            </li>
+          </ul>
+      </div>
+
+      <div *ngIf="activeProfileSetting=='privacy'" >
+          <h2 class="text-xl font-medium mb-5">Privacy Settings</h2>
+          <div class="space-y-4">
+            <div class="flex items-center justify-between p-3 border rounded-md">
+              <label for="label_1" class="text-gray-500 cursor-pointer">Allow Profile Visibility</label>
+              <input id="label_1" name="label_1" type="checkbox" class="toggle-checkbox cursor-pointer">
+            </div>
+            <div class="flex items-center justify-between p-3 border rounded-md">
+              <label for="label_2" class="text-gray-500 cursor-pointer">Enable Two-Factor Authentication</label>
+              <input id="label_2" name="label_2" type="checkbox" class="toggle-checkbox cursor-pointer">
+            </div>
+            <div class="flex items-center justify-between p-3 border rounded-md">
+              <label for="label_3" class="text-gray-500 cursor-pointer">Receive Email Notifications</label>
+              <input id="label_3" name="label_3" type="checkbox" class="toggle-checkbox cursor-pointer">
+            </div>
+            <button class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">
+              Save Changes
+            </button>
+          </div>
+      </div>
+
+      <div *ngIf="activeProfileSetting=='payment'" class="">
+          <h2 class="text-xl font-medium mb-5">Payment Settings</h2>
+          <div class="space-y-4">
+            <div class="border p-4 rounded-md flex justify-between items-center">
+              <div>
+                <p class="text-gray-700 font-medium">Visa **** 1234</p>
+                <p class="text-gray-500 text-sm">Expires 12/26</p>
+              </div>
+              <button class="text-red-500 hover:text-red-700">Remove</button>
+            </div>
+            <button class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+              Add New Payment Method
+            </button>
+          </div>
+      </div>
+
+    </section>
+
+  </section>
+</section>

@@ -1,0 +1,14 @@
+::ng-deep .fc-daygrid-day-frame {
+  min-height: 30px !important; /* Reduce cell height */
+  display: flex;
+  align-items: center; /* Center content */
+  justify-content: center;
+}
+
+::ng-deep .fc-daygrid-day {
+  height: 35px !important; /* Adjust row height */
+}
+
+::ng-deep .fc-daygrid-body {
+  height: auto !important;
+}

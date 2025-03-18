@@ -1,0 +1,183 @@
+<app-navbar [title]="'My Course'"></app-navbar>
+
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+  <section class="lg:col-span-2 bg-white rounded-lg p-5">
+
+    <iframe
+      width="100%"
+      class="rounded-lg mb-5 h-52 md:h-64 lg:h-80"
+      src="https://www.youtube.com/embed/3q3FV65ZrUs"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+
+    <h1 class="text-lg md:text-xl font-medium">Introduction to figma basic to advanced</h1>
+
+    <p class="flex items-center justify-between text-neutral-500 mb-5">
+      <span>William Joe | Figma | <span class="cursor-pointer text-green-500">+ Follow</span></span>
+      <button class="px-2 py-1 rounded-lg border-2 border-green-500 text-green-500 duration-300 hover:shadow hover:shadow-green-500">Become a member</button>
+    </p>
+
+    <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
+      <li (click)="handleActiveLink('Overview')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Overview'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Overview</li>
+      <li (click)="handleActiveLink('FAQ')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='FAQ'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">FAQ</li>
+      <li (click)="handleActiveLink('Discussion')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Discussion'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Discussion</li>
+      <li (click)="handleActiveLink('Reviews')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Reviews'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Reviews</li>
+    </ul>
+
+    <div *ngIf="activeCourseLink=='Overview'">
+      <h2 class="text-lg font-medium mb-0 ">Course Description</h2>
+      <p class="text-neutral-500 font-normal text-sm">Progressively synthesize clicks-and-mortar infrastructures for impactful quality vectors. Seamlessly innovate corporate best practices via standardized models. Intrinsicly grow sustainable relationships with world-class relationships.</p>
+      <h2 class="text-lg font-medium mb-0 mt-3">Course Outcomes</h2>
+      <ul class="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-normal text-neutral-500">
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> 15 lectures and 5.5 hours of content!</li>
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> Live project end to end software.</li>
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> All about Figma.</li>
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> Basics designing in Figma.</li>
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> Wire Frame, UX-UI design.</li>
+        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-green-500"></span> Design mobile and desktop apps.</li>
+      </ul>
+      <h2 class="text-lg font-medium mb-0 mt-3">Audience</h2>
+      <p class="text-neutral-500 font-normal text-sm">Credibly recaptiualize parallel sources and visionary mindshare. Conveniently fabricate out-of-the-box functionalities vis-a-vis excellent
+        core competencies. Compellingly re-engineer user friendly scenarios vis-a-vis magnetic infrastructures.. Intrinsicly enhance world-class paradigms for standardized</p>
+    </div>
+
+    <div *ngIf="activeCourseLink=='FAQ'" class="flex flex-col gap-5">
+      <h2 class="flex items-center justify-between text-lg">
+        Marketing Introduction
+        <span class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-green-500 bg-opacity-10 text-green-500"><i class="fa-solid fa-minus"></i></span>
+      </h2>
+      <p class="text-neutral-500 text-sm font-normal flex items-center justify-between">
+        Progressively synthesize clicks-and-mortar infrastructures for impactful quality vectors. Seamlessly innovate corporate best practices via standardized models. Intrinsicly grow sustainable relationships with world-class relationships.
+        <span class="flex w-8 h-8"></span>
+      </p>
+      <h2 class="flex items-center justify-between text-lg">
+        Marketing tools
+        <span class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-green-500 bg-opacity-10 text-green-500"><i class="fa-solid fa-plus"></i></span>
+      </h2>
+      <h2 class="flex items-center justify-between text-lg">
+        Digital Marketing
+        <span class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-green-500 bg-opacity-10 text-green-500"><i class="fa-solid fa-plus"></i></span>
+      </h2>
+      <h2 class="flex items-center justify-between text-lg">
+        How to marketing for my website?
+        <span class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-green-500 bg-opacity-10 text-green-500"><i class="fa-solid fa-plus"></i></span>
+      </h2>
+      <h2 class="flex items-center justify-between text-lg">
+        Marketing Rools
+        <span class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-green-500 bg-opacity-10 text-green-500"><i class="fa-solid fa-plus"></i></span>
+      </h2>
+    </div>
+
+    <div *ngIf="activeCourseLink=='Discussion'">
+      <div class="flex items-center gap-2 mb-2 ">
+        <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt="" class="w-12 h-12 rounded-full shadow-lg" >
+        <p class="flex flex-col">
+          <span class="font-medium">John Doe</span>
+          <span class="text-neutral-500">Student 2h ago</span>
+        </p>
+      </div>
+      <p class="text-sm font-normal text-neutral-500">
+        Compellingly aggregate revolutionary functionalities for customized methods of empowerment. Competently the coordinate resource sucking methods of empowerment with clicks-and-mortar relationships. Objectively rategize premier relationships via covalent niche markets. Assertively repurpose cross-platform relationships rather than diverse content.
+      </p>
+      <div class="flex items-center gap-2 mb-2 mt-5">
+        <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt="" class="w-12 h-12 rounded-full shadow-lg" >
+        <p class="flex flex-col">
+          <span class="font-medium">John Doe</span>
+          <span class="text-neutral-500">Student 2h ago</span>
+        </p>
+      </div>
+      <p class="text-sm font-normal text-neutral-500">
+        Compellingly aggregate revolutionary functionalities for customized methods of empowerment. Competently the coordinate resource sucking methods of empowerment with clicks-and-mortar relationships.
+      </p>
+    </div>
+
+    <div *ngIf="activeCourseLink=='Reviews'">
+      <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div>
+          <h2 class="font-medium text-lg mb-2">Average Rating</h2>
+          <p class="flex flex-col gap-2 items-center justify-center bg-green-500 bg-opacity-10 p-5 rounded-lg text-lg">
+            <span class="font-medium text-xl text-green-500">4.3</span>
+            <span class="flex items-center gap-1 text-sm">
+              <i class="fa-solid fa-star text-green-500"></i>
+              <i class="fa-solid fa-star text-green-500"></i>
+              <i class="fa-solid fa-star text-green-500"></i>
+              <i class="fa-solid fa-star text-green-500"></i>
+              <i class="fa-solid fa-star text-green-500 text-opacity-50"></i>
+            </span>
+            <span>Rating</span>
+          </p>
+        </div>
+        <div class="lg:col-span-2">
+          <h2 class="font-medium text-lg">Details Rating</h2>
+          <ul class="flex flex-col gap-1">
+            <li *ngFor="let i of [57,26,12,3,80]" class="flex gap-5 items-center">
+              <span>{{i<10?"0"+i:i}}%</span>
+              <span class="flex items-center gap-1 text-sm">
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-neutral-200"></i>
+              </span>
+              <span class="block flex-1 h-2 bg-neutral-200 rounded-lg"><span style.width="{{i}}%" class="block h-2 bg-violet-500 rounded-lg"></span></span>
+            </li>
+          </ul>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="flex items-center gap-2 mb-2 ">
+            <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt="" class="w-12 h-12 rounded-full shadow-lg" >
+            <p class="flex flex-col">
+              <span class="font-medium mb-1">John Doe</span>
+              <span class="flex items-center gap-1 text-sm">
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-neutral-200"></i>
+              </span>
+            </p>
+          </div>
+          <p>I don't have much time and the opprotunity to go outside learnig this class. This online Figma course is the best solution for me.</p>
+          <textarea class="h-32 w-full mt-3 mb-2 border-2 border-neutral-200 resize-none p-3 rounded-lg duration-300 hover:outline-green-500" placeholder="feedback here"></textarea>
+          <button class="px-6 py-1 rounded-lg text-xl text-white bg-green-500 duration-300 hover:shadow-md hover:shadow-green-500">Submit</button>
+        </div>
+      </section>
+    </div>
+
+  </section>
+
+  <section class=" bg-white rounded-lg p-5">
+    <h2 class="text-lg font-medium ">Course Content</h2>
+    <p class="text-sm text-neutral-500 mb-5">Lecture(15) Total(5.5 h)</p>
+    <ul class="flex flex-col gap-5">
+      <li *ngFor="let module of courseModulesService.modules" class="">
+        <p class="flex justify-between items-center">
+          <span class="font-medium">{{module.title}}</span>
+          <span class="text-neutral-500 text-sm font-normal opacity-75">
+            <i class="fa-solid fa-book-open text-violet-500 me-1"></i>{{module.lectures}} Lecture
+            <i class="fa-solid fa-clock text-violet-500 me-1 ms-2"></i>{{module.duration}} Min
+          </span>
+          <span>
+            <i (click)="module.open=!module.open" *ngIf="!module.open" class="cursor-pointer duration-300 fa-regular fa-square-caret-up bg-green-500 bg-opacity-10 p-2 rounded-full text-green-500"></i>
+            <i (click)="module.open=!module.open" *ngIf="module.open" class="cursor-pointer duration-300 fa-regular fa-square-caret-down text-white p-2 rounded-full bg-green-500"></i>
+          </span>
+        </p>
+        <p class="text-neutral-500">Introduction</p>
+        <ul *ngIf="module.open" class="flex flex-col my-2">
+          <li *ngFor="let lesson of module.lessons" class="py-2 flex items-center gap-3 cursor-pointer relative" (click)="lesson.completed=!lesson.completed">
+            <span class="absolute top-0 left-1 block w-1 h-full bg-green-500 bg-opacity-20"></span>
+            <input type="checkbox" [checked]="lesson.completed" class="cursor-pointer accent-green-500 z-10">
+            <p class="flex flex-col gap-0">
+              <span class="text-sm font-medium">{{lesson.title}}</span>
+              <span class="text-neutral-500 text-sm flex items-center gap-1"><i class="fa-solid fa-circle-play text-xs text-green-500"></i>1 video | {{lesson.duration}}</span>
+            </p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </section>
+
+</section>

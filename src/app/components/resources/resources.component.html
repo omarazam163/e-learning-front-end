@@ -1,0 +1,54 @@
+<section class="">
+  <app-navbar [title]="'Resources'"></app-navbar>
+  <section class="p-5 rounded-lg bg-white">
+
+    <p class="flex justify-between items-center mb-5">
+      <span class="text-xl font-medium">My Resources</span>
+      <button class="bg-green-500 text-white py-2 px-6 rounded-lg duration-300 hover:shadow-md hover:shadow-green-500">+ Add new resources</button>
+    </p>
+
+    <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
+      <li (click)="handleActiveCategory('Blog')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCategory=='Blog'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Blog Site</li>
+      <li (click)="handleActiveCategory('Illustration')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCategory=='Illustration'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Illustration Site</li>
+      <li (click)="handleActiveCategory('Typography')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCategory=='Typography'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Typography Site</li>
+      <li (click)="handleActiveCategory('Icon')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCategory=='Icon'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Icon Site</li>
+      <li (click)="handleActiveCategory('Image')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCategory=='Image'?'border-b-green-500 text-green-500':'text-neutral-500 border-b-transparent'}}">Image Site</li>
+    </ul>
+
+    <ul *ngIf="activeCategory=='Blog'" class="flex flex-col gap-5">
+      <li *ngFor="let site of blogSites" class="flex justify-between items-center px-4 py-2 rounded-lg bg-neutral-200 shadow bg-opacity-25 duration-300 hover:bg-opacity-75">
+        <span class="flex items-center gap-2"><span class="block w-2 h-2 bg-green-500 rounded-full"></span>{{site}}</span>
+        <span class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-lg bg-neutral-500 bg-opacity-10 text-neutral-500"><i class="fa-solid fa-pen"></i></span>
+      </li>
+    </ul>
+
+    <ul *ngIf="activeCategory=='Illustration'" class="flex flex-col gap-5">
+      <li *ngFor="let site of illustrationSites" class="flex justify-between items-center px-4 py-2 rounded-lg bg-neutral-200 shadow bg-opacity-25 duration-300 hover:bg-opacity-75">
+        <span class="flex items-center gap-2"><span class="block w-2 h-2 bg-green-500 rounded-full"></span>{{site}}</span>
+        <span class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-lg bg-neutral-500 bg-opacity-10 text-neutral-500"><i class="fa-solid fa-pen"></i></span>
+      </li>
+    </ul>
+
+    <ul *ngIf="activeCategory=='Typography'" class="flex flex-col gap-5">
+      <li *ngFor="let site of typographySites" class="flex justify-between items-center px-4 py-2 rounded-lg bg-neutral-200 shadow bg-opacity-25 duration-300 hover:bg-opacity-75">
+        <span class="flex items-center gap-2"><span class="block w-2 h-2 bg-green-500 rounded-full"></span>{{site}}</span>
+        <span class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-lg bg-neutral-500 bg-opacity-10 text-neutral-500"><i class="fa-solid fa-pen"></i></span>
+      </li>
+    </ul>
+
+    <ul *ngIf="activeCategory=='Icon'" class="flex flex-col gap-5">
+      <li *ngFor="let site of iconSites" class="flex justify-between items-center px-4 py-2 rounded-lg bg-neutral-200 shadow bg-opacity-25 duration-300 hover:bg-opacity-75">
+        <span class="flex items-center gap-2"><span class="block w-2 h-2 bg-green-500 rounded-full"></span>{{site}}</span>
+        <span class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-lg bg-neutral-500 bg-opacity-10 text-neutral-500"><i class="fa-solid fa-pen"></i></span>
+      </li>
+    </ul>
+
+    <ul *ngIf="activeCategory=='Image'" class="flex flex-col gap-5">
+      <li *ngFor="let site of imageSites" class="flex justify-between items-center px-4 py-2 rounded-lg bg-neutral-200 shadow bg-opacity-25 duration-300 hover:bg-opacity-75">
+        <span class="flex items-center gap-2"><span class="block w-2 h-2 bg-green-500 rounded-full"></span>{{site}}</span>
+        <span class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-lg bg-neutral-500 bg-opacity-10 text-neutral-500"><i class="fa-solid fa-pen"></i></span>
+      </li>
+    </ul>
+
+  </section>
+</section>
