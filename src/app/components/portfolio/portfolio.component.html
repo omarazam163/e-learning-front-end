@@ -14,7 +14,7 @@
           <span>Course in progress</span>
         </p>
         <p class="flex flex-col items-center gap-1">
-          <span class="font-medium w-10 h-10 flex justify-center items-center text-emerald-500 bg-emerald-500 bg-opacity-10 text-xl rounded-full">25</span>
+          <span class="font-medium w-10 h-10 flex justify-center items-center text-blue-500 bg-blue-500 bg-opacity-10 text-xl rounded-full">25</span>
           <span>Course Complete</span>
         </p>
       </div>
@@ -39,7 +39,7 @@
         <h1 class="text-xl font-medium mb-2">Support</h1>
         <ul class="flex flex-col gap-2">
           <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-blue-500 text-blue-500 bg-opacity-10"><i class="fa-solid fa-user"></i></span> Become a mentor</li>
-          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-emerald-500 text-emerald-500 bg-opacity-10"><i class="fa-regular fa-life-ring"></i></span> Support</li>
+          <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-blue-500 text-blue-500 bg-opacity-10"><i class="fa-regular fa-life-ring"></i></span> Support</li>
           <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-violet-500 text-violet-500 bg-opacity-10"><i class="fa-solid fa-user-group"></i></span> Invite friend</li>
           <li class="flex gap-2 items-center"><span class="w-10 h-10 flex justify-center items-center rounded-full bg-red-500 text-red-500 bg-opacity-10"><i class="fa-solid fa-trash-can"></i></span> Delete Account</li>
         </ul>
@@ -51,10 +51,10 @@
 
       <h1 class="text-xl font-medium mb-5">Profile Setting</h1>
       <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
-        <li (click)="handleActiveLink('personalDetails')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='personalDetails'?'border-b-emerald-500 text-emerald-500':'text-neutral-500 border-b-transparent'}}">Personal Details</li>
-        <li (click)="handleActiveLink('notification')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='notification'?'border-b-emerald-500 text-emerald-500':'text-neutral-500 border-b-transparent'}}">Notification</li>
-        <li (click)="handleActiveLink('privacy')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='privacy'?'border-b-emerald-500 text-emerald-500':'text-neutral-500 border-b-transparent'}}">Privacy</li>
-        <li (click)="handleActiveLink('payment')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='payment'?'border-b-emerald-500 text-emerald-500':'text-neutral-500 border-b-transparent'}}">Payment</li>
+        <li (click)="handleActiveLink('personalDetails')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='personalDetails'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">Personal Details</li>
+        <li (click)="handleActiveLink('notification')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='notification'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">Notification</li>
+        <li (click)="handleActiveLink('privacy')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='privacy'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">Privacy</li>
+        <li (click)="handleActiveLink('payment')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeProfileSetting=='payment'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">Payment</li>
       </ul>
 
       <div *ngIf="activeProfileSetting=='personalDetails'" >
@@ -66,35 +66,35 @@
           </div>
           <div class="relative">
             <label for="name" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Full Name</label>
-            <input id="name" name="name" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.name" placeholder="full name">
+            <input id="name" name="name" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.name" placeholder="full name">
           </div>
           <div class="relative">
             <label for="email" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Email Address</label>
-            <input id="email" name="email" type="email" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.email" placeholder="your email">
+            <input id="email" name="email" type="email" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.email" placeholder="your email">
           </div>
           <div class="relative lg:col-span-2">
             <label for="address" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Address</label>
-            <input id="address" name="address" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.address" placeholder="your address">
+            <input id="address" name="address" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.address" placeholder="your address">
           </div>
           <div class="relative">
             <label for="city" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">City</label>
-            <input id="city" name="city" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.city" placeholder="your city">
+            <input id="city" name="city" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.city" placeholder="your city">
           </div>
           <div class="relative">
             <label for="state" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">State</label>
-            <input id="state" name="state" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.state" placeholder="state">
+            <input id="state" name="state" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.state" placeholder="state">
           </div>
           <div class="relative">
             <label for="zipCode" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Zip Code</label>
-            <input id="zipCode" name="zipCode" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.zipCode" placeholder="00000">
+            <input id="zipCode" name="zipCode" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.zipCode" placeholder="00000">
           </div>
           <div class="relative">
             <label for="country" class="absolute bg-white h-6 flex items-center -top-3 px-2 left-2 text-sm text-neutral-500 font-medium">Country</label>
-            <input id="country" name="country" type="text" class="duration-300 focus:border-emerald-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.country" placeholder="your country">
+            <input id="country" name="country" type="text" class="duration-300 focus:border-blue-500 outline-none w-full p-3 rounded-lg border-2 border-neutral-200" ngModel required [value]="detailsService.details.country" placeholder="your country">
           </div>
           <div class="flex gap-5">
-            <button type="submit" class="flex-1 bg-emerald-500 text-white py-3 rounded-lg duration-300 hover:shadow-emerald-500 hover:shadow">Save Profile</button>
-            <button class="flex-1 border-2 border-emerald-500 text-emerald-500 py-3 rounded-lg duration-300 hover:shadow-emerald-500 hover:shadow">Cancel</button>
+            <button type="submit" class="flex-1 bg-blue-500 text-white py-3 rounded-lg duration-300 hover:shadow-blue-500 hover:shadow">Save Profile</button>
+            <button class="flex-1 border-2 border-blue-500 text-blue-500 py-3 rounded-lg duration-300 hover:shadow-blue-500 hover:shadow">Cancel</button>
           </div>
         </form>
       </div>
@@ -103,7 +103,7 @@
           <h2 class="text-xl font-medium mb-5">Notifications</h2>
           <ul class="flex flex-col gap-5">
             <li *ngFor="let notification of detailsService.notifications" class="flex justify-between items-center border-2 border-neutral-200 text-neutral-500 py-2 px-4 rounded-lg cursor-pointer">
-              <p class="flex items-center gap-2"><span class="block w-3 h-3 bg-emerald-500 rounded-full"></span>{{notification.message}}</p>
+              <p class="flex items-center gap-2"><span class="block w-3 h-3 bg-blue-500 rounded-full"></span>{{notification.message}}</p>
               <p>{{notification.time}}</p>
             </li>
           </ul>
@@ -124,7 +124,7 @@
               <label for="label_3" class="text-gray-500 cursor-pointer">Receive Email Notifications</label>
               <input id="label_3" name="label_3" type="checkbox" class="toggle-checkbox cursor-pointer">
             </div>
-            <button class="w-full bg-emerald-500 text-white py-2 rounded-md hover:bg-green-600">
+            <button class="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
               Save Changes
             </button>
           </div>

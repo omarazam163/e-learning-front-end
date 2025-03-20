@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-schedule',
-  imports: [NavbarComponent , CommonModule , FullCalendarModule ],
+  imports: [CommonModule , FullCalendarModule ],
   templateUrl: './schedule.component.html',
   styleUrl: './schedule.component.scss'
 })

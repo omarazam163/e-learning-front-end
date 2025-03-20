@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-settings',
-  imports: [NavbarComponent , CommonModule],
+  imports: [CommonModule],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss'
 })

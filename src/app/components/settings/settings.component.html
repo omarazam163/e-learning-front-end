@@ -2,27 +2,27 @@
   <section class="grid grid-cols-12 gap-2 md:gap-5">
 
     <ul class="col-span-12 md:col-span-3 lg:col-span-2 grid grid-cols-2 md:grid-cols-1 gap-4">
-      <li (click)="handleActiveSettings('general')" class="{{activeSetting=='general'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
+      <li (click)="handleActiveSettings('general')" class="{{activeSetting=='general'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
         <span class="flex items-center justify-center w-8 h-8 rounded-full text-lg bg-red-500 bg-opacity-10 text-red-500"><i class="fa-solid fa-gear"></i></span>
         <span>General</span>
       </li>
-      <li (click)="handleActiveSettings('profile')" class="{{activeSetting=='profile'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
+      <li (click)="handleActiveSettings('profile')" class="{{activeSetting=='profile'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
         <span class="flex items-center justify-center w-8 h-8 rounded-full text-lg bg-yellow-500 bg-opacity-10 text-yellow-500"><i class="fa-solid fa-user"></i></span>
         <span>User Profile</span>
       </li>
-      <li (click)="handleActiveSettings('notification')" class="{{activeSetting=='notification'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
-        <span class="{{activeSetting=='notification'?'bg-white text-white':'text-emerald-500'}} flex items-center justify-center w-8 h-8 rounded-full text-lg bg-emerald-500 bg-opacity-10"><i class="fa-solid fa-envelope"></i></span>
+      <li (click)="handleActiveSettings('notification')" class="{{activeSetting=='notification'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
+        <span class="{{activeSetting=='notification'?'bg-white text-white':'text-blue-500'}} flex items-center justify-center w-8 h-8 rounded-full text-lg bg-blue-500 bg-opacity-10"><i class="fa-solid fa-envelope"></i></span>
         <span>Email Notification</span>
       </li>
-      <li (click)="handleActiveSettings('subscription')" class="{{activeSetting=='subscription'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
+      <li (click)="handleActiveSettings('subscription')" class="{{activeSetting=='subscription'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
         <span class="flex items-center justify-center w-8 h-8 rounded-full text-lg bg-violet-500 bg-opacity-10 text-violet-500"><i class="fa-solid fa-dollar-sign"></i></span>
         <span>Subscription</span>
       </li>
-      <li (click)="handleActiveSettings('payment')" class="{{activeSetting=='payment'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
+      <li (click)="handleActiveSettings('payment')" class="{{activeSetting=='payment'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
         <span class="flex items-center justify-center w-8 h-8 rounded-full text-lg bg-orange-500 bg-opacity-10 text-orange-500"><i class="fa-solid fa-wallet"></i></span>
         <span>Payment</span>
       </li>
-      <li (click)="handleActiveSettings('reminder')" class="{{activeSetting=='reminder'?'bg-emerald-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-emerald-500 hover:bg-opacity-5">
+      <li (click)="handleActiveSettings('reminder')" class="{{activeSetting=='reminder'?'bg-blue-500 text-white':'bg-white text-black'}} flex items-center justify-center flex-col gap-1 p-4 rounded-lg cursor-pointer duration-300 hover:bg-blue-500 hover:bg-opacity-5">
         <span class="flex items-center justify-center w-8 h-8 rounded-full text-lg bg-indigo-500 bg-opacity-10 text-indigo-500"><i class="fa-solid fa-bell"></i></span>
         <span>Learning Reminder</span>
       </li>
@@ -36,7 +36,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>
@@ -49,7 +49,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>
@@ -62,7 +62,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>
@@ -75,7 +75,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>
@@ -88,7 +88,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>
@@ -101,7 +101,7 @@
         <ul class="flex flex-col gap-3">
           <li *ngFor="let n of nots;" class="flex items-center justify-between">
             <p>{{n.title}}</p>
-            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-emerald-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
+            <span (click)="n.active=!n.active" class="block w-12 h-4 rounded-lg {{n.active?'bg-blue-500':'bg-neutral-300'}} relative duration-300 shadow-md cursor-pointer">
               <span class="block w-5 h-5 bg-white rounded-full absolute top-1/2 -translate-y-1/2 duration-300 {{n.active?'right-0':'left-0'}}"></span>
             </span>
           </li>

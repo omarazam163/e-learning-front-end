@@ -6,7 +6,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-course-detail',
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule],
   templateUrl: './course-detail.component.html',
   styleUrl: './course-detail.component.scss'
 })

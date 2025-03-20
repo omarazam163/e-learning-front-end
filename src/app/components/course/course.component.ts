@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-course',
-  imports: [NavbarComponent , CommonModule , RouterModule],
+  imports: [CommonModule , RouterModule],
   templateUrl: './course.component.html',
   styleUrl: './course.component.scss'
 })

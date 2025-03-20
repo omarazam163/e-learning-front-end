@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
-  imports: [NavbarComponent , CommonModule , FormsModule],
+  imports: [CommonModule , FormsModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.scss'
 })

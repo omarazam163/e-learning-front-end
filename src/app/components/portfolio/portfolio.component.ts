@@ -6,7 +6,7 @@ import { DetailsService } from '../../services/details.service';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [NavbarComponent , CommonModule , FormsModule],
+  imports: [ CommonModule , FormsModule],
   templateUrl: './portfolio.component.html',
   styleUrl: './portfolio.component.scss'
 })

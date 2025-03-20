@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resources',
-  imports: [NavbarComponent , CommonModule],
+  imports: [ CommonModule],
   templateUrl: './resources.component.html',
   styleUrl: './resources.component.scss'
 })
