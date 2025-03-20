@@ -1,6 +1,4 @@
 <section class="">
-  <app-navbar [title]="'My Course'"></app-navbar>
-
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
     <li *ngFor="let course of coursesService.courses" class="bg-white p-5  rounded-lg flex flex-col gap-3 cursor-pointer" [routerLink]="'/course/'+ course.courseId" >
 

@@ -1,13 +1,15 @@
 
 <section class="w-60 h-full p-5 duration-300 z-50">
-
   <div class="p-5 bg-white h-full rounded-lg shadow-md ">
 
     <h1 class="text-center text-2xl font-semibold">Estudy</h1>
     <p class="text-center text-neutral-500 mb-10">Learn From Home</p>
     <ul class="flex flex-col gap-3">
       <li class=" " *ngFor="let link of linksService.links; index as i">
-        <a routerLink={{link.to}} class="flex items-center gap-2 text-xl p-1 rounded-lg {{router.url==link.to ? 'text-emerald-500 bg-emerald-500 bg-opacity-10' : 'text-neutral-500'}}">
+        <a routerLink={{link.to}}
+         class="flex items-center gap-2 text-xl p-1 rounded-lg text-neutral-500"
+        [routerLinkActive]="'text-emerald-500 bg-emerald-500 bg-opacity-10'"
+         >
           <i class="{{link.icon}} w-6 text-center"></i>
           {{link.title}}
         </a>
