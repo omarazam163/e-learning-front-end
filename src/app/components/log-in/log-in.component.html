@@ -1,0 +1,34 @@
+<section class="w-screen h-[100vh] flex flex-col-reverse md:flex-row">
+
+  <div class="flex-1 md:h-full flex flex-col gap-3 md:gap-5 justify-center items-center relative">
+    <h1 class="text-4xl md:text-5xl font-medium ">Login to your account</h1>
+    <a class="flex items-center gap-2 cursor-pointer text-xl">
+      Login using google
+      <i class="fa-brands fa-google-plus text-red-500 text-4xl"></i>
+    </a>
+    <p class="relative w-96 text-center">
+      <span class="font-medium text-xl relative z-20">OR</span>
+      <span class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-0.5 bg-emerald-500 bg-opacity-10"></span>
+    </p>
+    <form action="" class="flex flex-col gap-1" [formGroup]="logInForm" (ngSubmit)="handleSubmit()">
+      <div class="relative pb-5">
+        <input formControlName="email" type="email" placeholder="Email" class="w-96 p-3 rounded-lg bg-emerald-500 bg-opacity-10 outline-emerald-500 text-xl">
+        <p *ngIf="submitted && logInForm.controls['email'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">email required</p>
+        <p *ngIf="submitted && logInForm.controls['email'].hasError('email')" class="text-red-500 text-sm absolute bottom-0 left-0">wrong email</p>
+      </div>
+      <div class="relative pb-5">
+        <input formControlName="password" type="password" placeholder="Password" class="w-96 p-3 rounded-lg bg-emerald-500 bg-opacity-10 outline-emerald-500 text-xl">
+        <p *ngIf="submitted && logInForm.controls['password'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">password required</p>
+        <p *ngIf="submitted && logInForm.hasError('passwordMismatch')" class="text-red-500 text-sm absolute bottom-0 left-0">wrong password</p>
+      </div>
+      <button type="submit" class="bg-emerald-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-emerald-500">Log In</button>
+    </form>
+  </div>
+
+  <div class="py-5 bg-emerald-500 md:h-full text-white px-3 lg:w-96 text-xl flex flex-col gap-5 justify-center items-center">
+    <h1 class="font-medium text-5xl">New Here ?</h1>
+    <p>Sign up and discover a great<br/>amount of new opportunities</p>
+    <button class="py-2 px-10 rounded-full bg-white text-black font-medium duration-300 hover:shadow-md hover:shadow-white">Sign Up</button>
+  </div>
+
+</section>

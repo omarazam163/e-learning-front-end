@@ -4,7 +4,7 @@
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
     <li *ngFor="let course of coursesService.courses" class="bg-white p-5  rounded-lg flex flex-col gap-3 cursor-pointer" [routerLink]="'/course/'+ course.courseId" >
 
-      <img [src]="course.icon" alt="" class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-full p-2">
+      <img [src]="course.icon" alt="" class="w-12 h-12 bg-emerald-500 bg-opacity-10 rounded-full p-2">
 
       <h2 class="font-medium">{{course.title}}</h2>
 
@@ -21,13 +21,13 @@
       </div>
 
       <div *ngIf="course.percentage == 100" class="flex items-center gap-2 mt-2">
-        <i class="fa-solid fa-circle-check text-green-500"></i>
+        <i class="fa-solid fa-circle-check text-emerald-500"></i>
         completed
       </div>
 
       <div *ngIf="course.percentage != 100" class="flex items-center gap-2 mt-2">
-        <p class="flex-1 bg-green-500 bg-opacity-10 h-1 rounded-lg ">
-          <span class="block bg-green-500 h-full rounded-lg" [ngStyle]="{ width: course.percentage + '%' }" ></span>
+        <p class="flex-1 bg-emerald-500 bg-opacity-10 h-1 rounded-lg ">
+          <span class="block bg-emerald-500 h-full rounded-lg" [ngStyle]="{ width: course.percentage + '%' }" ></span>
         </p>
         <p>{{course.percentage}}%</p>
       </div>

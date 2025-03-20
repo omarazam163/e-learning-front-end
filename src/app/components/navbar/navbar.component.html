@@ -1,8 +1,8 @@
 <nav class="flex justify-between items-center mb-5 relative">
   <h1 class="text-2xl font-medium">{{title}}</h1>
   <div class="flex items-center gap-2 font-medium">
-    <i *ngIf="isMobile" (click)="showSidebar=!showSidebar" class="fa-solid fa-bars mx-2 text-xl cursor-pointer duration-300 hover:text-green-500"></i>
-    <i class="fa-regular fa-bell me-2 text-xl cursor-pointer duration-300 hover:text-green-500"></i>
+    <i *ngIf="isMobile" (click)="showSidebar=!showSidebar" class="fa-solid fa-bars mx-2 text-xl cursor-pointer duration-300 hover:text-emerald-500"></i>
+    <i class="fa-regular fa-bell me-2 text-xl cursor-pointer duration-300 hover:text-emerald-500"></i>
     <img [src]="detailsService.details.imagePath" alt="..." class="w-10 h-10 rounded-full shadow">
     <p>{{detailsService.details.name}}</p>
   </div>
