@@ -10,10 +10,12 @@ import { CourseDetailComponent } from './components/course-detail/course-detail.
 import path from 'path';
 import { MylearningComponent } from './components/mylearning/mylearning.component';
 import { HomeComponent } from './components/home/home.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo:"home",pathMatch:"full" },
-  {path:"home",title:"Home",component:HomeComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', title: 'Home', component: HomeComponent },
   {
     path: 'mylearning',
     component: MylearningComponent,
@@ -30,5 +32,19 @@ export const routes: Routes = [
       { path: '**', redirectTo: 'course', pathMatch: 'full' },
     ],
   },
-  {path:"**" ,redirectTo:"home",pathMatch:"full"}
+  {
+    path: 'login',
+    component: LogInComponent,
+    title: 'Log In',
+  },
+  {
+    path: 'register',
+    component: SignUpComponent,
+    title: 'Sign Up',
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
 ];

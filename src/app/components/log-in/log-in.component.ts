@@ -1,42 +1,42 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-log-in',
-  imports: [ CommonModule , ReactiveFormsModule ],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  styleUrl: './log-in.component.scss',
 })
 export class LogInComponent {
+  logInForm: FormGroup;
+  submitted: boolean = false;
+  _auth = inject(AuthService);
 
-  logInForm : FormGroup;
-  submitted : boolean = false;
-
-  constructor () {
-    this.logInForm = new FormGroup ({
-      email : new FormControl("" , [ Validators.required , Validators.email ]),
-      password : new FormControl("" , [ Validators.required ])
-    },
-    {
-      validators: this.passwordMatchValidator
-    }
-  );
+  constructor() {
+    this.logInForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
+    });
   }
 
-    passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl) => {
-      const password = formGroup.get('password')?.value;
-      const passwordOfEmail = '12345678';
-      return password === passwordOfEmail ? null : { passwordMismatch: true };
-    };
-
-  handleSubmit () : void {
+  handleSubmit(): void {
     this.submitted = true;
     if (this.logInForm.invalid) {
-      console.log("Form is invalid!");
-    }else {
-      console.log("Form Submitted Successfully", this.logInForm.value);
+      console.log('Form is invalid!');
+    } else {
+      let data =new FormData();
+      data.append('Email', this.logInForm.get('email')?.value);
+      data.append('Password', this.logInForm.get('password')?.value);
+      this._auth.login(data).subscribe({
+        next: (res:any) => {
+          localStorage.setItem('token', res.data.accessToken);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
   }
-
 }

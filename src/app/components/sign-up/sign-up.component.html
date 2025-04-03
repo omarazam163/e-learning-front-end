@@ -1,12 +1,15 @@
-<section class="w-screen h-[100vh] flex flex-col md:flex-row">
+<section class="h-screen flex flex-col md:flex-row items-center">
 
-  <div class="py-5 bg-blue-500 md:h-full text-white px-3 lg:w-96 text-lg md:text-xl flex flex-col gap-2 md:gap-5 justify-center items-center">
+  <div
+    class="h-screen w-full mb-8 lg:mb-0 py-5 bg-blue-500 md:h-full text-white px-3 lg:w-96 text-lg md:text-xl flex flex-col gap-2 md:gap-5 justify-center items-center">
     <h1 class="font-medium text-4xl">Have an account ?</h1>
-    <p>Log in and discover a great<br/>amount of new opportunities</p>
-    <button class="py-2 px-10 rounded-full bg-white text-black font-medium duration-300 hover:shadow-md hover:shadow-white">Log In</button>
+    <p>Log in and discover a great<br />amount of new opportunities</p>
+    <button
+      class="py-2 px-10 rounded-full bg-white text-black font-medium duration-300 hover:shadow-md hover:shadow-white">Log
+      In</button>
   </div>
 
-  <div class="flex-1 md:h-full flex flex-col gap-2 md:gap-4 justify-center items-center relative">
+  <div class="h-full flex-1 md:h-full flex flex-col gap-2 md:gap-4 justify-center items-center relative py-4">
     <h1 class="text-4xl md:text-5xl font-medium ">Create a new account</h1>
     <a class="flex items-center gap-2 cursor-pointer text-xl">
       Signup using google
@@ -18,33 +21,86 @@
     </p>
     <form action="" class="flex flex-col gap-1" [formGroup]="signUpForm" (ngSubmit)="handleSubmit()">
       <div class="relative pb-5">
-        <input formControlName="firstName" type="text" placeholder="First Name" class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
-        <p *ngIf="submitted && signUpForm.controls['firstName'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">firstName required</p>
-        <p *ngIf="submitted && signUpForm.controls['firstName'].hasError('minlength')" class="text-red-500 text-sm absolute bottom-0 left-0">minLength is 3</p>
-        <p *ngIf="submitted && signUpForm.controls['firstName'].hasError('maxlength')" class="text-red-500 text-sm absolute bottom-0 left-0">maxLength is 15</p>
+        <input formControlName="fullName" type="text" placeholder="Full Name"
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl"
+          [ngClass]="{'border-2 border-red-500 outline-red-500': signUpForm.get('fullName')?.touched && signUpForm.get('fullName')?.invalid}">
+        @if (signUpForm.get("fullName")?.touched && signUpForm.get("fullName")?.getError("required")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            full Name is required</span></p>
+        }
+        @else if (signUpForm.get("fullName")?.touched && signUpForm.get("fullName")?.getError("minlength")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            full Name should be at least 3 characters</span></p>
+        }
+        @else if (signUpForm.get("fullName")?.touched && signUpForm.get("fullName")?.getError("maxlength")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            fullName should be at most 25 characters</span></p>
+        }
+
       </div>
       <div class="relative pb-5">
-        <input formControlName="lastName" type="text" placeholder="Last Name" class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
-        <p *ngIf="submitted && signUpForm.controls['lastName'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">lastName required</p>
-        <p *ngIf="submitted && signUpForm.controls['lastName'].hasError('minlength')" class="text-red-500 text-sm absolute bottom-0 left-0">minLength is 3</p>
-        <p *ngIf="submitted && signUpForm.controls['lastName'].hasError('maxlength')" class="text-red-500 text-sm absolute bottom-0 left-0">maxLength is 15</p>
+        <input formControlName="userName" type="text" placeholder="User Name"
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl"
+          [ngClass]="{'border-2 border-red-500 outline-red-500': signUpForm.get('userName')?.touched && signUpForm.get('userName')?.invalid}">
+        @if (signUpForm.get("userName")?.touched && signUpForm.get("userName")?.getError("required")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            User Name is required</span></p>
+        }
+        @else if (signUpForm.get("userName")?.touched && signUpForm.get("userName")?.getError("minlength")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            User Name should be at least 3 characters</span></p>
+        }
+        @else if (signUpForm.get("userName")?.touched && signUpForm.get("userName")?.getError("maxlength")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            User Name should be at most 15 characters</span></p>
+        }
       </div>
       <div class="relative pb-5">
-        <input formControlName="email" type="email" placeholder="Email" class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
-        <p *ngIf="submitted && signUpForm.controls['email'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">email required</p>
-        <p *ngIf="submitted && signUpForm.controls['email'].hasError('email')" class="text-red-500 text-sm absolute bottom-0 left-0">wrong email</p>
+        <input formControlName="email" type="email" placeholder="Email"
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl"
+          [ngClass]="{'border-2 border-red-500 outline-red-500': signUpForm.get('email')?.touched && signUpForm.get('email')?.invalid}">
+        @if (signUpForm.get("email")?.touched && signUpForm.get("email")?.getError("required")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            Email is required</span></p>
+        }
+        @else if (signUpForm.get("email")?.touched && signUpForm.get("email")?.getError("email")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            Email is not valid</span></p>
+        }
       </div>
       <div class="relative pb-5">
-        <input formControlName="password" type="password" placeholder="Password" class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
-        <p *ngIf="submitted && signUpForm.controls['password'].hasError('required')" class="text-red-500 text-sm absolute bottom-0 left-0">password required</p>
-        <p *ngIf="submitted && signUpForm.controls['password'].hasError('minlength')" class="text-red-500 text-sm absolute bottom-0 left-0">minLength is 8</p>
-        <p *ngIf="submitted && signUpForm.controls['password'].hasError('maxlength')" class="text-red-500 text-sm absolute bottom-0 left-0">maxLength is 15</p>
+        <input formControlName="password" type="password" placeholder="Password"
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl"
+          [ngClass]="{'border-2 border-red-500 outline-red-500': signUpForm.get('password')?.touched && signUpForm.get('password')?.invalid}">
+        @if (signUpForm.get("password")?.touched && signUpForm.get("password")?.getError("required")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            password is required</span></p>
+        }
+        @else if (signUpForm.get("password")?.touched && signUpForm.get("password")?.getError("minlength")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            password should be at least 8 characters</span></p>
+        }
+        @else if (signUpForm.get("password")?.touched && signUpForm.get("password")?.getError("pattern")) {
+                  <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+                      password is not strong enough</span></p>
+        }
       </div>
       <div class="relative pb-5">
-        <input formControlName="confirmPassword" type="password" placeholder="Confirm Password" class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
-        <p *ngIf="submitted && signUpForm.hasError('passwordMismatch')" class="text-red-500 text-sm absolute bottom-0 left-0">not match</p>
+        <input formControlName="confirmPassword" type="password" placeholder="Confirm Password"
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
+        @if (signUpForm.get("confirmPassword")?.touched && signUpForm.get("confirmPassword")?.getError("required")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            confirm password is required</span></p>
+        }
+        @else if (signUpForm.get("confirmPassword")?.touched && signUpForm.hasError("passwordMismatch")) {
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            Passwords do not match</span></p>
+        }
       </div>
-      <button type="submit" class="bg-blue-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-blue-500">Sign Up</button>
+      <button type="submit" [disabled]="!signUpForm.valid" [class.pointer-events-none]="!signUpForm.valid"
+        [class.bg-opacity-50]="!signUpForm.valid"
+        class="bg-blue-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-blue-500">Sign
+        Up</button>
     </form>
   </div>
 

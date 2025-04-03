@@ -1,87 +1,67 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a routerLink="" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Mesterfy</span>
-    </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button"
-        class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-        id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
-        data-dropdown-placement="bottom">
-        <span class="sr-only">Open user menu</span>
-        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
-      </button>
-      <!-- Dropdown menu -->
-      <div
-        class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow-sm dark:bg-gray-700 dark:divide-gray-600"
-        id="user-dropdown">
-        <div class="px-4 py-3">
-          <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-          <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">name.com</span>
+<nav class="bg-white shadow-lg relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="flex space-x-4">
+        <div>
+          <a href="#" class="flex items-center py-5 px-2 text-blue-600">
+            <svg class="h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0L15.09 7.26L23 8.34L17 13.97L18.18 21.66L12 18L5.82 21.66L7 13.97L1 8.34L8.91 7.26L12 0Z" />
+            </svg> <span class="font-bold">Xcelerate</span>
+          </a>
         </div>
-        <ul class="py-2" aria-labelledby="user-menu-button">
-          <li>
-            <a href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-          </li>
-          <li>
-            <a href="#"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-              out</a>
-          </li>
-        </ul>
+        <div class="flex gap-3">
+          <ul class="hidden lg:flex items-center space-x-1">
+            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Home</a>
+            <a href="coming-soon.html" routerLink="/mylearning" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">my learning</a>
+            <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Courses</a>
+            <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Teachers</a>
+          </ul>
+          <div class="bg-white hidden flex lg:flex p-2 rounded-lg  gap-2 items-center absolute top-[105%] left-[50%] translate-x-[-50%] 
+          lg:translate-x-[0%]
+          z-50 lg:static" #searchBar>
+            <input type="text" placeholder="Search..."
+              class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            <button
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
+          </div>
+        </div>
       </div>
-      <button data-collapse-toggle="navbar-user" type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-user" aria-expanded="false">
-        <span class="sr-only">Open main menu</span>
-        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
-    </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-      <ul
-        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-        <li>
-          <a
-            class="block py-2  px-3 text-gray-900 sm:bg-inherit rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            aria-current="page"
-            routerLink="/home"
-            routerLinkActive="!text-blue-700"
-            >Home</a>
-        </li>
-        <li>
-          <a href="#"
-            class="block py-2 px-3 bg-inherit text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            routerLink="/mylearning"
-            routerLinkActive="!text-blue-700"
-            >mylearning</a>
-        </li>
-        <li>
-          <a href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-        </li>
-        <li>
-          <a href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Pricing</a>
-        </li>
-        <li>
-          <a href="#"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-        </li>
-      </ul>
+      <div class="hidden lg:flex items-center space-x-1">
+        <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600" routerLink="/login">Log in</a>
+        <a href="coming-soon.html"
+          class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300" routerLink="/register">Register Now</a>
+      </div>
+      <div class="lg:hidden flex items-center gap-4">
+        <button class="w-6 h-6" (click)="openSearchBar()">
+          <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="search" x="0" y="0" version="1.1"
+            viewBox="0 0 29 29">
+            <path
+              d="M11.854 21.854c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-18c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.588-8-8-8z">
+            </path>
+            <path
+              d="M26.146 27.146a.997.997 0 0 1-.707-.293l-7.694-7.694a.999.999 0 1 1 1.414-1.414l7.694 7.694a.999.999 0 0 1-.707 1.707z">
+            </path>
+          </svg>
+        </button>
+        <button class="mobile-menu-button" (click)="openMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </div>
+  <div class="mobile-menu hidden lg:hidden" #mobileMenu>
+    <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home"
+      routerLinkActive="text-blue-500">Home</a>
+          <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200"
+          routerLink="/mylearning" routerLinkActive="text-blue-500"
+          >my learning</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Courses</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Teachers</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Log in</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Register Now</a>
+  </div>
 </nav>
-
