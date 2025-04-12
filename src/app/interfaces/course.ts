@@ -7,6 +7,7 @@ export interface Course {
   adminImage : string ,
   NumberOfLessons : string ,
   NumberOfHours : string ,
-  percentage : number
+  percentage : number,
+  category: string
 
 }
