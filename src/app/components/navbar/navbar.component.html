@@ -11,27 +11,20 @@
         </div>
         <div class="flex gap-3">
           <ul class="hidden lg:flex items-center space-x-1">
-            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
-              class="py-5 px-3 hover:text-blue-600">Home</a>
-            <a href="coming-soon.html" routerLink="/mylearning" routerLinkActive="text-blue-500"
-              class="py-5 px-3 hover:text-blue-600">my learning</a>
-            <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Courses</a>
+            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Home</a>
+            <!-- <a href="coming-soon.html" routerLink="/mylearning" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">my learning</a> -->
+            <a href="coming-soon.html" routerLink="/courses" class="py-5 px-3 hover:text-blue-600">Courses</a>
             <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Teachers</a>
           </ul>
-          <div class="bg-white hidden flex lg:flex p-2 rounded-lg  gap-2 items-center absolute top-[105%] left-[50%] translate-x-[-50%] 
-          lg:translate-x-[0%]
-          z-50 lg:static" #searchBar>
-            <input type="text" placeholder="Search..."
-              class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
-            <button
-              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
-          </div>
+          <ul class="bg-white hidden lg:flex p-2 rounded-lg  gap-2 items-center absolute top-[105%] left-[50%] translate-x-[-50%] lg:translate-x-[0%] z-50 lg:static" #searchBar>
+            <input type="text" placeholder="Search..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
+          </ul>
         </div>
       </div>
       <div class="hidden lg:flex items-center space-x-1">
         <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600" routerLink="/login">Log in</a>
-        <a href="coming-soon.html"
-          class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300" routerLink="/register">Register Now</a>
+        <a href="coming-soon.html" class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300" routerLink="/register">Register Now</a>
       </div>
       <div class="lg:hidden flex items-center gap-4">
         <button class="w-6 h-6" (click)="openSearchBar()">

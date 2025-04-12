@@ -10,7 +10,7 @@ export class AuthService {
   constructor() {}
   _http = inject(HttpClient);
   islogin = new BehaviorSubject<boolean>(false);
-  register(newUser: Register) 
+  register(newUser: Register)
   {
     return this._http.post(this.url+ "/Auth/Register", newUser);
   }
@@ -19,5 +19,16 @@ export class AuthService {
   {
     return this._http.post(this.url + '/Auth/Login', user);
   }
+
+  /*----------------------------*/
+  // is student or instructor or general
+
+  private role : "student" | "instructor" | "general" = "general" ;
+  setRole(role : "student" | "instructor" | "general") {
+    this.role = role;
+  }
+  isInstructor() : boolean { return this.role == "instructor" }
+  isStudent() : boolean { return this.role == "student" }
+  isGeneral() : boolean { return this.role == "general" }
 
 }
