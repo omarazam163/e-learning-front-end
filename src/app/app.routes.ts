@@ -1,17 +1,16 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CourseComponent } from './components/course/course.component';
-import { ResourcesComponent } from './components/resources/resources.component';
-import { ChatComponent } from './components/chat/chat.component';
-import { ScheduleComponent } from './components/schedule/schedule.component';
-import { SettingsComponent } from './components/settings/settings.component';
-import { PortfolioComponent } from './components/portfolio/portfolio.component';
-import { CourseDetailComponent } from './components/course-detail/course-detail.component';
-import path from 'path';
-import { MylearningComponent } from './components/mylearning/mylearning.component';
-import { HomeComponent } from './components/home/home.component';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { DashboardComponent } from './features/components/dashboard/dashboard.component';
+import { CourseComponent } from './features/components/course/course.component';
+import { ResourcesComponent } from './features/components/resources/resources.component';
+import { ChatComponent } from './features/components/chat/chat.component';
+import { ScheduleComponent } from './features/components/schedule/schedule.component';
+import { SettingsComponent } from './features/components/settings/settings.component';
+import { PortfolioComponent } from './features/components/portfolio/portfolio.component';
+import { CourseDetailComponent } from './features/components/course-detail/course-detail.component';
+import { MylearningComponent } from './features/components/mylearning/mylearning.component';
+import { HomeComponent } from './features/components/home/home.component';
+import { LogInComponent } from './features/components/log-in/log-in.component';
+import { SignUpComponent } from './features/components/sign-up/sign-up.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

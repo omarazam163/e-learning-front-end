@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { LinksService } from '../../services/links.service';
+import { LinksService } from '../../../core/services/links.service';
 import { Router, RouterModule } from '@angular/router';
 import { RouterLinkActive } from '@angular/router';
 

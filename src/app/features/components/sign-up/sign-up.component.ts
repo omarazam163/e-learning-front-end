@@ -1,8 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
-import { Register } from '../../interfaces/register';
-import { AuthService } from '../../services/auth.service';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
+import { Register } from '../../../shared/interfaces/register';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-sign-up',
   imports: [ReactiveFormsModule, CommonModule],
@@ -12,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class SignUpComponent {
   signUpForm: FormGroup;
   submitted: boolean = false;
-  _AuthService=inject(AuthService);
+  _AuthService = inject(AuthService);
   constructor() {
     this.signUpForm = new FormGroup(
       {
@@ -56,16 +63,14 @@ export class SignUpComponent {
       console.log('Form is invalid!');
     } else {
       let newUser: Register = this.signUpForm.value;
-      this._AuthService.register(newUser).subscribe(
-        {
-          next: (res) => {
-            console.log(res);
-          },
-          error: (err) => {
-            console.log(err);
-          }
-        }
-      );
+      this._AuthService.register(newUser).subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
   }
 }

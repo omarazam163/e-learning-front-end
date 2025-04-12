@@ -1,7 +1,7 @@
-import { AuthService } from './../../services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink,RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +13,7 @@ export class NavbarComponent {
   @ViewChild('searchBar') searchBar!: ElementRef;
   @ViewChild('mobileMenu') menu!: ElementRef;
   _auth = inject(AuthService);
-  
+
   openSearchBar() {
     (this.searchBar.nativeElement as HTMLElement).classList.toggle('hidden');
     (this.menu.nativeElement as HTMLElement).classList.add('hidden');

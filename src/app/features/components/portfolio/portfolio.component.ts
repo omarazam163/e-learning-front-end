@@ -1,29 +1,27 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from "../navbar/navbar.component";
+import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DetailsService } from '../../services/details.service';
+import { DetailsService } from '../../../core/services/details.service';
 
 @Component({
   selector: 'app-portfolio',
-  imports: [ CommonModule , FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.scss'
+  styleUrl: './portfolio.component.scss',
 })
 export class PortfolioComponent {
-[x: string]: any;
+  [x: string]: any;
 
-  constructor ( public detailsService : DetailsService ) {}
+  constructor(public detailsService: DetailsService) {}
 
-  activeProfileSetting : string = "personalDetails";
-  handleActiveLink(active : string) {
+  activeProfileSetting: string = 'personalDetails';
+  handleActiveLink(active: string) {
     this.activeProfileSetting = active;
   }
 
-  submitChanges(form : any) {
+  submitChanges(form: any) {
     this.detailsService.saveChanges(form.value);
     console.log(this.detailsService.notifications);
-
   }
-
 }

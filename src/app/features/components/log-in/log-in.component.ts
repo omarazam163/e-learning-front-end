@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-log-in',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
@@ -26,11 +31,11 @@ export class LogInComponent {
     if (this.logInForm.invalid) {
       console.log('Form is invalid!');
     } else {
-      let data =new FormData();
+      let data = new FormData();
       data.append('Email', this.logInForm.get('email')?.value);
       data.append('Password', this.logInForm.get('password')?.value);
       this._auth.login(data).subscribe({
-        next: (res:any) => {
+        next: (res: any) => {
           localStorage.setItem('token', res.data.accessToken);
         },
         error: (err) => {
