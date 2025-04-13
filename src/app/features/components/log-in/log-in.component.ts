@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-log-in',
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
@@ -17,8 +18,10 @@ import { AuthService } from '../../../core/services/auth.service';
 export class LogInComponent {
   logInForm: FormGroup;
   submitted: boolean = false;
+  isLoading: boolean = false;
+  _router = inject(Router);
   _auth = inject(AuthService);
-
+  errorMessage = '';
   constructor() {
     this.logInForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -31,15 +34,22 @@ export class LogInComponent {
     if (this.logInForm.invalid) {
       console.log('Form is invalid!');
     } else {
+      this.isLoading = true;
       let data = new FormData();
       data.append('Email', this.logInForm.get('email')?.value);
       data.append('Password', this.logInForm.get('password')?.value);
       this._auth.login(data).subscribe({
         next: (res: any) => {
           localStorage.setItem('token', res.data.accessToken);
+          this._auth.islogin.next('student');
+          this._auth.getUserDataFromToken();
+          this._router.navigate(['/home']);
+          this.isLoading = false;
         },
         error: (err) => {
-          console.log(err);
+          this._auth.islogin.next('noLogin');
+          this.errorMessage = err.error.message;
+          this.isLoading = false;
         },
       });
     }

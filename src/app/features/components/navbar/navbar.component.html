@@ -11,33 +11,77 @@
         </div>
         <div class="flex gap-3">
           <ul class="hidden lg:flex items-center space-x-1">
-            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Home</a>
+            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Home</a>
             <!-- <a href="coming-soon.html" routerLink="/mylearning" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">my learning</a> -->
             <a href="coming-soon.html" routerLink="/courses" class="py-5 px-3 hover:text-blue-600">Courses</a>
             <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Teachers</a>
           </ul>
-          <ul class="bg-white hidden lg:flex p-2 rounded-lg  gap-2 items-center absolute top-[105%] left-[50%] translate-x-[-50%] lg:translate-x-[0%] z-50 lg:static" #searchBar>
-            <input type="text" placeholder="Search..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
-            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
-          </ul>
+          <!-- <ul
+            class="bg-white hidden lg:flex p-2 rounded-lg  gap-2 items-center absolute top-[105%] left-[50%] translate-x-[-50%] lg:translate-x-[0%] z-50 lg:static"
+            #searchBar>
+            <input type="text" placeholder="Search..."
+              class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
+            <button
+              class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
+          </ul> -->
         </div>
       </div>
+      @if (!isLoggedIn) {
       <div class="hidden lg:flex items-center space-x-1">
         <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600" routerLink="/login">Log in</a>
-        <a href="coming-soon.html" class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300" routerLink="/register">Register Now</a>
+        <a href="coming-soon.html"
+          class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300"
+          routerLink="/register">Register Now</a>
       </div>
-      <div class="lg:hidden flex items-center gap-4">
-        <button class="w-6 h-6" (click)="openSearchBar()">
-          <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" id="search" x="0" y="0" version="1.1"
-            viewBox="0 0 29 29">
-            <path
-              d="M11.854 21.854c-5.514 0-10-4.486-10-10s4.486-10 10-10 10 4.486 10 10-4.486 10-10 10zm0-18c-4.411 0-8 3.589-8 8s3.589 8 8 8 8-3.589 8-8-3.588-8-8-8z">
-            </path>
-            <path
-              d="M26.146 27.146a.997.997 0 0 1-.707-.293l-7.694-7.694a.999.999 0 1 1 1.414-1.414l7.694 7.694a.999.999 0 0 1-.707 1.707z">
-            </path>
-          </svg>
+      }
+      @else {
+      <!-- Dropdown Wrapper -->
+      <div (click)="toggleDropdown()" class="hidden lg:inline-block text-left">
+        <!-- Profile Button -->
+        <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
+          <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">OA</div>
+          <div class="text-left">
+            <div class="font-semibold text-sm">{{User.UserName}}</div>
+            <div class="text-xs text-gray-500">{{User.Email}}</div>
+          </div>
         </button>
+
+        <!-- Dropdown Menu -->
+        <div #dropdownMenu class="absolute hidden right-10 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
+          <div class="divide-y">
+            <div class="py-2">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
+              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <span>My cart</span>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">1</span>
+              </a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
+            </div>
+            <div class="py-2">
+              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <span>Notifications</span>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+              </a>
+              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <span>Messages</span>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+              </a>
+            </div>
+            <div class="py-2">
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Account settings</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
+            </div>
+            <div class="py-2">
+              <button (click)="signOut()" class="text-left block px-4 py-2 hover:bg-gray-100 w-full">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="lg:hidden flex items-center gap-4">
         <button class="mobile-menu-button" (click)="openMenu()">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -47,14 +91,60 @@
     </div>
   </div>
   <div class="mobile-menu hidden lg:hidden" #mobileMenu>
+
+    @if (isLoggedIn) {
+    <!-- Dropdown Wrapper -->
+    <div (click)="toggleDropdownMobile()" class="relative inline-block text-left">
+      <!-- Profile Button -->
+      <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
+        <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">OA</div>
+        <div class="text-left">
+          <div class="font-semibold text-sm">{{User.UserName}}</div>
+          <div class="text-xs text-gray-500">{{User.Email}}</div>
+        </div>
+      </button>
+      <div #dropdownMenuMobile class="absolute hidden right-[-50%] mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
+        <div class="divide-y">
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
+            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <span>My cart</span>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">1</span>
+            </a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
+          </div>
+          <div class="py-2">
+            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <span>Notifications</span>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+            </a>
+            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <span>Messages</span>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+            </a>
+          </div>
+          <div class="py-2">
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Account settings</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
+          </div>
+          <div class="py-2">
+            <button (click)="signOut()" class="text-left block px-4 py-2 hover:bg-gray-100 w-full">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
     <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home"
       routerLinkActive="text-blue-500">Home</a>
-          <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200"
-          routerLink="/mylearning" routerLinkActive="text-blue-500"
-          >my learning</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Courses</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Teachers</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Log in</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200">Register Now</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/courses"
+    routerLinkActive="text-blue-500"
+    >Courses</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLinkActive="text-blue-500">Teachers</a>
+    @if (!isLoggedIn) {
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/login">Log in</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/register">Register Now</a>
+    }
   </div>
 </nav>

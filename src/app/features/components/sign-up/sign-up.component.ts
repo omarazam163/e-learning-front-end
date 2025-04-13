@@ -10,17 +10,20 @@ import {
 } from '@angular/forms';
 import { Register } from '../../../shared/interfaces/register';
 import { AuthService } from '../../../core/services/auth.service';
-import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, CommonModule , RouterModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
+  _router = inject(Router);
   signUpForm: FormGroup;
   submitted: boolean = false;
   _AuthService = inject(AuthService);
+  errorMessage = '';
   constructor() {
     this.signUpForm = new FormGroup(
       {
@@ -66,10 +69,10 @@ export class SignUpComponent {
       let newUser: Register = this.signUpForm.value;
       this._AuthService.register(newUser).subscribe({
         next: (res) => {
-          console.log(res);
+          this._router.navigate(['/login']);
         },
         error: (err) => {
-          console.log(err);
+          this.errorMessage = err.error.message;
         },
       });
     }

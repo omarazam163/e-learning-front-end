@@ -32,21 +32,31 @@
             password is required</span></p>
         }
       </div>
+      <div class="text-center">
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            {{errorMessage}}
+      </span></p>
+      </div>
       <button type="submit" [disabled]="!logInForm.valid" [class.pointer-events-none]="!logInForm.valid"
         [class.bg-opacity-50]="!logInForm.valid"
-        class="bg-blue-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-blue-500">Log
-        In</button>
+        class="bg-blue-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-blue-500">
+        @if (isLoading) {
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+        }
+        @else {
+          Log In
+        }
+      </button>
     </form>
   </div>
+
 
   <div
     class="py-5 bg-blue-500 md:h-full text-white px-3 lg:w-96 text-xl flex flex-col gap-5 justify-center items-center">
     <h1 class="font-medium text-5xl">New Here ?</h1>
     <p>Sign up and discover a great<br />amount of new opportunities</p>
-    <a
-      routerLink="/register"
+    <a routerLink="/register"
       class="py-2 px-10 rounded-full bg-white text-black font-medium duration-300 hover:shadow-md hover:shadow-white">Sign
       Up</a>
   </div>
-
 </section>
