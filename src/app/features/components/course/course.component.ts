@@ -4,10 +4,10 @@ import { CoursesService } from '../../../core/services/courses.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-course',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, RouterLink],
   templateUrl: './course.component.html',
   styleUrl: './course.component.scss',
 })

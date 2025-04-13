@@ -33,16 +33,18 @@ export const routes: Routes = [
   //   ],
   // },
   { path: 'courses', component: CourseComponent, title: 'Courses' },
+  { path: 'course/:id', component: CourseDetailComponent },
   {
     path: 'login',
     component: LogInComponent,
     title: 'Log In',
     canActivate: [loginguardGuard],
   },
-  { path: 'register',
+  {
+    path: 'register',
     component: SignUpComponent,
     title: 'Sign Up',
-    canActivate:[loginguardGuard]
-   },
+    canActivate: [loginguardGuard],
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
