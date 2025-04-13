@@ -10,9 +10,10 @@ import {
 } from '@angular/forms';
 import { Register } from '../../../shared/interfaces/register';
 import { AuthService } from '../../../core/services/auth.service';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule , RouterModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })

@@ -33,7 +33,7 @@ export class CourseModulesService {
       title: 'Module 2',
       lectures: 21,
       duration: 54,
-      open: true,
+      open: false,
       lessons: [
         {
           title: 'Getting started lessons',

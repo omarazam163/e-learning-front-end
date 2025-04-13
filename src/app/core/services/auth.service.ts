@@ -20,18 +20,20 @@ export class AuthService {
 
   // /*----------------------------*/
   // // is student or instructor or general
+  // // كود تجريبي
 
-  // private role: 'student' | 'instructor' | 'general' = 'general';
-  // setRole(role: 'student' | 'instructor' | 'general') {
-  //   this.role = role;
-  // }
-  // isInstructor(): boolean {
-  //   return this.role == 'instructor';
-  // }
-  // isStudent(): boolean {
-  //   return this.role == 'student';
-  // }
-  // isGeneral(): boolean {
-  //   return this.role == 'general';
-  // }
+  private role: 'student' | 'instructor' | 'general' = 'student';
+  setRole(role: 'student' | 'instructor' | 'general') {
+    this.role = role;
+  }
+  isInstructor(): boolean {
+    return this.role == 'instructor';
+  }
+  isStudent(): boolean {
+    return this.role == 'student';
+  }
+  isAccessed(): boolean {
+    return false;
+  }
+
 }

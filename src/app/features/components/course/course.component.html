@@ -17,7 +17,7 @@
 
   <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-    <li *ngFor="let course of courses" class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200 p-5  rounded-lg flex flex-col gap-3 cursor-pointer" [routerLink]="'/course/'+ course.courseId" >
+    <li *ngFor="let course of courses" class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200 p-5  rounded-lg flex flex-col gap-3 cursor-pointer" [routerLink]="'/courses/'+ course.courseId" >
 
       <img [src]="course.icon" alt="" class="w-12 h-12 bg-blue-500 bg-opacity-10 rounded-full p-2">
 

@@ -1,22 +1,35 @@
-<section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+<section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-  <section class="lg:col-span-2 bg-white rounded-lg p-5">
+  <section class="lg:col-span-2 bg-white rounded-lg">
 
-    <iframe
-      width="100%"
-      class="rounded-lg mb-5 h-52 md:h-64 lg:h-80"
-      src="https://www.youtube.com/embed/3q3FV65ZrUs"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen>
-    </iframe>
-
-    <h1 class="text-lg md:text-xl font-medium">Introduction to figma basic to advanced</h1>
-
-    <p class="flex items-center justify-between text-neutral-500 mb-5">
-      <span>William Joe | Figma | <span class="cursor-pointer text-blue-500">+ Follow</span></span>
-      <button class="px-2 py-1 rounded-lg border-2 border-blue-500 text-blue-500 duration-300 hover:shadow hover:shadow-blue-500">Become a member</button>
-    </p>
+    @if ( !authService.isStudent() && !authService.isInstructor() ) {
+      <div class="w-full aspect-video bg-blue-500 bg-opacity-20 flex justify-center items-center flex-col gap-2 md:gap-4 text-lg md:text-xl lg:text-2xl rounded-lg shadow-md shadow-blue-200 mb-5">
+        <p>You aren't signed</p>
+        <p>Do you have an account?</p>
+        <a href="" [routerLink]="'/login'" class="-mt-3 ld:-mt-4 text-white bg-blue-500 px-10 py-1 rounded-lg ">Log in</a>
+        <p>Create an account? </p>
+        <a href="" [routerLink]="'/register'" class="-mt-3 ld:-mt-4 text-white bg-blue-500 px-10 py-1 rounded-lg ">Sign up</a>
+      </div>
+    }@else if ( !authService.isAccessed() ) {
+      <div class="w-full aspect-video bg-blue-500 bg-opacity-20 flex justify-center items-center flex-col gap-2 md:gap-4 text-lg md:text-xl lg:text-2xl rounded-lg shadow-md shadow-blue-200 mb-5">
+        <p class="font-semibold">130$</p>
+        <button class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md shadow-blue-200">Buy Now</button>
+      </div>
+    }@else {
+      <iframe
+        width="100%"
+        class="rounded-lg mb-5 aspect-video"
+        src="https://www.youtube.com/embed/3q3FV65ZrUs"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+      <h1 class="text-lg md:text-xl font-medium">Introduction to figma basic to advanced</h1>
+      <p class="flex items-center justify-between text-neutral-500 mb-5">
+        <span>William Joe | Figma | <span class="cursor-pointer text-blue-500">+ Follow</span></span>
+        <button class="px-2 py-1 rounded-lg border-2 border-blue-500 text-blue-500 duration-300 hover:shadow hover:shadow-blue-500">Become a member</button>
+      </p>
+    }
 
     <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
       <li (click)="handleActiveLink('Overview')" class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Overview'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">Overview</li>
