@@ -4,9 +4,10 @@
     class="h-screen w-full mb-8 lg:mb-0 py-5 bg-blue-500 md:h-full text-white px-3 lg:w-96 text-lg md:text-xl flex flex-col gap-2 md:gap-5 justify-center items-center">
     <h1 class="font-medium text-4xl">Have an account ?</h1>
     <p>Log in and discover a great<br />amount of new opportunities</p>
-    <button
+    <a
+     routerLink="/login"
       class="py-2 px-10 rounded-full bg-white text-black font-medium duration-300 hover:shadow-md hover:shadow-white">Log
-      In</button>
+      In</a>
   </div>
 
   <div class="h-full flex-1 md:h-full flex flex-col gap-2 md:gap-4 justify-center items-center relative py-4">
@@ -81,8 +82,8 @@
             password should be at least 8 characters</span></p>
         }
         @else if (signUpForm.get("password")?.touched && signUpForm.get("password")?.getError("pattern")) {
-                  <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
-                      password is not strong enough</span></p>
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            password is not strong enough</span></p>
         }
       </div>
       <div class="relative pb-5">
@@ -96,6 +97,11 @@
         <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
             Passwords do not match</span></p>
         }
+      </div>
+      <div class="text-center">
+        <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
+            {{errorMessage}}
+          </span></p>
       </div>
       <button type="submit" [disabled]="!signUpForm.valid" [class.pointer-events-none]="!signUpForm.valid"
         [class.bg-opacity-50]="!signUpForm.valid"

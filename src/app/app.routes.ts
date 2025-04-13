@@ -11,7 +11,7 @@ import { MylearningComponent } from './features/components/mylearning/mylearning
 import { HomeComponent } from './features/components/home/home.component';
 import { LogInComponent } from './features/components/log-in/log-in.component';
 import { SignUpComponent } from './features/components/sign-up/sign-up.component';
-
+import { loginguardGuard } from './core/guards/loginguard.guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -32,8 +32,17 @@ export const routes: Routes = [
   //     { path: '**', redirectTo: 'course', pathMatch: 'full' },
   //   ],
   // },
-  {  path: 'courses',  component: CourseComponent,  title: 'Log In'  },
-  {  path: 'login',  component: LogInComponent,  title: 'Log In'  },
-  {  path: 'register',  component: SignUpComponent,  title: 'Sign Up' },
-  {  path: '**',  redirectTo: 'home',  pathMatch: 'full',  },
+  { path: 'courses', component: CourseComponent, title: 'Courses' },
+  {
+    path: 'login',
+    component: LogInComponent,
+    title: 'Log In',
+    canActivate: [loginguardGuard],
+  },
+  { path: 'register', 
+    component: SignUpComponent, 
+    title: 'Sign Up',
+    canActivate:[loginguardGuard]
+   },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
