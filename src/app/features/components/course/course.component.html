@@ -6,55 +6,59 @@
   </ul>
 
   <ul class="flex flex-wrap justify-center gap-4">
-    <li (click)="handleCategory('all')"           [ngClass]="category==='all'?'bg-blue-600':'bg-blue-500'"          class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">All</li>
-    <li (click)="handleCategory('dataScience')"   [ngClass]="category==='dataScience'?'bg-blue-600':'bg-blue-500'"  class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">Data Science</li>
-    <li (click)="handleCategory('it')"            [ngClass]="category==='it'?'bg-blue-600':'bg-blue-500'"           class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">IT Certifications</li>
-    <li (click)="handleCategory('leaderShip')"    [ngClass]="category==='leaderShip'?'bg-blue-600':'bg-blue-500'"   class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">Leadership</li>
-    <li (click)="handleCategory('web')"           [ngClass]="category==='web'?'bg-blue-600':'bg-blue-500'"          class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">Web Development</li>
-    <li (click)="handleCategory('communication')" [ngClass]="category==='communication'?'bg-blue-600':'bg-blue-500'"class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">Communication</li>
-    <li (click)="handleCategory('business')"      [ngClass]="category==='business'?'bg-blue-600':'bg-blue-500'"     class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300">Business</li>
+    <li
+      *ngFor="let c of categories"
+      (click)="handleCategory(c.categoryId)"
+      [ngClass]="category == c.categoryId ? 'bg-blue-700' : 'bg-blue-500'"
+      class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300"
+    >
+      {{ c.categoryName }}
+    </li> 
   </ul>
 
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
 
-    @for (course of courses; track $index) {
-          <li 
-            class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200 p-5  rounded-lg flex flex-col gap-3 cursor-pointer"
+    @for (course of coursesForShow; track $index) {
+          <li
+            class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200  rounded-lg flex flex-col gap-3 cursor-pointer pb-4"
             [routerLink]="['/course', course.id]">
-          
-            <img [src]="course.icon" alt="" class="w-12 h-12 bg-blue-500 bg-opacity-10 rounded-full p-2">
-          
-            <h2 class="font-medium">{{course.title}}</h2>
-          
-            <div class="flex items-center gap-2 text-neutral-500 font-medium">
-              <img [src]="course.adminImage" alt="." class="w-8 h-8 rounded-full">
-              {{course.admin}}
+
+            <img src="https://imgscf.slidemembers.com/docs/1/1/430/online_education_cover_design_design_429051.jpg" alt="" class="w-full rounded-lg shadow-md shadow-blue-200">
+
+            <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
+
+            <p class="px-2 md:px-4 lg:px-6 text-neutral-500">{{course.description}}</p>
+
+            <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
+              <!-- <img [src]="course.adminImage" alt="." class="w-8 h-8 rounded-full"> -->
+              instructorId : {{course.instructorId}}
             </div>
-          
-            <div class="text-neutral-500">
-              <i class="fa-solid fa-book-open text-violet-500"></i>
-              {{course.NumberOfLessons}} Lessons
+
+            <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
+              <i class="text-violet-500 font-bold">$</i>
+              {{course.price}}
               <i class="fa-solid fa-clock ms-4 text-violet-500"></i>
-              {{course.NumberOfHours}} Hours
+              {{course.hours}} Hours
             </div>
-          
-            <div *ngIf="course.percentage == 100" class="flex items-center gap-2 mt-2">
+
+            <div *ngIf="course.percentage == 100" class="px-2 md:px-4 lg:px-6 flex items-center gap-2 mt-2">
               <i class="fa-solid fa-circle-check text-blue-500"></i>
               completed
             </div>
-          
-            <div *ngIf="course.percentage != 100" class="flex items-center gap-2 mt-2">
+
+            <!-- <div *ngIf="course.percentage != 100" class="flex items-center gap-2 mt-2">
               <p class="flex-1 bg-blue-500 bg-opacity-10 h-1 rounded-lg ">
                 <span class="block bg-blue-500 h-full rounded-lg" [ngStyle]="{ width: course.percentage + '%' }"></span>
               </p>
               <p>{{course.percentage}}%</p>
-            </div>
-          
+            </div> -->
+
           </li>
-           
+
     }
-              <li [ngClass]="this.allCourses.length < 9 * this.endOfCourses ? 'hidden':''" (click)="addNewCourses()"
-                class="w-full aspect-video lg:aspect-auto bg-blue-500 bg-opacity-10 text-9xl flex items-center justify-center text-blue-500 cursor-pointer duration-300 hover:shadow-lg hover:shadow-blue-200">
-                +</li>
-          </ul>
+      <li [ngClass]="this.allCourses.length < 9 * this.endOfCourses ? 'hidden':''" (click)="addNewCourses()"
+        class="w-full aspect-video lg:aspect-auto bg-blue-500 bg-opacity-10 text-9xl flex items-center justify-center text-blue-500 cursor-pointer duration-300 hover:shadow-lg hover:shadow-blue-200">
+        +</li>
+  </ul>
+
 </section>
