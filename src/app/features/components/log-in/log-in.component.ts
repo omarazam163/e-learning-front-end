@@ -24,7 +24,7 @@ export class LogInComponent {
   errorMessage = '';
   constructor() {
     this.logInForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
@@ -36,7 +36,7 @@ export class LogInComponent {
     } else {
       this.isLoading = true;
       let data = new FormData();
-      data.append('Email', this.logInForm.get('email')?.value);
+      data.append('userName', this.logInForm.get('email')?.value);
       data.append('Password', this.logInForm.get('password')?.value);
       this._auth.login(data).subscribe({
         next: (res: any) => {
