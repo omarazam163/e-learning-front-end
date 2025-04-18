@@ -1,3 +1,5 @@
+import { role } from './shared/types/role';
+import { ChooseRoleComponent } from './features/components/choose-role/choose-role.component';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './features/components/dashboard/dashboard.component';
 import { CourseComponent } from './features/components/course/course.component';
@@ -12,6 +14,10 @@ import { HomeComponent } from './features/components/home/home.component';
 import { LogInComponent } from './features/components/log-in/log-in.component';
 import { SignUpComponent } from './features/components/sign-up/sign-up.component';
 import { loginguardGuard } from './core/guards/loginguard.guard';
+import { SendResetPasswordComponent } from './features/components/send-reset-password/send-reset-password.component';
+import { ConfirmResetPasswordComponent } from './features/components/confirm-reset-password/confirm-reset-password.component';
+import { ResetPasswordComponent } from './features/components/reset-password/reset-password.component';
+import { resetPasswordGuard } from './core/guards/reset-password.guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -41,10 +47,34 @@ export const routes: Routes = [
     canActivate: [loginguardGuard],
   },
   {
-    path: 'register',
+    path: 'register/:role',
     component: SignUpComponent,
     title: 'Sign Up',
     canActivate: [loginguardGuard],
+  },
+  {
+    path: 'chooseRole',
+    component: ChooseRoleComponent,
+    title: 'choose Role',
+    canActivate: [loginguardGuard],
+  },
+  {
+    path: 'SendResetPassword',
+    component: SendResetPasswordComponent,
+    title: 'reset password',
+    canActivate: [loginguardGuard],
+  },
+  {
+    path: 'confirmResetPassword',
+    component: ConfirmResetPasswordComponent,
+    title: 'reset password',
+    canActivate: [loginguardGuard, resetPasswordGuard],
+  },
+  {
+    path: 'resetPassword',
+    component: ResetPasswordComponent,
+    title: 'reset password',
+    canActivate: [loginguardGuard, resetPasswordGuard],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

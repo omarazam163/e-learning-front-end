@@ -9,8 +9,6 @@ export class CategoryService {
 
   public categoryURL = "https://localhost:7180/api/Categories";
   public categories : any[] = [];
-
-  
   constructor( public http : HttpClient ) {
     this.getCategories().subscribe( (res) => this.categories = res )
   }

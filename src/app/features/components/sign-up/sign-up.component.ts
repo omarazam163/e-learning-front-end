@@ -1,3 +1,4 @@
+import { role } from './../../../shared/types/role';
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
@@ -12,6 +13,7 @@ import { Register } from '../../../shared/interfaces/register';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-sign-up',
   imports: [ReactiveFormsModule, CommonModule, RouterLink],
@@ -24,6 +26,8 @@ export class SignUpComponent {
   submitted: boolean = false;
   _AuthService = inject(AuthService);
   errorMessage = '';
+  _activeRoute = inject(ActivatedRoute);
+  roleName:string ="";
   constructor() {
     this.signUpForm = new FormGroup(
       {
@@ -52,11 +56,20 @@ export class SignUpComponent {
       }
     );
   }
-
+  ngOnInit()
+  {
+    if(this._activeRoute.snapshot.params["role"] != "student" && this._activeRoute.snapshot.params["role"] != "instructor")
+    {
+      this._router.navigate(["/chooseRole"]);
+    }
+    else
+    {
+      this.roleName = this._activeRoute.snapshot.params['role'];
+    }
+  }
   passwordMatchValidator: ValidatorFn = (formGroup: AbstractControl) => {
     const password = formGroup.get('password')?.value;
     const confirmPassword = formGroup.get('confirmPassword')?.value;
-
     return password === confirmPassword ? null : { passwordMismatch: true };
   };
 
@@ -66,7 +79,8 @@ export class SignUpComponent {
     if (this.signUpForm.invalid) {
       console.log('Form is invalid!');
     } else {
-      let newUser: Register = this.signUpForm.value;
+      let newUser: Register = {...this.signUpForm.value,roleName:this.roleName};
+      console.log(newUser);
       this._AuthService.register(newUser).subscribe({
         next: (res) => {
           this._router.navigate(['/login']);

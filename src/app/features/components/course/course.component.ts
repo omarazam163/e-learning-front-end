@@ -51,7 +51,6 @@ export class CourseComponent {
       this.coursesForShow = this.coursesForShow.filter( (c) =>
         c.title.toLowerCase().includes(this.inputValue.toLowerCase()) ||
         c.description.toLowerCase().includes(this.inputValue.toLowerCase())
-        // c.instructor.toLowerCase().includes(this.inputValue.toLowerCase())
       )
     }
   }

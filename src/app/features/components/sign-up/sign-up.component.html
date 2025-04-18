@@ -88,7 +88,8 @@
       </div>
       <div class="relative pb-5">
         <input formControlName="confirmPassword" type="password" placeholder="Confirm Password"
-          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl">
+          class="w-96 p-3 rounded-lg bg-blue-500 bg-opacity-10 outline-blue-500 text-xl"
+          [ngClass]="{'border-2 border-red-500 outline-red-500': signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.invalid}">
         @if (signUpForm.get("confirmPassword")?.touched && signUpForm.get("confirmPassword")?.getError("required")) {
         <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
             confirm password is required</span></p>

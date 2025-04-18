@@ -35,19 +35,20 @@
       <div class="text-center">
         <p id="outlined_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400"><span class="font-medium">
             {{errorMessage}}
-      </span></p>
+          </span></p>
       </div>
       <button type="submit" [disabled]="!logInForm.valid" [class.pointer-events-none]="!logInForm.valid"
         [class.bg-opacity-50]="!logInForm.valid"
         class="bg-blue-500 py-3 w-60 mx-auto rounded-full text-white text-xl font-medium mt-3 duration-300 hover:shadow-md hover:shadow-blue-500">
         @if (isLoading) {
-          <i class="fa-solid fa-circle-notch fa-spin"></i>
+        <i class="fa-solid fa-circle-notch fa-spin"></i>
         }
         @else {
-          Log In
+        Log In
         }
       </button>
     </form>
+    <a class=" text-blue-500 hover:underline" routerLink="/SendResetPassword">forgot password?</a>
   </div>
 
 

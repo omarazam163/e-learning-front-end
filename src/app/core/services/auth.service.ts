@@ -13,6 +13,7 @@ import { Console } from 'console';
 export class AuthService {
   url: string = 'https://localhost:7180/api';
   _PLATFORM_ID = inject(PLATFORM_ID);
+  emailToResetPassword : string = ''
   constructor() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       if (localStorage.getItem('token')) {
@@ -39,5 +40,19 @@ export class AuthService {
     let decoded = jwtDecode(localStorage.getItem('token')!);
     const { Email, UserName, Id } = decoded as any;
     this.UserData.next({ Email, UserName, Id });
+  }
+  SendResetPassword(data: FormData)
+  {
+    return this._http.post(this.url+"/Auth/SendResetPassword",data);
+  }
+
+  ConfirmResetPassword(data:any)
+  {
+    return this._http.post(this.url + '/Auth/ConfirmResetPassword', data);
+  }
+
+  resetPassword(data:FormData)
+  {
+    return this._http.post(this.url + '/Auth/ResetPassword', data);
   }
 }
