@@ -20,6 +20,9 @@ import { ResetPasswordComponent } from './features/components/reset-password/res
 import { resetPasswordGuard } from './core/guards/reset-password.guard';
 import { WorkSpaceComponent } from './features/components/work-space/work-space.component';
 import { AddCourseComponent } from './features/components/add-course/add-course.component';
+import { InstructorComponent } from './features/components/instructor/instructor.component';
+import { InstructorCoursesComponent } from './features/components/instructor-courses/instructor-courses.component';
+import { InstructorContactComponent } from './features/components/instructor-contact/instructor-contact.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },

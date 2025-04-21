@@ -5,6 +5,21 @@
     <button (click)="handleSearch()" class="bg-blue-600 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
   </ul>
 
+  <!-- <select
+  *ngIf="categoryService?.categories"
+  class="bg-blue-500 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-600 transition duration-300"
+  (change)="handleCategoryActive($event.target.value)"
+  [value]="categoryActive"
+>
+  <option
+    *ngFor="let c of categoryService?.categories"
+    [value]="c.categoryId"
+    [ngClass]="categoryActive == c.categoryId ? 'bg-blue-700' : 'bg-blue-500'"
+  >
+    {{ c.categoryName }}
+  </option>
+</select> -->
+
   <ul class="flex flex-wrap justify-center gap-4">
     <li
       *ngFor="let c of categories"
@@ -21,17 +36,15 @@
     @for (course of coursesForShow; track $index) {
           <li
             class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200  rounded-lg flex flex-col gap-3 cursor-pointer pb-4"
-            [routerLink]="['/course', course.id]">
+            [routerLink]="['/courses', course.id]">
 
-            <img src="https://imgscf.slidemembers.com/docs/1/1/430/online_education_cover_design_design_429051.jpg" alt="" class="w-full rounded-lg shadow-md shadow-blue-200">
+            <img [src]="course.image" class="aspect-video w-full rounded-lg shadow-md shadow-blue-200">
 
             <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
 
-            <p class="px-2 md:px-4 lg:px-6 text-neutral-500">{{course.description}}</p>
-
             <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
-              <!-- <img [src]="course.adminImage" alt="." class="w-8 h-8 rounded-full"> -->
-              instructorId : {{course.instructorId}}
+              <img [src]="instructorsService.instructors[course.instructorId].image" alt="." class="w-8 h-8 rounded-full shadow-md">
+              {{instructorsService.instructors[(course.instructorId)].name}}
             </div>
 
             <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
@@ -46,12 +59,7 @@
               completed
             </div>
 
-            <!-- <div *ngIf="course.percentage != 100" class="flex items-center gap-2 mt-2">
-              <p class="flex-1 bg-blue-500 bg-opacity-10 h-1 rounded-lg ">
-                <span class="block bg-blue-500 h-full rounded-lg" [ngStyle]="{ width: course.percentage + '%' }"></span>
-              </p>
-              <p>{{course.percentage}}%</p>
-            </div> -->
+            <p class="px-2 md:px-4 lg:px-6 text-neutral-500">{{course.description}}</p>
 
           </li>
 

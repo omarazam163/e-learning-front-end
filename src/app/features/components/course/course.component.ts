@@ -9,6 +9,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { role } from '../../../shared/types/role';
 import { HttpClient } from '@angular/common/http';
 import { CategoryService } from './../../../core/services/category.service';
+import { InstructorsService } from './../../../core/services/instructors.service';
 import { category } from '../../../shared/interfaces/category';
 
 
@@ -19,6 +20,12 @@ import { category } from '../../../shared/interfaces/category';
   styleUrl: './course.component.scss',
 })
 export class CourseComponent {
+GetInstuctorImage(arg0: any) {
+throw new Error('Method not implemented.');
+}
+Number(arg0: any) {
+throw new Error('Method not implemented.');
+}
   public inputValue: string = '';
   public categoryActive: number = 0;
   public role: role = 'noLogin';
@@ -41,12 +48,12 @@ export class CourseComponent {
   }
 
   handleCategoryActive(category: number) {
-    this.categoryActive = category;
+    this.categoryActive = Number(category);
     if (category == 0) {
       this.coursesForShow = this.coursesService.courses;
     } else {
       this.http
-        .get<any>(`https://localhost:7180/api/Courses/${category}`)
+        .get<any>(`https://localhost:7180/api/Courses/Category/${category}`)
         .subscribe((res) => (this.coursesForShow = res.data));
     }
   }
@@ -54,12 +61,11 @@ export class CourseComponent {
   handleSearch() {
     if (this.inputValue == '') {
       this.coursesForShow = this.coursesService.courses;
-    } else {
-      this.coursesForShow = this.coursesForShow.filter(
-        (c) =>
-          c.title.toLowerCase().includes(this.inputValue.toLowerCase()) ||
-          c.description.toLowerCase().includes(this.inputValue.toLowerCase())
-      );
+    }else {
+      this.coursesForShow = this.coursesForShow.filter( (c) =>
+        c.title.toLowerCase().includes(this.inputValue.toLowerCase()) ||
+        c.description.toLowerCase().includes(this.inputValue.toLowerCase()) 
+      )
     }
   }
 }
