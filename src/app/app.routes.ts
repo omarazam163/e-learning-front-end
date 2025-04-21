@@ -43,8 +43,31 @@ export const routes: Routes = [
   //     { path: '**', redirectTo: 'course', pathMatch: 'full' },
   //   ],
   // },
-  { path: 'courses', component: CourseComponent, title: 'Courses' },
-  { path: 'course/:id', component: CourseDetailComponent },
+  {
+    path: 'courses',
+    title: 'Courses',
+    children: [
+      { path: '', component: CourseComponent },
+      { path: ':id', component: CourseDetailComponent },
+    ],
+  },
+  {
+    path: 'instructors',
+    title: 'Instructors',
+    children: [
+      { path: '', component: InstructorComponent, title: 'Instructor courses' },
+      {
+        path: 'courses/:id',
+        component: InstructorCoursesComponent,
+        title: 'Instructor courses',
+      },
+      {
+        path: 'contact/:id',
+        component: InstructorContactComponent,
+        title: 'Instructor contact',
+      },
+    ],
+  },
   {
     path: 'login',
     component: LogInComponent,
@@ -82,14 +105,14 @@ export const routes: Routes = [
     canActivate: [loginguardGuard, resetPasswordGuard],
   },
   {
-    path:'workSpace',
-    component:WorkSpaceComponent,
-    title:'workSpace'
+    path: 'workSpace',
+    component: WorkSpaceComponent,
+    title: 'workSpace',
   },
   {
-    path:"createCoure",
-    component:AddCourseComponent,
-    title:'create new Coure'
+    path: 'createCoure',
+    component: AddCourseComponent,
+    title: 'create new Coure',
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

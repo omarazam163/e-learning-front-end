@@ -37,7 +37,8 @@ throw new Error('Method not implemented.');
     public coursesService: CoursesService,
     public authServices: AuthService,
     public http: HttpClient,
-    public categoryService: CategoryService
+    public categoryService: CategoryService,
+    public instructorsService: InstructorsService
   ) {
     this.coursesForShow = coursesService.courses;
   }
