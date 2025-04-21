@@ -9,6 +9,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { role } from '../../../shared/types/role';
 import { HttpClient } from '@angular/common/http';
 import { CategoryService } from './../../../core/services/category.service';
+import { InstructorsService } from './../../../core/services/instructors.service';
 
 
 @Component({
@@ -18,6 +19,12 @@ import { CategoryService } from './../../../core/services/category.service';
   styleUrl: './course.component.scss',
 })
 export class CourseComponent {
+GetInstuctorImage(arg0: any) {
+throw new Error('Method not implemented.');
+}
+Number(arg0: any) {
+throw new Error('Method not implemented.');
+}
   public inputValue: string = '';
   public categoryActive: number = 0;
   public role : role = "noLogin";
@@ -25,22 +32,21 @@ export class CourseComponent {
 
   public coursesForShow: any[] = [];
 
-  constructor(public coursesService: CoursesService , public authServices : AuthService , public http : HttpClient , public categoryService : CategoryService) {
-    this.coursesForShow = coursesService.courses;
-  }
+  constructor(public coursesService: CoursesService , public instructorsService: InstructorsService , public authServices : AuthService , public http : HttpClient , public categoryService : CategoryService) {}
 
   ngOnInit(): void {
     this.authServices.islogin.subscribe( (e:role) => this.role=e )
+    this.handleCategoryActive(0);
   }
 
   
 
   handleCategoryActive(category: number) {
-    this.categoryActive = category;
+    this.categoryActive = Number(category);
     if (category == 0) {
       this.coursesForShow = this.coursesService.courses;
     }else {
-      this.http.get<any>(`https://localhost:7180/api/Courses/${category}`).subscribe((res) => this.coursesForShow = res.data);
+      this.http.get<any>(`https://localhost:7180/api/Courses/Category/${category}`).subscribe((res) => this.coursesForShow = res.data);
     }
   }
 
@@ -50,9 +56,10 @@ export class CourseComponent {
     }else {
       this.coursesForShow = this.coursesForShow.filter( (c) =>
         c.title.toLowerCase().includes(this.inputValue.toLowerCase()) ||
-        c.description.toLowerCase().includes(this.inputValue.toLowerCase())
+        c.description.toLowerCase().includes(this.inputValue.toLowerCase()) 
       )
     }
   }
+
 
 }
