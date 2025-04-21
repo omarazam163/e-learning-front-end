@@ -36,10 +36,9 @@
     @for (course of coursesForShow; track $index) {
           <li
             class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200  rounded-lg flex flex-col gap-3 cursor-pointer pb-4"
-            [routerLink]="['/course', course.id]">
+            [routerLink]="['/courses', course.id]">
 
             <img [src]="course.image" class="aspect-video w-full rounded-lg shadow-md shadow-blue-200">
-            <!-- <img src="https://imgscf.slidemembers.com/docs/1/1/430/online_education_cover_design_design_429051.jpg" alt="" class="w-full rounded-lg shadow-md shadow-blue-200"> -->
 
             <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
 

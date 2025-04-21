@@ -19,12 +19,28 @@ import { ConfirmResetPasswordComponent } from './features/components/confirm-res
 import { ResetPasswordComponent } from './features/components/reset-password/reset-password.component';
 import { resetPasswordGuard } from './core/guards/reset-password.guard';
 import { InstructorComponent } from './features/components/instructor/instructor.component';
+import { InstructorCoursesComponent } from './features/components/instructor-courses/instructor-courses.component';
+import { InstructorContactComponent } from './features/components/instructor-contact/instructor-contact.component';
 export const routes: Routes = [
   {  path: '', redirectTo: 'home', pathMatch: 'full' },
   {  path: 'home', title: 'Home', component: HomeComponent },
-  {  path: 'courses', component: CourseComponent, title: 'Courses' },
-  {  path: 'instructors', component: InstructorComponent, title: 'Instructors' },
-  {  path: 'course/:id', component: CourseDetailComponent },
+  {  
+    path: 'courses', 
+    title: 'Courses' ,
+    children:[
+      {  path: '', component: CourseComponent },
+      {  path: ':id', component: CourseDetailComponent },
+    ]
+  },
+  {  
+    path: 'instructors', 
+    title: 'Instructors' ,
+    children: [
+      { path: '' , component:InstructorComponent , title : 'Instructor courses' },
+      { path: 'courses/:id' , component:InstructorCoursesComponent , title : 'Instructor courses' },
+      { path: 'contact/:id' , component:InstructorContactComponent , title : 'Instructor contact' },
+    ]
+  },
   {  path: 'login',  component: LogInComponent,  title: 'Log In',  canActivate: [loginguardGuard],  },
   {  path: 'register/:role',  component: SignUpComponent,  title: 'Sign Up',  canActivate: [loginguardGuard],  },
   {  path: 'chooseRole',  component: ChooseRoleComponent,  title: 'choose Role',  canActivate: [loginguardGuard],  },

@@ -12,8 +12,8 @@
         <li class="text-xl">{{instructor.name}}</li>
         <li class="text-neutral-500">{{instructor.bio}}</li>
         <li class="flex items-center gap-3 mt-auto">
-          <button class="bg-blue-500 rounded-lg py-2 text-lg shadow shadow-blue-200 duration-300 hover:shadow-lg hover:shadow-blue-200 flex-1 text-white">Show courses</button>
-          <button class="bg-blue-500 rounded-lg py-2 text-lg shadow shadow-blue-200 duration-300 hover:shadow-lg hover:shadow-blue-200 flex-1 text-white">Contact</button>
+          <a [routerLink]="['/instructors/courses',instructor.id]" routerLinkActive="router-link-active"  class="text-center bg-blue-500 rounded-lg py-2 text-lg shadow shadow-blue-200 duration-300 hover:shadow-lg hover:shadow-blue-200 flex-1 text-white">Show courses</a>
+          <a [routerLink]="['/instructors/contact',instructor.id]" routerLinkActive="router-link-active" class="text-center bg-blue-500 rounded-lg py-2 text-lg shadow shadow-blue-200 duration-300 hover:shadow-lg hover:shadow-blue-200 flex-1 text-white">Contact</a>
         </li>
       </ul>
     </li>
