@@ -9,7 +9,7 @@ export const loginguardGuard: CanActivateFn = (route, state) => {
   if (!(islogin == 'noLogin'))
     {
       router.navigate(['/home']);
+      return false;
     } 
-    
   return islogin == 'noLogin';
 };

@@ -14,7 +14,8 @@
             <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
               class="py-5 px-3 hover:text-blue-600">Home</a>
             <!-- <a href="coming-soon.html" routerLink="/mylearning" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">my learning</a> -->
-            <a href="coming-soon.html" routerLink="/courses" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Courses</a>
+            <a href="coming-soon.html" routerLink="/courses" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Courses</a>
             <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600">Teachers</a>
           </ul>
           <!-- <ul
@@ -73,6 +74,9 @@
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
+              @if (User.role == "Instructor") {
+              <a routerLink="/workSpace" class="block px-4 py-2 hover:bg-gray-100">Workspace</a>
+              }
             </div>
             <div class="py-2">
               <button (click)="signOut()" class="text-left block px-4 py-2 hover:bg-gray-100 w-full">Logout</button>
@@ -127,6 +131,9 @@
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Account settings</a>
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
+            @if (User.role == "Instructor") {
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Workspace</a>
+            }
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
           </div>
           <div class="py-2">
@@ -139,12 +146,13 @@
     <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home"
       routerLinkActive="text-blue-500">Home</a>
     <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/courses"
-    routerLinkActive="text-blue-500"
-    >Courses</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLinkActive="text-blue-500">Teachers</a>
+      routerLinkActive="text-blue-500">Courses</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200"
+      routerLinkActive="text-blue-500">Teachers</a>
     @if (!isLoggedIn) {
     <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/login">Log in</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/chooseRole">Register Now</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/chooseRole">Register
+      Now</a>
     }
   </div>
 </nav>

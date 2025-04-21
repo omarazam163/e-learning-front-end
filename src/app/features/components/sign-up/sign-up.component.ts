@@ -27,7 +27,7 @@ export class SignUpComponent {
   _AuthService = inject(AuthService);
   errorMessage = '';
   _activeRoute = inject(ActivatedRoute);
-  roleName:string ="";
+  roleName: string = '';
   constructor() {
     this.signUpForm = new FormGroup(
       {
@@ -56,14 +56,13 @@ export class SignUpComponent {
       }
     );
   }
-  ngOnInit()
-  {
-    if(this._activeRoute.snapshot.params["role"] != "student" && this._activeRoute.snapshot.params["role"] != "instructor")
-    {
-      this._router.navigate(["/chooseRole"]);
-    }
-    else
-    {
+  ngOnInit() {
+    if (
+      this._activeRoute.snapshot.params['role'] != 'student' &&
+      this._activeRoute.snapshot.params['role'] != 'Instructor'
+    ) {
+      this._router.navigate(['/chooseRole']);
+    } else {
       this.roleName = this._activeRoute.snapshot.params['role'];
     }
   }
@@ -79,7 +78,10 @@ export class SignUpComponent {
     if (this.signUpForm.invalid) {
       console.log('Form is invalid!');
     } else {
-      let newUser: Register = {...this.signUpForm.value,roleName:this.roleName};
+      let newUser: Register = {
+        ...this.signUpForm.value,
+        roleName: this.roleName,
+      };
       console.log(newUser);
       this._AuthService.register(newUser).subscribe({
         next: (res) => {

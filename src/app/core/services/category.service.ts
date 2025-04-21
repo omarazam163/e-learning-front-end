@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,19 +8,9 @@ import { map, Observable } from 'rxjs';
 export class CategoryService {
 
   public categoryURL = "https://localhost:7180/api/Categories";
-  public categories : any[] = [];
-  constructor( public http : HttpClient ) {
-    this.getCategories().subscribe( (res) => this.categories = res )
+  _http = inject(HttpClient);
+  getCategories(){
+    return this._http.get(this.categoryURL);
   }
-
-  getCategories() : Observable<any[]>{
-    return this.http.get<any>(this.categoryURL).pipe(
-      map(res => {
-        const categories = res.data;
-        categories.unshift({ categoryId: 0, categoryName: 'All' });
-        return categories;
-      })
-    );
-  }
-
+  
 }

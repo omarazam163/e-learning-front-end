@@ -23,5 +23,8 @@ export class CoursesService {
       );
     }
 
-
+    addNewCourse(data:FormData)
+    {
+      return this.http.post(this.courseURL,data);
+    }
 }

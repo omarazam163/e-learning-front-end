@@ -10,29 +10,24 @@ import { User } from '../../../shared/interfaces/user.';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  @ViewChild('searchBar') searchBar!: ElementRef;
   @ViewChild('mobileMenu') menu!: ElementRef;
   @ViewChild('dropdownMenu') dropdown!: ElementRef;
   @ViewChild('dropdownMenuMobile') dropdownMobile!: ElementRef;
   _auth = inject(AuthService);
   isLoggedIn = false;
   User: User = {} as User;
-  openSearchBar() {
-    (this.searchBar.nativeElement as HTMLElement).classList.toggle('hidden');
-    (this.menu.nativeElement as HTMLElement).classList.add('hidden');
-  }
 
   openMenu() {
     (this.menu.nativeElement as HTMLElement).classList.toggle('hidden');
-    (this.searchBar.nativeElement as HTMLElement).classList.add('hidden');
   }
 
   ngOnInit() {
     this._auth.islogin.subscribe((val) => {
-      if (val == 'student' || val == 'teacher') {
+      if (val == 'student' || val == 'Instructor') {
         this.isLoggedIn = true;
         this._auth.UserData.subscribe((user: User) => {
           this.User = user;
+          console.log(this.User);
         });
       } else this.isLoggedIn = false;
     });

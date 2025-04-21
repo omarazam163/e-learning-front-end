@@ -18,6 +18,8 @@ import { SendResetPasswordComponent } from './features/components/send-reset-pas
 import { ConfirmResetPasswordComponent } from './features/components/confirm-reset-password/confirm-reset-password.component';
 import { ResetPasswordComponent } from './features/components/reset-password/reset-password.component';
 import { resetPasswordGuard } from './core/guards/reset-password.guard';
+import { WorkSpaceComponent } from './features/components/work-space/work-space.component';
+import { AddCourseComponent } from './features/components/add-course/add-course.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -75,6 +77,16 @@ export const routes: Routes = [
     component: ResetPasswordComponent,
     title: 'reset password',
     canActivate: [loginguardGuard, resetPasswordGuard],
+  },
+  {
+    path:'workSpace',
+    component:WorkSpaceComponent,
+    title:'workSpace'
+  },
+  {
+    path:"createCoure",
+    component:AddCourseComponent,
+    title:'create new Coure'
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

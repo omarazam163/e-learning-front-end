@@ -17,8 +17,8 @@ export class AuthService {
   constructor() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       if (localStorage.getItem('token')) {
-        this.islogin.next('student');
         this.getUserDataFromToken();
+        this.islogin.next(this.UserData.getValue().role);
       } else {
         this.islogin.next('noLogin');
         this.UserData.next({} as User);
@@ -38,8 +38,9 @@ export class AuthService {
 
   getUserDataFromToken() {
     let decoded = jwtDecode(localStorage.getItem('token')!);
+    let role = (decoded as any)[`http://schemas.microsoft.com/ws/2008/06/identity/claims/role`];
     const { Email, UserName, Id } = decoded as any;
-    this.UserData.next({ Email, UserName, Id });
+    this.UserData.next({ Email, UserName, Id, role });
   }
   SendResetPassword(data: FormData)
   {
