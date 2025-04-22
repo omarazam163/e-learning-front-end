@@ -57,11 +57,21 @@ export class CourseComponent {
 
   handleCategoryActive(category: number) {
     this.categoryActive = Number(category);
-    if (category == 0) {
+    if (this.categoryActive == 0) {
       this.coursesForShow = this.courses;
     } else {
       this.http
-        .get<any>(`https://localhost:7180/api/Courses/Category/${category}`)
+        .get<any>(`https://localhost:7180/api/Courses/Category/${this.categoryActive}`)
+        .subscribe((res) => (this.coursesForShow = res.data));
+    }
+  }
+  handleCategoryActiveSelection(e : any){
+    this.categoryActive = Number((e.target as HTMLSelectElement).value);
+    if (this.categoryActive == 0) {
+      this.coursesForShow = this.courses;
+    } else {
+      this.http
+        .get<any>(`https://localhost:7180/api/Courses/Category/${this.categoryActive}`)
         .subscribe((res) => (this.coursesForShow = res.data));
     }
   }
