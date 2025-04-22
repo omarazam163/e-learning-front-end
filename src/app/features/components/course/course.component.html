@@ -35,16 +35,16 @@
 
     @for (course of coursesForShow; track $index) {
           <li
-            class="bg-blue-500 bg-opacity-10 shadow-md shadow-blue-100 duration-300 hover:shadow-lg hover:shadow-blue-200  rounded-lg flex flex-col gap-3 cursor-pointer pb-4"
+            class="bg-blue-500 bg-opacity-10 shadow-md hover:shadow-lg transition-all duration-300  rounded-2xl flex flex-col gap-3 cursor-pointer pb-4"
             [routerLink]="['/courses', course.id]">
 
-            <img [src]="course.image" class="aspect-video w-full rounded-lg shadow-md shadow-blue-200">
+            <img [src]="course.image" class="aspect-video w-full rounded-2xl shadow-md ">
 
             <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
 
             <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
-              <img [src]="instructorsService.instructors[course.instructorId].image" alt="." class="w-8 h-8 rounded-full shadow-md">
-              {{instructorsService.instructors[(course.instructorId)].name}}
+              <img [src]="getInstructorData(course.instructorId).image" alt="." class="w-8 h-8 rounded-full shadow-md">
+              {{getInstructorData(course.instructorId).name}}
             </div>
 
             <div class="px-2 md:px-4 lg:px-6 text-neutral-500">

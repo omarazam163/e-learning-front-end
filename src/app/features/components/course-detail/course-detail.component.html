@@ -11,8 +11,8 @@
     <h1 *ngIf="videoTitle" class="text-lg md:text-xl font-medium">{{videoTitle}}</h1>
 
     <p class="flex items-center gap-2 text-neutral-500 font-medium text-lg mb-4 mt-2">
-      <img [src]="instructorsService.instructors[courseDetails.instructorId].image" class="w-10 h-10 shadow-md rounded-full" alt="">
-      <span>{{instructorsService.instructors[courseDetails.instructorId].name}} </span>
+      <img [src]="getInstructorData(courseDetails.instructorId).image" class="w-10 h-10 shadow-md rounded-full" alt="">
+      <span>{{getInstructorData(courseDetails.instructorId).name}} </span>
     </p>
 
     <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
@@ -68,15 +68,15 @@
 
     <div *ngIf="activeCourseLink=='Discussion'">
       <div class="flex items-center gap-2 mb-2">
-        <img [src]="instructorsService.instructors[courseDetails.instructorId+1].image" alt="" class="w-10 h-10 rounded-full shadow-lg" >
-        <p class="font-medium">{{instructorsService.instructors[courseDetails.instructorId+1].name}}</p>
+        <img [src]="instructors[courseDetails.instructorId+1].image" alt="" class="w-10 h-10 rounded-full shadow-lg" >
+        <p class="font-medium">{{instructors[courseDetails.instructorId+1].name}}</p>
       </div>
-      <p class="text-sm font-normal text-neutral-500 mb-5">{{instructorsService.instructors[courseDetails.instructorId+1].bio}}</p>
+      <p class="text-sm font-normal text-neutral-500 mb-5">{{instructors[courseDetails.instructorId+1].bio}}</p>
       <div class="flex items-center gap-2 mb-2">
-        <img [src]="instructorsService.instructors[courseDetails.instructorId].image" alt="" class="w-10 h-10 rounded-full shadow-lg" >
-        <p class="font-medium">{{instructorsService.instructors[courseDetails.instructorId].name}}</p>
+        <img [src]="instructors[courseDetails.instructorId].image" alt="" class="w-10 h-10 rounded-full shadow-lg" >
+        <p class="font-medium">{{instructors[courseDetails.instructorId].name}}</p>
       </div>
-      <p class="text-sm font-normal text-neutral-500">{{instructorsService.instructors[courseDetails.instructorId].bio}}</p>
+      <p class="text-sm font-normal text-neutral-500">{{instructors[courseDetails.instructorId].bio}}</p>
     </div>
 
     <div *ngIf="activeCourseLink=='Reviews'">

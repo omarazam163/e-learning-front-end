@@ -11,6 +11,12 @@ import { RouterModule } from '@angular/router';
 })
 export class InstructorComponent {
 
+  instructors : any[] = []; 
+
   constructor ( public instructorsService : InstructorsService ) {}
+
+  ngOnInit(): void {
+    this.instructorsService.getInstructors().subscribe( (res) => this.instructors = res )
+  }
 
 }

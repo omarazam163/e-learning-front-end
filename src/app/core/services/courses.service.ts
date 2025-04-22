@@ -9,12 +9,9 @@ import { map, Observable } from 'rxjs';
 export class CoursesService {
 
   public courseURL = "https://localhost:7180/api/Courses";
-  public courses : any[] = [];
 
-  constructor( public http : HttpClient ) {
-      this.getCourses().subscribe( (res) => this.courses = res )
-    }
-  
+  constructor( public http : HttpClient ) {}
+
     getCourses() : Observable<any[]>{
       return this.http.get<any>(this.courseURL).pipe(
         map(res => {

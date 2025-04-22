@@ -8,11 +8,8 @@ import { map, Observable } from 'rxjs';
 export class InstructorsService {
 
   instructorsURL = "https://localhost:7180/api/Instructors";
-  instructors : any[] = []; 
 
-  constructor( public http : HttpClient ) {
-    this.getInstructors().subscribe( (res) => this.instructors = res )
-  }
+  constructor( public http : HttpClient ) {  }
 
   getInstructors() : Observable<any[]>{
     return this.http.get<any>(this.instructorsURL).pipe(

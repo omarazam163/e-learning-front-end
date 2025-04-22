@@ -18,101 +18,34 @@ import { SendResetPasswordComponent } from './features/components/send-reset-pas
 import { ConfirmResetPasswordComponent } from './features/components/confirm-reset-password/confirm-reset-password.component';
 import { ResetPasswordComponent } from './features/components/reset-password/reset-password.component';
 import { resetPasswordGuard } from './core/guards/reset-password.guard';
-import { WorkSpaceComponent } from './features/components/work-space/work-space.component';
-import { AddCourseComponent } from './features/components/add-course/add-course.component';
 import { InstructorComponent } from './features/components/instructor/instructor.component';
 import { InstructorCoursesComponent } from './features/components/instructor-courses/instructor-courses.component';
 import { InstructorContactComponent } from './features/components/instructor-contact/instructor-contact.component';
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', title: 'Home', component: HomeComponent },
-  // // Will we hide mylearning ?????
-  // {
-  //   path: 'mylearning',
-  //   component: MylearningComponent,
-  //   children: [
-  //     { path: '', redirectTo: 'course', pathMatch: 'full' },
-  //     { path: 'course', component: CourseComponent },
-  //     { path: 'dashboard', component: DashboardComponent },
-  //     { path: 'course/:id', component: CourseDetailComponent },
-  //     { path: 'resources', component: ResourcesComponent },
-  //     { path: 'chat', component: ChatComponent },
-  //     { path: 'schedule', component: ScheduleComponent },
-  //     { path: 'portfolio', component: PortfolioComponent },
-  //     { path: 'settings', component: SettingsComponent },
-  //     { path: '**', redirectTo: 'course', pathMatch: 'full' },
-  //   ],
-  // },
+  {  path: '', redirectTo: 'home', pathMatch: 'full' },
+  {  path: 'home', title: 'Home', component: HomeComponent },
   {
     path: 'courses',
-    title: 'Courses',
-    children: [
-      { path: '', component: CourseComponent },
-      { path: ':id', component: CourseDetailComponent },
-    ],
+    title: 'Courses' ,
+    children:[
+      {  path: '', component: CourseComponent },
+      {  path: ':id', component: CourseDetailComponent },
+    ]
   },
   {
     path: 'instructors',
-    title: 'Instructors',
+    title: 'Instructors' ,
     children: [
-      { path: '', component: InstructorComponent, title: 'Instructor courses' },
-      {
-        path: 'courses/:id',
-        component: InstructorCoursesComponent,
-        title: 'Instructor courses',
-      },
-      {
-        path: 'contact/:id',
-        component: InstructorContactComponent,
-        title: 'Instructor contact',
-      },
-    ],
+      { path: '' , component:InstructorComponent , title : 'Instructor courses' },
+      { path: 'courses/:id' , component:InstructorCoursesComponent , title : 'Instructor courses' },
+      { path: 'contact/:id' , component:InstructorContactComponent , title : 'Instructor contact' },
+    ]
   },
-  {
-    path: 'login',
-    component: LogInComponent,
-    title: 'Log In',
-    canActivate: [loginguardGuard],
-  },
-  {
-    path: 'register/:role',
-    component: SignUpComponent,
-    title: 'Sign Up',
-    canActivate: [loginguardGuard],
-  },
-  {
-    path: 'chooseRole',
-    component: ChooseRoleComponent,
-    title: 'choose Role',
-    canActivate: [loginguardGuard],
-  },
-  {
-    path: 'SendResetPassword',
-    component: SendResetPasswordComponent,
-    title: 'reset password',
-    canActivate: [loginguardGuard],
-  },
-  {
-    path: 'confirmResetPassword',
-    component: ConfirmResetPasswordComponent,
-    title: 'reset password',
-    canActivate: [loginguardGuard, resetPasswordGuard],
-  },
-  {
-    path: 'resetPassword',
-    component: ResetPasswordComponent,
-    title: 'reset password',
-    canActivate: [loginguardGuard, resetPasswordGuard],
-  },
-  {
-    path: 'workSpace',
-    component: WorkSpaceComponent,
-    title: 'workSpace',
-  },
-  {
-    path: 'createCoure',
-    component: AddCourseComponent,
-    title: 'create new Coure',
-  },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' },
+  {  path: 'login',  component: LogInComponent,  title: 'Log In',  canActivate: [loginguardGuard],  },
+  {  path: 'register/:role',  component: SignUpComponent,  title: 'Sign Up',  canActivate: [loginguardGuard],  },
+  {  path: 'chooseRole',  component: ChooseRoleComponent,  title: 'choose Role',  canActivate: [loginguardGuard],  },
+  {  path: 'SendResetPassword',  component: SendResetPasswordComponent,  title: 'reset password',  canActivate: [loginguardGuard],  },
+  {  path: 'confirmResetPassword',  component: ConfirmResetPasswordComponent,  title: 'reset password',  canActivate: [loginguardGuard, resetPasswordGuard],  },
+  {  path: 'resetPassword',  component: ResetPasswordComponent,  title: 'reset password',  canActivate: [loginguardGuard, resetPasswordGuard],  },
+  {  path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -12,10 +12,17 @@ import { RouterModule } from '@angular/router';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
+
+  courses : any[] = [];
+
   constructor(
     public detailsService: DetailsService,
     public coursesService: CoursesService
   ) {}
+
+  ngOnInit(): void {
+    this.coursesService.getCourses().subscribe( (res) => this.courses = res )
+  }
 
   option: any = {
     tooltip: {

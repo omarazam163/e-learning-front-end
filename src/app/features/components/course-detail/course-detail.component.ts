@@ -20,6 +20,7 @@ export class CourseDetailComponent {
   handleActiveLink(active: string) {
     this.activeCourseLink = active;
   }
+  instructors : any[] = [];
   modules : any[] = [];
   courseDetails : any;
   videoUrl : string = "";
@@ -37,6 +38,7 @@ export class CourseDetailComponent {
     this.courseId = this.activatedRoute.snapshot.paramMap.get('id');
     this.GetModules().subscribe( (res) => this.modules = res )
     this.GetCourseDetails().subscribe( (res) => this.courseDetails = res )
+    this.instructorsService.getInstructors().subscribe( (res) => this.instructors = res )
   }
 
   GetModules () : Observable<any[]> {
@@ -55,7 +57,9 @@ export class CourseDetailComponent {
     );
   }
 
-  // handleActiveVideo(vu : string) => { videoUrl = vu };
+  getInstructorData(iId : any){
+    return this.instructors.find( i => i.id == iId)
+  }
 
   handleActiveVideo (vu : string, vt : string) { 
     this.videoUrl = vu;

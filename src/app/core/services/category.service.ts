@@ -8,9 +8,17 @@ import { map, Observable } from 'rxjs';
 export class CategoryService {
 
   public categoryURL = "https://localhost:7180/api/Categories";
-  _http = inject(HttpClient);
-  getCategories(){
-    return this._http.get(this.categoryURL);
+
+  constructor ( public http : HttpClient ) {}
+
+  getCategories() : Observable<any[]>{
+    return this.http.get<any>(this.categoryURL).pipe(
+      map(res => {
+        res.data.unshift({categoryId: 0, categoryName: 'All'});
+        return res.data;
+      })
+    );
   }
-  
+
+
 }

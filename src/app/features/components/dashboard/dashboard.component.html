@@ -20,7 +20,7 @@
     <div class="shadow-md shadow-neutral-200 p-5 rounded-lg bg-white lg:col-span-2">
       <h2 class="mb-5 text-lg font-medium">My Courses</h2>
       <ul class="flex flex-col gap-4">
-        <li *ngFor="let course of coursesService.courses.slice(3,6)" class="p-2 border-2 border-neutral-200 rounded-lg flex items-center justify-between gap-2 md:gap-4 lg:gap-6">
+        <li *ngFor="let course of courses.slice(3,6)" class="p-2 border-2 border-neutral-200 rounded-lg flex items-center justify-between gap-2 md:gap-4 lg:gap-6">
           <div class="flex gap-2 flex-1">
             <img [src]="course.icon" alt="" class="w-10 h-10" >
             <p class="text-sm font-medium flex flex-col">

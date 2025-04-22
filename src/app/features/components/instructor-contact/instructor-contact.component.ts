@@ -11,21 +11,21 @@ import { InstructorsService } from '../../../core/services/instructors.service';
 export class InstructorContactComponent {
 
   instructorId :any;
-  instructorEmail :any;
+  instructors : any[] = [];
+  instructorData : any;
 
   constructor ( public activatedRoute : ActivatedRoute , public instructorsService : InstructorsService ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(params => {
-      this.instructorId = params.get('id');  
-    });
-    // this.instructorId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.getInstructorEmail();
+    this.activatedRoute.paramMap.subscribe(params => this.instructorId = params.get('id'));
+    this.instructorsService.getInstructors().subscribe( (res) => {
+      this.instructors = res
+      this.getInstructorData();
+    })
   }
 
-  getInstructorEmail() {
-    console.log(this.instructorId);
-    console.log(this.instructorsService.instructors[this.instructorId]);
+  getInstructorData() {
+    this.instructorData = this.instructors.find( i => i.id = this.instructorId )
   }
 
 }
