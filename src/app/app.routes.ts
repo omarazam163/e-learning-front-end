@@ -23,6 +23,7 @@ import { InstructorCoursesComponent } from './features/components/instructor-cou
 import { InstructorContactComponent } from './features/components/instructor-contact/instructor-contact.component';
 import { WorkSpaceComponent } from './features/components/work-space/work-space.component';
 import { AddCourseComponent } from './features/components/add-course/add-course.component';
+import { instructorGuard } from './core/guards/instructor.guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -54,18 +55,20 @@ export const routes: Routes = [
   {
     path: 'workSpace',
     component: WorkSpaceComponent,
-    title: 'work space'
+    title: 'work space',
+    canActivate: [instructorGuard],
+  },
+  {
+    path: 'addCourse',
+    component: AddCourseComponent,
+    title: 'Add Course',
+    canActivate: [instructorGuard],
   },
   {
     path: 'login',
     component: LogInComponent,
     title: 'Log In',
     canActivate: [loginguardGuard],
-  },
-  {
-    path:"addCourse",
-    component:AddCourseComponent,
-    title:"Add Course",
   },
   {
     path: 'register/:role',
