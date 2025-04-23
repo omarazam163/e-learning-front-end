@@ -1,13 +1,11 @@
 export interface Course {
-
-  courseId : number ,
-  icon : string ,
-  title : string ,
-  admin : string ,
-  adminImage : string ,
-  NumberOfLessons : string ,
-  NumberOfHours : string ,
-  percentage : number,
-  category: string
-
+  id: number,
+  title: string,
+  image: string,
+  description: string,
+  instructorId: number,
+  price: number,
+  hours: number,
+  updatedAt: string,
+  categoryId: number,
 }

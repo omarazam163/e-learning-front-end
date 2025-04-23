@@ -11,6 +11,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../core/services/category.service';
 import { CoursesService } from '../../../core/services/courses.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-course',
   imports: [ReactiveFormsModule, FormsModule],
@@ -23,12 +24,13 @@ export class AddCourseComponent {
   _coursesService = inject(CoursesService);
   categories = signal<category[]>([]);
   User: User = {} as User;
+  _router = inject(Router);
   isloading = signal(false);
   ngOnInit() {
     this._auth.UserData.subscribe((user: User) => {
       this.User = user;
     });
-    this._categoryService.getCategories().subscribe((res: any) => {
+    this._categoryService.getAllCategories().subscribe((res: any) => {
       this.categories.set(res.data);
     });
   }
@@ -80,16 +82,15 @@ export class AddCourseComponent {
         'CategoryId',
         this.addCourseForm.get('courusecategory')?.value as string
       );
-      data.append('InstructorId', this.User.Id as string);
+      data.append('InstructorEmail', this.User.Email);
       data.append(
         'Image',
         this.addCourseForm.get('courseImage')?.value as unknown as File
       );
-      data.append('UpdatedAt', new Date().toISOString());
-      console.log(data);
       this._coursesService.addNewCourse(data).subscribe({
         next: (res) => {
-          console.log(res);
+          this.isloading.set(false);
+          this._router.navigate(["/workSpace"]);
         },
       });
     }

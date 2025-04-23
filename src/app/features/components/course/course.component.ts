@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { CategoryService } from './../../../core/services/category.service';
 import { InstructorsService } from './../../../core/services/instructors.service';
 import { category } from '../../../shared/interfaces/category';
+import { Course } from '../../../shared/interfaces/course';
 
 
 @Component({
@@ -30,8 +31,8 @@ export class CourseComponent {
   public categoryActive: number = 0;
   public role: role = 'noLogin';
   public courseURL = 'https://localhost:7180/api/Courses';
-  categories!: category[];
-  public courses : any[] = [];
+  categories: category[]= [];
+  public courses : Course[] = [];
   public coursesForShow: any[] = [];
   public instructors : any[] = [];
 
@@ -47,7 +48,11 @@ export class CourseComponent {
 
   ngOnInit(): void {
     this.authServices.islogin.subscribe((e: role) => (this.role = e));
-    this.categoryService.getCategories().subscribe( (res) => this.categories = res );
+    this.categoryService.getAllCategories().subscribe( (res:any) =>
+      {
+        this.categories = res.data; 
+        console.log(this.categories);
+      });
     this.coursesService.getCourses().subscribe( (res) => {
       this.courses = res;
       this.coursesForShow = res;

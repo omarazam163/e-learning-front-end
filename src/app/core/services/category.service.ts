@@ -10,15 +10,11 @@ export class CategoryService {
   public categoryURL = "https://localhost:7180/api/Categories";
 
   constructor ( public http : HttpClient ) {}
-
-  getCategories() : Observable<any[]>{
-    return this.http.get<any>(this.categoryURL).pipe(
-      map(res => {
-        res.data.unshift({categoryId: 0, categoryName: 'All'});
-        return res.data;
-      })
-    );
+  
+  getAllCategories(){
+    return this.http.get(this.categoryURL);
   }
+
 
 
 }

@@ -7,7 +7,7 @@
 
   <div class="block lg:hidden bg-blue-500 px-2 rounded-lg">
     <select
-      *ngIf="categories"
+      *ngIf="categories.length>0"
       class="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 outline-none border-none w-full"
       (change)="handleCategoryActiveSelection($event)"
     >
@@ -22,6 +22,7 @@
   </div>
 
   <ul class="hidden lg:flex flex-wrap justify-center gap-4">
+    <li class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300" [ngClass]="categoryActive == 0 ? 'bg-blue-700' : 'bg-blue-500'" (click)="handleCategoryActive(0)">All</li>
     <li
       *ngFor="let c of categories"
       (click)="handleCategoryActive(c.categoryId)"
@@ -32,40 +33,42 @@
     </li>
   </ul>
 
-  <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+  @if(courses.length>0){
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      
+        @for (course of coursesForShow; track $index) {
+        <li
+          class="bg-blue-500 bg-opacity-10 shadow-md hover:shadow-lg transition-all duration-300  rounded-2xl flex flex-col gap-3 cursor-pointer pb-4"
+          [routerLink]="['/courses', course.id]">
+      
+          <img [src]="course.image" class="aspect-video w-full rounded-2xl shadow-md ">
+      
+          <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
+      
+          <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
+            <img [src]="getInstructorData(course.instructorId).image" alt="." class="w-8 h-8 rounded-full shadow-md">
+            {{getInstructorData(course.instructorId).name}}
+          </div>
+      
+          <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
+            <i class="text-violet-500 font-bold">$</i>
+            {{course.price}}
+            <i class="fa-solid fa-clock ms-4 text-violet-500"></i>
+            {{course.hours}} Hours
+          </div>
+      
+          <div *ngIf="course.percentage == 100" class="px-2 md:px-4 lg:px-6 flex items-center gap-2 mt-2">
+            <i class="fa-solid fa-circle-check text-blue-500"></i>
+            completed
+          </div>
+      
+          <p class="px-2 md:px-4 lg:px-6 text-neutral-500 break-words whitespace-normal">{{course.description}}</p>
+      
+        </li>
+      
+        }
+      
+      </ul>
 
-    @for (course of coursesForShow; track $index) {
-          <li
-            class="bg-blue-500 bg-opacity-10 shadow-md hover:shadow-lg transition-all duration-300  rounded-2xl flex flex-col gap-3 cursor-pointer pb-4"
-            [routerLink]="['/courses', course.id]">
-
-            <img [src]="course.image" class="aspect-video w-full rounded-2xl shadow-md ">
-
-            <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
-
-            <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
-              <img [src]="getInstructorData(course.instructorId).image" alt="." class="w-8 h-8 rounded-full shadow-md">
-              {{getInstructorData(course.instructorId).name}}
-            </div>
-
-            <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
-              <i class="text-violet-500 font-bold">$</i>
-              {{course.price}}
-              <i class="fa-solid fa-clock ms-4 text-violet-500"></i>
-              {{course.hours}} Hours
-            </div>
-
-            <div *ngIf="course.percentage == 100" class="px-2 md:px-4 lg:px-6 flex items-center gap-2 mt-2">
-              <i class="fa-solid fa-circle-check text-blue-500"></i>
-              completed
-            </div>
-
-            <p class="px-2 md:px-4 lg:px-6 text-neutral-500">{{course.description}}</p>
-
-          </li>
-
-    }
-
-  </ul>
-
+  }
 </section>
