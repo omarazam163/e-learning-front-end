@@ -1,5 +1,4 @@
 export interface Details {
-
   imagePath:string;
   name: string;
   email: string;
@@ -8,5 +7,4 @@ export interface Details {
   state: string;
   zipCode: string;
   country: string;
-
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { InstructorsService } from '../../../core/services/instructors.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Instructor } from '../../../shared/interfaces/Instructor';
 
 @Component({
   selector: 'app-instructor',
@@ -11,12 +12,12 @@ import { RouterModule } from '@angular/router';
 })
 export class InstructorComponent {
 
-  instructors : any[] = []; 
+  instructors : Instructor[] = []; 
 
   constructor ( public instructorsService : InstructorsService ) {}
 
   ngOnInit(): void {
-    this.instructorsService.getInstructors().subscribe( (res) => this.instructors = res )
+    this.instructorsService.getInstructors().subscribe( (res:any) => this.instructors = res )
   }
 
 }

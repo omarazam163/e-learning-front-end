@@ -24,8 +24,8 @@ export class InstructorContactComponent {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => this.instructorId = params.get('id'));
-    this.instructorsService.getInstructors().subscribe( (res) => {
-      this.instructors = res
+    this.instructorsService.getInstructors().subscribe( (res:any) => {
+      this.instructors = res.data
       this.getInstructorData();
     })
   }

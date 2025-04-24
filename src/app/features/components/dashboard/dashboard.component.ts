@@ -21,7 +21,7 @@ export class DashboardComponent {
   ) {}
 
   ngOnInit(): void {
-    this.coursesService.getCourses().subscribe( (res) => this.courses = res )
+    this.coursesService.getCourses().subscribe( (res:any) => this.courses = res )
   }
 
   option: any = {

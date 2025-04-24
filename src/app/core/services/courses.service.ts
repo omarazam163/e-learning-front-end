@@ -1,27 +1,90 @@
-import { Injectable } from '@angular/core';
-import { Course } from '../../shared/interfaces/course';
+import { Course } from './../../shared/interfaces/course';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import {
+  forkJoin,
+  map,
+  merge,
+  mergeAll,
+  mergeMap,
+  Observable,
+  switchMap,
+} from 'rxjs';
+import { InstructorsService } from './instructors.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
+  public courseURL = 'https://localhost:7180/api/Courses';
+  _instructorService = inject(InstructorsService);
 
-  public courseURL = "https://localhost:7180/api/Courses";
+  constructor(public http: HttpClient) {}
 
-  constructor( public http : HttpClient ) {}
+  getCourses() {
+        return this.http
+          .get<{ data: Course[] }>(this.courseURL)
+          .pipe(
+            switchMap((res) => {
+              const courses = res.data;
+              const enrichedCourses$ = courses.map((course: any) =>
+                this._instructorService
+                  .getSpecificInstructor(course.instructorId)
+                  .pipe(
+                    map((instructor: any) => ({
+                      ...course,
+                      instructor: instructor.data,
+                    }))
+                  )
+              );
 
-    getCourses() : Observable<any[]>{
-      return this.http.get<any>(this.courseURL).pipe(
-        map(res => {
-          return res.data;
+              return forkJoin(enrichedCourses$);
+            })
+          );
+  }
+
+  addNewCourse(data: FormData) {
+    return this.http.post(this.courseURL, data);
+  }
+
+  getInstructorCourses(instructorId: string): Observable<Course[]> {
+    return this.http
+      .get<Course[]>(this.courseURL + '/Instructor/' + instructorId)
+      .pipe(map((res: any) => res.data));
+  }
+
+  getCoursesByCategory(categoryId: number): Observable<Course[]> {
+    return this.http
+      .get<{ data: Course[] }>(this.courseURL + '/Category/' + categoryId)
+      .pipe(
+        switchMap((res) => {
+          const courses = res.data;
+          const enrichedCourses$ = courses.map((course: any) =>
+            this._instructorService
+              .getSpecificInstructor(course.instructorId)
+              .pipe(
+                map((instructor: any) => ({
+                  ...course,
+                  instructor: instructor.data,
+                }))
+              )
+          );
+
+          return forkJoin(enrichedCourses$);
         })
       );
-    }
+  }
 
-    addNewCourse(data:FormData)
-    {
-      return this.http.post(this.courseURL,data);
-    }
+  getCourseById(id: number): Observable<Course> {
+    return this.http.get<any>(this.courseURL + '/' + id).pipe(switchMap((res:any)=>{
+      const Data = res.data;
+      const course = this._instructorService.getSpecificInstructor(Data.instructorId).pipe(
+        map((instructor: any) => ({
+          ...Data,
+          instructor: instructor.data,
+        }))
+      )
+      return course;
+    }));
+  }
 }

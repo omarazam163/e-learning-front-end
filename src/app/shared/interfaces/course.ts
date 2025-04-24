@@ -1,9 +1,11 @@
+import { Instructor } from "./Instructor";
+
 export interface Course {
   id: number,
   title: string,
   image: string,
   description: string,
-  instructorId: number,
+  instructor: Instructor,
   price: number,
   hours: number,
   updatedAt: string,

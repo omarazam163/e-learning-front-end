@@ -39,8 +39,8 @@ export class AuthService {
   getUserDataFromToken() {
     let decoded = jwtDecode(localStorage.getItem('token')!);
     let role = (decoded as any)[`http://schemas.microsoft.com/ws/2008/06/identity/claims/role`];
-    const { Email, UserName, Id } = decoded as any;
-    this.UserData.next({ Email, UserName, Id, role });
+    const { Email, UserName, Id, instructorId } = decoded as any;
+    this.UserData.next({ Email, UserName, Id, role, instructorId });
   }
   SendResetPassword(data: FormData)
   {

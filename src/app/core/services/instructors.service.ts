@@ -11,12 +11,12 @@ export class InstructorsService {
 
   constructor( public http : HttpClient ) {  }
 
-  getInstructors() : Observable<any[]>{
-    return this.http.get<any>(this.instructorsURL).pipe(
-      map(res => {
-        return res.data;
-      })
-    );
+  getInstructors() {
+    return this.http.get(this.instructorsURL);
+  }
+
+  getSpecificInstructor(InstructorId: string) {
+    return this.http.get(this.instructorsURL+"/"+InstructorId);
   }
 
 }
