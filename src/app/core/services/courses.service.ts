@@ -4,9 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import {
   forkJoin,
   map,
-  merge,
-  mergeAll,
-  mergeMap,
   Observable,
   switchMap,
 } from 'rxjs';
@@ -48,9 +45,26 @@ export class CoursesService {
   }
 
   getInstructorCourses(instructorId: string): Observable<Course[]> {
-    return this.http
-      .get<Course[]>(this.courseURL + '/Instructor/' + instructorId)
-      .pipe(map((res: any) => res.data));
+        return this.http
+          .get<{ data: Course[] }>(this.courseURL + "/Instructor/" + instructorId)
+          .pipe(
+            switchMap((res) => {
+              const courses = res.data;
+              console.log(courses);
+              const enrichedCourses$ = courses.map((course: any) =>
+                this._instructorService
+                  .getSpecificInstructor(course.instructorId)
+                  .pipe(
+                    map((instructor: any) => ({
+                      ...course,
+                      instructor: instructor.data,
+                    }))
+                  )
+              );
+
+              return forkJoin(enrichedCourses$);
+            })
+          );
   }
 
   getCoursesByCategory(categoryId: number): Observable<Course[]> {

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
+import { Instructor } from '../../shared/interfaces/Instructor';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class InstructorsService {
 
   constructor( public http : HttpClient ) {  }
 
-  getInstructors() {
-    return this.http.get(this.instructorsURL);
+  getInstructors():Observable<Instructor[]> {
+    return this.http.get(this.instructorsURL).pipe(
+      map((res: any) => res.data)
+    );
   }
 
   getSpecificInstructor(InstructorId: string) {

@@ -25,16 +25,12 @@ export class InstructorCoursesComponent {
     this.instructorId = this.activatedRoute.snapshot.paramMap.get('id');
     this.instructorsService.getInstructors().subscribe( (res:any) => {
       this.instructors = res.data
-      this.getInstructorData();
       this.getInstructorCourses();
     } )
   }
 
   getInstructorCourses(){
-    this.coursesService.getInstructorCourses(this.instructorId).subscribe( (res:any) => this.instructorCourses = res.data )
-  }
-  getInstructorData () {
-    this.instructorsService.getSpecificInstructor(this.instructorId).subscribe( (res:any) => this.instructorData = res.data )
+    this.coursesService.getInstructorCourses(this.instructorId.toString()).subscribe( (res:Course[]) => this.instructorCourses = res )
   }
 
 }

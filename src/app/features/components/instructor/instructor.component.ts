@@ -17,7 +17,7 @@ export class InstructorComponent {
   constructor ( public instructorsService : InstructorsService ) {}
 
   ngOnInit(): void {
-    this.instructorsService.getInstructors().subscribe( (res:any) => this.instructors = res )
+    this.instructorsService.getInstructors().subscribe( (res) => this.instructors = res )
   }
 
 }
