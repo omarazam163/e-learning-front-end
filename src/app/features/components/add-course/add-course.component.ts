@@ -1,7 +1,12 @@
+import { coursePreview } from './../../../shared/interfaces/privewCourse';
 import { category } from './../../../shared/interfaces/category';
 import { Component, inject, signal } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../shared/interfaces/user.';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatButtonModule } from '@angular/material/button';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -12,26 +17,35 @@ import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../core/services/category.service';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Router } from '@angular/router';
+import { AddCourseFormComponent } from '../add-course-form/add-course-form.component';
+import { PreviewPageComponent } from '../preview-page/preview-page.component';
 @Component({
   selector: 'app-add-course',
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatStepperModule,
+    PreviewPageComponent,
+    AddCourseFormComponent
+  ],
   templateUrl: './add-course.component.html',
   styleUrl: './add-course.component.scss',
 })
 export class AddCourseComponent {
   _auth = inject(AuthService);
-  _categoryService = inject(CategoryService);
   _coursesService = inject(CoursesService);
-  categories = signal<category[]>([]);
   User: User = {} as User;
   _router = inject(Router);
-  isloading = signal(false);
+  isloading = false;
+  currentStep = 0;
+  coursePreview: coursePreview = {} as coursePreview;
+  formData = new FormData();
   ngOnInit() {
     this._auth.UserData.subscribe((user: User) => {
       this.User = user;
-    });
-    this._categoryService.getAllCategories().subscribe((res: any) => {
-      this.categories.set(res.data);
     });
   }
   addCourseForm = new FormGroup({
@@ -55,54 +69,74 @@ export class AddCourseComponent {
     ]),
     courusecategory: new FormControl('', [Validators.required]),
     courseImage: new FormControl(null, [Validators.required]),
+    courseImageUrl: new FormControl('',[Validators.required]),
   });
 
-  handelSubmit() {
-    console.log(this.addCourseForm.value);
+  handelSubmitCourseData() {
+
+    // for form submit
     if (this.addCourseForm.valid) {
-      this.isloading.set(true);
-      const data = new FormData();
-      data.append(
+      this.isloading = true;
+      this.formData.append(
         'Title',
         this.addCourseForm.get('courseName')?.value as string
       );
-      data.append(
+      this.formData.append(
         'Description',
         this.addCourseForm.get('courseDescription')?.value as string
       );
-      data.append(
+      this.formData.append(
         'Price',
         this.addCourseForm.get('coursePrice')?.value as string
       );
-      data.append(
+      this.formData.append(
         'Hours',
         this.addCourseForm.get('courseDuration')?.value as string
       );
-      data.append(
+      this.formData.append(
         'CategoryId',
-        this.addCourseForm.get('courusecategory')?.value as string
+        (this.addCourseForm.get('courusecategory')?.value as string).split(
+          '-'
+        )[0]
       );
-      data.append('InstructorEmail', this.User.Email);
-      data.append(
+      this.formData.append('InstructorEmail', this.User.Email);
+      this.formData.append(
         'Image',
         this.addCourseForm.get('courseImage')?.value as unknown as File
       );
-      this._coursesService.addNewCourse(data).subscribe({
-        next: (res) => {
-          this.isloading.set(false);
-          this._router.navigate(["/workSpace"]);
-        },
-      });
+
+
+      // for preview
+      this.coursePreview = {
+        title: this.addCourseForm.get('courseName')?.value as string,
+        description: this.addCourseForm.get('courseDescription')
+          ?.value as string,
+        price: parseInt(this.addCourseForm.get('coursePrice')?.value as string),
+        hours: parseInt(
+          this.addCourseForm.get('courseDuration')?.value as string
+        ),
+        category: (
+          this.addCourseForm.get('courusecategory')?.value as string
+        ).split('-')[1],
+        image: this.addCourseForm.get('courseImageUrl')?.value as string,
+      };
+      console.log(this.coursePreview);
+      this.currentStep = 1;
     }
   }
 
-  onFileChange(event: any) {
-    const file = event.target.files[0]; // Get the selected file
-    if (file) {
-      // Manually set the file in the form control
-      this.addCourseForm.patchValue({
-        courseImage: file,
-      });
-    }
+  publish()
+  {
+    this._coursesService.addNewCourse(this.formData).subscribe({
+      next: (res) => {
+        this.isloading = false;
+        this._router.navigate(['/workSpace']);
+      },
+    });
+  }
+
+  edit()
+  {
+    this.currentStep = 0;
   }
 }

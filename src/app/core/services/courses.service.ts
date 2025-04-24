@@ -50,7 +50,6 @@ export class CoursesService {
           .pipe(
             switchMap((res) => {
               const courses = res.data;
-              console.log(courses);
               const enrichedCourses$ = courses.map((course: any) =>
                 this._instructorService
                   .getSpecificInstructor(course.instructorId)

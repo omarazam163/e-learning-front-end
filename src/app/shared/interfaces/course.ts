@@ -8,6 +8,5 @@ export interface Course {
   instructor: Instructor,
   price: number,
   hours: number,
-  updatedAt: string,
   categoryId: number,
 }

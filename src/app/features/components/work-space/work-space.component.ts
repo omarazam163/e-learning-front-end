@@ -1,7 +1,8 @@
 import { CoursesService } from './../../../core/services/courses.service';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { Course } from '../../../shared/interfaces/course';
 @Component({
   selector: 'app-work-space',
   imports: [RouterLink],
@@ -11,14 +12,18 @@ import { AuthService } from '../../../core/services/auth.service';
 export class WorkSpaceComponent {
   _auth = inject(AuthService);
   _CoursesService = inject(CoursesService);
-  ngOnInit()
-  {
-    this._CoursesService.getInstructorCourses(this._auth.UserData.getValue().instructorId as string).subscribe(
-      {
-        next:(res:any)=>{
-          console.log(res);
-        }
-      }
-    );
+  Courses = signal<Course[]>([]);
+  Id: string = '0';
+  Name: string = '';
+  ngOnInit() {
+    if (this._auth.islogin.getValue() == 'Instructor') {
+      this.Id = this._auth.UserData.getValue().instructorId || '0';
+      this.Name = this._auth.UserData.getValue().UserName;
+      this._CoursesService
+        .getInstructorCourses(this.Id.toString())
+        .subscribe((res: Course[]) => {
+          this.Courses.set(res);
+        });
+    }
   }
 }

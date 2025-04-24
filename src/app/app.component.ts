@@ -4,10 +4,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlowbiteService } from './core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
 import { NavbarComponent } from './features/components/navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
-  imports: [ReactiveFormsModule, RouterOutlet, NavbarComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterOutlet,
+    NavbarComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
