@@ -1,11 +1,24 @@
-import { Injectable } from '@angular/core';
-import { CourseModule } from '../../shared/interfaces/course-module';
-
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { Module } from '../../shared/interfaces/module';
 @Injectable({
   providedIn: 'root',
 })
 export class CourseModulesService {
+  _http = inject(HttpClient);
+  public moduleURL = 'https://localhost:7180/api/Modules';
 
+  getCourseModules(id: number): Observable<Module[]>
+  {
+    return this._http.get(this.moduleURL + '/Course/' + id).pipe(
+      map((res: any) => res.data)
+    );
+  }
 
-  constructor() {}
+  addModuleToCourse(CourseId : number, moduleName:string) : Observable<any> { 
+    return this._http.post(this.moduleURL,{title:moduleName,courseId:CourseId});
+  }
+
+  
 }

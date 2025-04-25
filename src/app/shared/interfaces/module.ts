@@ -1,0 +1,7 @@
+import { video } from './video';
+export interface Module {
+  id: number;
+  title: string;
+  courseId: number;
+  videos: video[];
+}

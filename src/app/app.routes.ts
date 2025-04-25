@@ -24,6 +24,7 @@ import { InstructorContactComponent } from './features/components/instructor-con
 import { WorkSpaceComponent } from './features/components/work-space/work-space.component';
 import { AddCourseComponent } from './features/components/add-course/add-course.component';
 import { instructorGuard } from './core/guards/instructor.guard';
+import { EditCourseComponent } from './features/components/edit-course/edit-course.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -62,6 +63,12 @@ export const routes: Routes = [
     path: 'addCourse',
     component: AddCourseComponent,
     title: 'Add Course',
+    canActivate: [instructorGuard],
+  },
+  {
+    path: "editCourse/:id",
+    component: EditCourseComponent,
+    title: 'Edit Course',
     canActivate: [instructorGuard],
   },
   {

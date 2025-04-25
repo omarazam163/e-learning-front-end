@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { Course } from '../../../shared/interfaces/course';
+
 @Component({
   selector: 'app-work-space',
   imports: [RouterLink],
