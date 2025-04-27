@@ -20,5 +20,7 @@ export class CourseModulesService {
     return this._http.post(this.moduleURL,{title:moduleName,courseId:CourseId});
   }
 
-  
+  deleteVideoFromModule(videoId: number): Observable<any> {
+    return this._http.delete(this.moduleURL + '/Video/'+videoId);
+  }
 }

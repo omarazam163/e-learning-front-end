@@ -30,7 +30,7 @@ export class CoursesService {
                   .pipe(
                     map((instructor: any) => ({
                       ...course,
-                      instructor: instructor.data,
+                      instructor: instructor,
                     }))
                   )
               );
@@ -56,7 +56,7 @@ export class CoursesService {
                   .pipe(
                     map((instructor: any) => ({
                       ...course,
-                      instructor: instructor.data,
+                      instructor: instructor,
                     }))
                   )
               );
@@ -78,7 +78,7 @@ export class CoursesService {
               .pipe(
                 map((instructor: any) => ({
                   ...course,
-                  instructor: instructor.data,
+                  instructor: instructor,
                 }))
               )
           );
@@ -94,7 +94,7 @@ export class CoursesService {
       const course = this._instructorService.getSpecificInstructor(Data.instructorId).pipe(
         map((instructor: any) => ({
           ...Data,
-          instructor: instructor.data,
+          instructor: instructor,
         }))
       )
       return course;

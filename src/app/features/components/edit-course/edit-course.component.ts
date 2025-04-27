@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../../../core/services/video.service';
 import { HttpEventType } from '@angular/common/http';
-import { VideoPlayerComponent } from "../../helpers/video-player/video-player.component";
+import { VideoPlayerComponent } from '../../helpers/video-player/video-player.component';
 
 @Component({
   selector: 'app-edit-course',
@@ -93,7 +93,7 @@ export class EditCourseComponent {
       .subscribe((res: Module[]) => {
         this.Modueles.set(res);
         this.SelectedModule.set(
-          this.Modueles().find((m) => m.id == this.Id) as Module
+          this.Modueles().find((m) => m.id == this.SelectedModule().id) as Module
         );
       });
   }
@@ -167,11 +167,16 @@ export class EditCourseComponent {
     this.isVideoPlayerOpen.set(true);
   }
 
-  closeVideoPlayer()
-  {
+  closeVideoPlayer() {
     this.isVideoPlayerOpen.set(false);
     this.source.set('');
-  };
-  
-  // removeVideoFromModule(videoId: number) {
+  }
+
+  removeVideoFromModule(videoId: number) {
+    this._ModuleService.deleteVideoFromModule(videoId).subscribe((res) => {
+      this.refreshModules();
+      this.isVideoPlayerOpen.set(false);
+      this.source.set('');
+    });
+  }
 }

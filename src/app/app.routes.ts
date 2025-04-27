@@ -13,7 +13,7 @@ import { MylearningComponent } from './features/components/mylearning/mylearning
 import { HomeComponent } from './features/components/home/home.component';
 import { LogInComponent } from './features/components/log-in/log-in.component';
 import { SignUpComponent } from './features/components/sign-up/sign-up.component';
-import { loginguardGuard } from './core/guards/loginguard.guard';
+import { loginGuard } from './core/guards/loginguard.guard';
 import { SendResetPasswordComponent } from './features/components/send-reset-password/send-reset-password.component';
 import { ConfirmResetPasswordComponent } from './features/components/confirm-reset-password/confirm-reset-password.component';
 import { ResetPasswordComponent } from './features/components/reset-password/reset-password.component';
@@ -25,6 +25,8 @@ import { WorkSpaceComponent } from './features/components/work-space/work-space.
 import { AddCourseComponent } from './features/components/add-course/add-course.component';
 import { instructorGuard } from './core/guards/instructor.guard';
 import { EditCourseComponent } from './features/components/edit-course/edit-course.component';
+import { AccountSettingsComponent } from './features/components/account-settings/account-settings.component';
+import { isloggedGuard } from './core/guards/islogged.guard';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', title: 'Home', component: HomeComponent },
@@ -66,7 +68,7 @@ export const routes: Routes = [
     canActivate: [instructorGuard],
   },
   {
-    path: "editCourse/:id",
+    path: 'editCourse/:id',
     component: EditCourseComponent,
     title: 'Edit Course',
     canActivate: [instructorGuard],
@@ -75,37 +77,43 @@ export const routes: Routes = [
     path: 'login',
     component: LogInComponent,
     title: 'Log In',
-    canActivate: [loginguardGuard],
+    canActivate: [loginGuard],
   },
   {
     path: 'register/:role',
     component: SignUpComponent,
     title: 'Sign Up',
-    canActivate: [loginguardGuard],
+    canActivate: [loginGuard],
   },
   {
     path: 'chooseRole',
     component: ChooseRoleComponent,
     title: 'choose Role',
-    canActivate: [loginguardGuard],
+    canActivate: [loginGuard],
   },
   {
     path: 'SendResetPassword',
     component: SendResetPasswordComponent,
     title: 'reset password',
-    canActivate: [loginguardGuard],
+    canActivate: [loginGuard],
   },
   {
     path: 'confirmResetPassword',
     component: ConfirmResetPasswordComponent,
     title: 'reset password',
-    canActivate: [loginguardGuard, resetPasswordGuard],
+    canActivate: [loginGuard, resetPasswordGuard],
   },
   {
     path: 'resetPassword',
     component: ResetPasswordComponent,
     title: 'reset password',
-    canActivate: [loginguardGuard, resetPasswordGuard],
+    canActivate: [loginGuard, resetPasswordGuard],
+  },
+  {
+    path: 'accountSettings',
+    component: AccountSettingsComponent,
+    title: 'Account Settings',
+    canActivate: [isloggedGuard],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

@@ -18,8 +18,15 @@ export class InstructorsService {
     );
   }
 
-  getSpecificInstructor(InstructorId: string) {
-    return this.http.get(this.instructorsURL+"/"+InstructorId);
+  getSpecificInstructor(InstructorId: string) :Observable<Instructor>
+  {
+    return this.http.get(this.instructorsURL+"/"+InstructorId).pipe(
+      map((res: any) => res.data)
+    );
   }
 
+  updateInstructor(data:FormData):Observable<any>
+  {
+    return this.http.put(this.instructorsURL, data);
+  }
 }
