@@ -89,7 +89,8 @@
             <div class="bg-white p-6 rounded-lg border hover:border-purple-200 transition-all">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
-                        <h3 class="font-medium mb-2">{{video.title}}</h3>
+                        <a (click)="selectVideo(video.url)"
+                            class="font-medium mb-2 hover:text-blue-500 hover:underline cursor-pointer">{{video.title}}</a>
                         <div class="flex items-center space-x-4 text-gray-500 text-sm">
                             <span class="flex items-center space-x-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -143,7 +144,7 @@
                 @if (!selectedVideoFile) {
                 <div class="flex items-center justify-center w-full">
                     <label for="dropzone-file"
-                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                        class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 ">
                         <div class="flex flex-col items-center justify-center pt-5 pb-6">
                             <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
@@ -206,3 +207,12 @@
         }
     </main>
 </div>
+
+@if (isVideoPlayerOpen()) {
+<div #videoPlayer
+    class="z-[1000] bg-gray-100 flex-col gap-[10px] py-[10px] px-[5px] fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-lg rounded-md w-[700px]  flex items-center justify-center">
+    <app-video-player class="w-full" [source]="source()"></app-video-player>
+    <button (click)="closeVideoPlayer()"
+        class="px-4 py-2 bg-blue-500 self-end text-white rounded-md hover:bg-blue-700">Close</button>
+</div>
+}

@@ -41,8 +41,8 @@ export class LogInComponent {
       this._auth.login(data).subscribe({
         next: (res: any) => {
           localStorage.setItem('token', res.data.accessToken);
-          this._auth.islogin.next('student');
           this._auth.getUserDataFromToken();
+          this._auth.islogin.next(this._auth.UserData.getValue().role);
           this._router.navigate(['/home']);
           this.isLoading = false;
         },

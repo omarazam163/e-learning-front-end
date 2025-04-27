@@ -3,6 +3,7 @@ import { Course } from './../../../shared/interfaces/course';
 import {
   Component,
   ElementRef,
+  HostListener,
   inject,
   signal,
   viewChild,
@@ -17,10 +18,17 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../../../core/services/video.service';
 import { HttpEventType } from '@angular/common/http';
+import { VideoPlayerComponent } from "../../helpers/video-player/video-player.component";
 
 @Component({
   selector: 'app-edit-course',
-  imports: [RouterLink, FormsModule, CommonModule, MatProgressBarModule],
+  imports: [
+    RouterLink,
+    FormsModule,
+    CommonModule,
+    MatProgressBarModule,
+    VideoPlayerComponent,
+  ],
   templateUrl: './edit-course.component.html',
   styleUrl: './edit-course.component.scss',
 })
@@ -28,6 +36,7 @@ export class EditCourseComponent {
   @ViewChild('newModuleForm') newModuleForm!: ElementRef;
   @ViewChild('newModuleInput') newModuleInput!: ElementRef;
   @ViewChild('progressBar') progressBar!: ElementRef;
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef;
   //services
   _activeRoute = inject(ActivatedRoute);
   _ModuleService = inject(CourseModulesService);
@@ -45,6 +54,17 @@ export class EditCourseComponent {
   errorMessage = signal<string>('');
   progressBarValue = signal<number>(0);
   fileUploading = signal<boolean>(false);
+  isVideoPlayerOpen = signal<boolean>(false);
+  source = signal<string>('');
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent): void {
+    if (
+      this.videoPlayer &&
+      !this.videoPlayer.nativeElement.contains(event.target)
+    ) {
+      this.isVideoPlayerOpen.set(false);
+    }
+  }
   ngOnInit(): void {
     this.courseService.getCourseById(this.Id).subscribe((res: Course) => {
       this.CourseData = res;
@@ -72,7 +92,9 @@ export class EditCourseComponent {
       .getCourseModules(this.CourseData.id)
       .subscribe((res: Module[]) => {
         this.Modueles.set(res);
-        this.SelectedModule.set(this.Modueles().find((m) => m.id == this.Id) as Module);
+        this.SelectedModule.set(
+          this.Modueles().find((m) => m.id == this.Id) as Module
+        );
       });
   }
 
@@ -107,20 +129,20 @@ export class EditCourseComponent {
         switch (event.type) {
           case HttpEventType.UploadProgress:
             if (event.total) {
-              console.log("here");
+              console.log('here');
               this.progressBarValue.set(
                 Math.round((100 * event.loaded) / event.total)
               );
             }
             break;
           case HttpEventType.Response:
-              this.progressBarValue.set(0);
-              this.fileUploading.set(false);
-              this.refreshModules();
-              this.selectedVideoFile = undefined;
-              this.selectedVideoTitle.set('');
-              this.progressBar.nativeElement.classList.add('hidden');
-              break;
+            this.progressBarValue.set(0);
+            this.fileUploading.set(false);
+            this.refreshModules();
+            this.selectedVideoFile = undefined;
+            this.selectedVideoTitle.set('');
+            this.progressBar.nativeElement.classList.add('hidden');
+            break;
           default:
             break;
         }
@@ -140,5 +162,16 @@ export class EditCourseComponent {
     this.selectedVideoFile = undefined;
   }
 
+  selectVideo(video: string) {
+    this.source.set(video);
+    this.isVideoPlayerOpen.set(true);
+  }
+
+  closeVideoPlayer()
+  {
+    this.isVideoPlayerOpen.set(false);
+    this.source.set('');
+  };
+  
   // removeVideoFromModule(videoId: number) {
 }

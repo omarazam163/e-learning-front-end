@@ -13,7 +13,7 @@ import { Console } from 'console';
 export class AuthService {
   url: string = 'https://localhost:7180/api';
   _PLATFORM_ID = inject(PLATFORM_ID);
-  emailToResetPassword : string = ''
+  emailToResetPassword: string = '';
   constructor() {
     if (isPlatformBrowser(this._PLATFORM_ID)) {
       if (localStorage.getItem('token')) {
@@ -38,22 +38,27 @@ export class AuthService {
 
   getUserDataFromToken() {
     let decoded = jwtDecode(localStorage.getItem('token')!);
-    let role = (decoded as any)[`http://schemas.microsoft.com/ws/2008/06/identity/claims/role`];
-    const { Email, UserName, Id, instructorId } = decoded as any;
-    this.UserData.next({ Email, UserName, Id, role, instructorId });
+    let role = (decoded as any)[
+      `http://schemas.microsoft.com/ws/2008/06/identity/claims/role`
+    ];
+    const { Email, UserName, Id, studentId, instructorId } = decoded as any;
+    this.UserData.next({
+      Email,
+      UserName,
+      Id,
+      role,
+      roleId: studentId || instructorId,
+    });
   }
-  SendResetPassword(data: FormData)
-  {
-    return this._http.post(this.url+"/Auth/SendResetPassword",data);
+  SendResetPassword(data: FormData) {
+    return this._http.post(this.url + '/Auth/SendResetPassword', data);
   }
 
-  ConfirmResetPassword(data:any)
-  {
+  ConfirmResetPassword(data: any) {
     return this._http.post(this.url + '/Auth/ConfirmResetPassword', data);
   }
 
-  resetPassword(data:FormData)
-  {
+  resetPassword(data: FormData) {
     return this._http.post(this.url + '/Auth/ResetPassword', data);
   }
 }

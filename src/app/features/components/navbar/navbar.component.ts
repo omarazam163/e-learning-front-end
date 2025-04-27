@@ -23,18 +23,17 @@ export class NavbarComponent {
 
   ngOnInit() {
     this._auth.islogin.subscribe((val) => {
-      if (val == 'student' || val == 'Instructor') {
+      if (val == 'Student' || val == 'Instructor') {
         this.isLoggedIn = true;
         this._auth.UserData.subscribe((user: User) => {
           this.User = user;
-          console.log(this.User);
+          console.log(this.User, 'user from navbar component');
         });
       } else this.isLoggedIn = false;
     });
   }
 
   signOut() {
-    console.log('sign out');
     this.isLoggedIn = false;
     localStorage.removeItem('token');
     this._auth.UserData.next({} as User);

@@ -1,5 +1,5 @@
 export type role = student | teacher | noLogin;
 
-type student = "student";
+type student = "Student";
 type teacher = "Instructor";
 type noLogin = "noLogin";
