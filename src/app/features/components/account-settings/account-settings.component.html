@@ -14,7 +14,7 @@
         <div class="flex items-center mb-8">
             <div class="relative group">
                 <label class="cursor-pointer">
-                    <input type="file" class="hidden" (change)="handleImageChange($event)" accept="image/*">
+                    <input id="file" type="file" class="hidden" (change)="handleImageChange($event)" accept="image/*">
                     <div class="group w-20 h-20  overflow-hidden">
                         @if (instructorData.image) {
                         <img [src]="instructorData.image" class="absolute w-full h-full object-cover rounded-full" />
@@ -39,8 +39,7 @@
                 </label>
             </div>
             <div class="ml-4">
-                <label class="cursor-pointer">
-                    <input type="file" class="hidden" accept="image/*">
+                <label for="file" class="cursor-pointer">
                     <span
                         class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
                         Upload new photo

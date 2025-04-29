@@ -99,7 +99,7 @@ export class EditCourseComponent {
   }
 
   addNewModulePressed() {
-    this.newModuleForm.nativeElement.classList.toggle('hidden');
+    this.newModuleForm.nativeElement.classList.remove('hidden');
     this.newModuleInput.nativeElement.focus();
   }
 
@@ -107,8 +107,7 @@ export class EditCourseComponent {
     if (this.newModuleTitle().length > 3) {
       this.addnewModule();
     }
-    this.newModuleForm.nativeElement.classList.toggle('hidden');
-    this.newModuleInput.nativeElement.blur();
+    this.newModuleForm.nativeElement.classList.add('hidden');
     this.newModuleTitle.set('');
   }
 

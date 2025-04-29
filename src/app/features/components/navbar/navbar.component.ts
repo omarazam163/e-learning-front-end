@@ -1,5 +1,5 @@
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, ElementRef, Input, ViewChild, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../../../shared/interfaces/user.';
@@ -16,7 +16,7 @@ export class NavbarComponent {
   _auth = inject(AuthService);
   isLoggedIn = false;
   User: User = {} as User;
-
+  
   openMenu() {
     (this.menu.nativeElement as HTMLElement).classList.toggle('hidden');
   }
