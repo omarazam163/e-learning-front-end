@@ -92,6 +92,7 @@ export class EditCourseComponent {
       .getCourseModules(this.CourseData.id)
       .subscribe((res: Module[]) => {
         this.Modueles.set(res);
+        if(this.Modueles().length ==1) this.SelectedModule.set(this.Modueles()[0]);
         this.SelectedModule.set(
           this.Modueles().find((m) => m.id == this.SelectedModule().id) as Module
         );
@@ -177,5 +178,14 @@ export class EditCourseComponent {
       this.isVideoPlayerOpen.set(false);
       this.source.set('');
     });
+  }
+
+  removeModule(moduleId: number) {
+    // this._ModuleService.deleteModule(moduleId).subscribe((res) => {
+    //   this.refreshModules();
+    //   this.isVideoPlayerOpen.set(false);
+    //   this.source.set('');
+    // });
+    console.log("here");
   }
 }

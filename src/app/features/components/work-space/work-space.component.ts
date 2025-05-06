@@ -27,4 +27,10 @@ export class WorkSpaceComponent {
         });
     }
   }
+
+  deleteCourse(id: number) {
+    this._CoursesService.deleteCourse(id).subscribe((res) => {
+      this.Courses.set(this.Courses().filter((course) => course.id != id));
+    });
+  }
 }
