@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { InstructorsService } from '../../../core/services/instructors.service';
 import { Course } from '../../../shared/interfaces/course';
-import Module from 'node:module';
+import { Module } from '../../../shared/interfaces/module';
 
 @Component({
   selector: 'app-course-detail',
@@ -39,7 +39,9 @@ export class CourseDetailComponent {
   ngOnInit(): void {
     this.courseId = this.activatedRoute.snapshot.paramMap.get('id');
     this._ModuleService.getCourseModules(this.courseId).subscribe(
-      
+      {
+        next:(res:Module[])=>{this.modules=res}
+      }
     );
     this.CoursesService.getCourseById(this.courseId).subscribe(
       (res: Course) => {
