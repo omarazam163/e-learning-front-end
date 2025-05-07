@@ -7,77 +7,124 @@
             class="bg-blue-600 text-white py-3 px-6 rounded-full hover:bg-blue-500 transition duration-300">Explore
             Courses </a>
     </div>
-</section> 
+</section>
+
 <section class="container mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold text-center mb-4">All the skills you need in one place</h2>
     <p class="text-1xl text-gray-600 text-center mb-8">From essential skills to advanced technical topics, Xcelerate
         empowers your professional learning journey</p>
 
-    <div class="flex flex-wrap justify-center gap-4">
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">Data Science</a>
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">IT Certifications</a>
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">Leadership</a>
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">Web Development</a>
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">Communication</a>
-        <a href="coming-soon.html"
-            class="bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-500 transition duration-300">Business Analytics & Intelligence</a>
-    </div>
+        <div *ngIf="categories && categories.length" >
+          <owl-carousel-o [options]="customOptions">
+            @for(category of categories ; track category.categoryId ) {
+              <ng-template carouselSlide [id]="'id'+category.categoryId"  >
+                <div
+                  [routerLink]="['/courses']"
+                  class="flex items-center justify-center aspect-square text-white bg-blue-600 p-2 rounded-lg shadow-md text-center text-xl hover:bg-blue-500 duration-300 cursor-pointer">
+                  {{ category.categoryName }}
+                </div>
+              </ng-template>
+            }
+          </owl-carousel-o>
+        </div>
+
 </section>
 
 
+<section class="bg-blue-600 bg-opacity-5">
 <section class="container mx-auto px-6 py-16">
     <h2 class="text-3xl font-bold text-center mb-8">Featured Courses</h2>
-    <div class="grid gap-8 md:grid-cols-3">
+    @if(courses().length>0){
+      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      
+        @for (course of courses().slice(0,3); track $index) {
+        <li
+          class="bg-blue-500 bg-opacity-10 shadow-md hover:shadow-lg transition-all duration-300  rounded-2xl flex flex-col gap-3 cursor-pointer pb-4"
+          [routerLink]="['/courses', course.id]">
+          <img [src]="course.image" class="aspect-video w-full rounded-2xl shadow-md ">
+      
+          <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
+      
+          <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
+            <img [src]="course.instructor.image" alt="." class="w-8 h-8 rounded-full shadow-md">
+            {{course.instructor.name}}
+          </div>
+      
+          <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
+            <i class="text-violet-500 font-bold">$</i>
+            {{course.price}}
+            <i class="fa-solid fa-clock ms-4 text-violet-500"></i>
+            {{course.hours}} Hours
+          </div>
+          <p class="px-2 md:px-4 lg:px-6 text-neutral-500 break-words whitespace-normal">{{course.description}}</p>
+        </li>
+        }
+      </ul>
+    }
 
-        <div class="bg-blue-200 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="./images/programming-background-collage.jpg" alt="" class="w-full h-48 object-cover">
-            <div class="p-6">
-                <h3 class="font-bold text-xl mb-2">Web Design Course</h3>
-                <p class="text-gray-600 mb-4">Learn the basics of website design and development using the latest
-                    technologies</p>
-                <a href="coming-soon.html" class="text-blue-600 hover:underline">More details</a>
-            </div>
-        </div>
-
-        <div class="bg-blue-200 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="./images/programming-screen.jpg" alt="" class="w-full h-48 object-cover">
-            <div class="p-6">
-                <h3 class="font-bold text-xl mb-2">Programming course</h3>
-                <p class="text-gray-600 mb-4">Master different programming languages ​​and apply them in real projects
-                </p>
-                <a href="coming-soon.html" class="text-blue-600 hover:underline">More details</a>
-            </div>
-        </div>
-
-        <div class="bg-blue-200 rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
-            <img src="./images/logo.jpg" alt="" class="w-full h-48 object-cover">
-            <div class="p-6">
-                <h3 class="font-bold text-xl mb-2">Graphic Design Course</h3>
-                <p class="text-gray-600 mb-4">Learn the basic principles of design and master professional design tools
-                </p>
-                <a href="coming-soon.html" class="text-blue-600 hover:underline">More details</a>
-            </div>
-        </div>
-    </div>
+</section>
 </section>
 
-<section class="bg-blue-600 py-16">
+<section class="container mx-auto px-6 py-16">
+
+  <h2 class="text-2xl text-neutral-600 mb-6">Contact with <span class="font-semibold text-blue-500">US</span></h2>
+
+  <form (submit)="sendEmail()" class="bg-white p-6 rounded-lg shadow-lg w-full">
+    
+    <div class="mb-2">
+      <label for="email" class="block text-sm font-medium text-neutral-600">Email</label>
+      <input
+        type="email"
+        id="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        class="mt-2 p-3 w-full border border-neutral-200  rounded-lg focus:ring-1 focus:ring-blue-500 outline-none focus:border-blue-500"
+        placeholder="enter your email"
+      />
+      <p class="text-rose-500 h-6 ps-3">{{emailError}}</p>
+    </div>
+
+    <div class="mb-2">
+      <label for="message" class="block text-sm font-medium text-neutral-600">Message</label>
+      <textarea
+        id="message"
+        [(ngModel)]="message"
+        name="message"
+        required
+        rows="4"
+        class="mt-2 p-3 w-full h-40 border border-neutral-200  rounded-lg focus:ring-1 focus:ring-blue-500 outline-none focus:border-blue-500 resize-none"
+        placeholder="enter your message here ..."
+      ></textarea>
+      <p class="text-rose-500 h-6 ps-3">{{messageError}}</p>
+    </div>
+
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        class="bg-blue-500 text-white py-2 px-10 rounded-lg hover:bg-blue-600 transition duration-300"
+      >
+        Send Message
+      </button>
+    </div>
+  </form>
+
+</section>
+
+<section class="bg-blue-600 bg-opacity-5">
+  <section class="py-16">
     <div class="container mx-auto px-6 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">Start your educational journey now</h2>
-        <p class="text-blue-200 mb-8">Join thousands of learners and develop your skills in multiple fields</p>
-        <a href="coming-soon.html"
-            class="bg-white text-blue-600 py-3 px-6 rounded-full font-bold hover:bg-gray-200 transition duration-300">Register
+        <h2 class="text-3xl font-semibold mb-4">Start your educational journey now</h2>
+        <p class="text-neutral-600 mb-8">Join thousands of learners and develop your skills in multiple fields</p>
+        <a href="coming-soon.html" [routerLink]="['/courses']"
+            class="bg-blue-600 text-white py-3 px-6 text-xl rounded-full font-medium hover:bg-blue-500 duration-300">Go to courses
         </a>
     </div>
 </section>
+</section>
 
-<footer class="bg-gray-800 text-gray-200 py-6">
+<footer class="bg-blue-600 text-white py-6 md:text-xl">
     <div class="container mx-auto px-6 text-center">
-        <p>&copy; Xcelerate 2025 All rights reserved
+        <p>&copy; <span class="font-medium">Xcelerate</span> 2025 All rights reserved
     </div>
 </footer>

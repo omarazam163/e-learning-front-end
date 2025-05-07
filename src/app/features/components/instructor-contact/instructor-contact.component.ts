@@ -63,4 +63,5 @@ export class InstructorContactComponent {
       }, 1000);
     }
   }
+
 }

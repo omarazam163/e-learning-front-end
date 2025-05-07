@@ -40,6 +40,7 @@
     "jwt-decode": "^4.0.0",
     "ng-sidebar": "^9.4.3",
     "ngx-otp-input": "^1.1.4",
+    "ngx-owl-carousel-o": "^19.0.2",
     "ngx-pagination": "^6.0.3",
     "primeng": "^19.0.10",
     "rxjs": "~7.8.0",
