@@ -1,0 +1,35 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <!-- Modal Container -->
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md transform transition-all">
+        <!-- Modal Content -->
+        <div class="p-6">
+            <!-- Header -->
+            <div class="mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Submit Quiz?</h3>
+            </div>
+
+            <!-- Progress Summary -->
+            <div class="mb-6">
+                <div class="flex items-center justify-between text-sm text-gray-600 mb-2">
+                    <span>Questions Solved</span>
+                    <span>{{qustionNumberSolved}}/{{qustionNumber}} Completed</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full">
+                    <div class="h-2 bg-blue-500 rounded-full" #progress></div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-end space-x-3">
+                <button (click)="onClose.emit()"
+                 class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50">
+                    Close
+                </button>
+                <button (click)="onSubmit.emit()"
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                    Submit Quiz
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

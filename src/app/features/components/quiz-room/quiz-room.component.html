@@ -1,11 +1,27 @@
 <!-- Progress Bar -->
 @if (QuizData) {
+@if (ShowSubmitAlert()) {
+    <app-pop-up [qustionNumber]="QuizData.questions.length" [qustionNumberSolved]="QuestionSolved()"
+    (onClose)="closeSubmitAlert()"
+    (onSubmit)="handleSubmit()"
+    ></app-pop-up>
+}
+@if (showScorePopup()) {
+    <app-submit-pop-up
+    [CourseId]="CourseData.id"
+    [CourseName]="CourseData.title"
+    [score]="score()"
+    [totalScore]="QuesAnswers.controls.length"
+    ></app-submit-pop-up>
+}
 <div class="container mx-auto px-4 py-8 max-w-4xl">
     <!-- Quiz Header -->
     <div class="flex justify-between items-center mb-8">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">{{QuizData.title}}</h1>
-            <p class="text-gray-600">Course: {{QuizData.courseId}}</p>
+            @if (CourseData) {
+            <p class="text-gray-600">Course: {{CourseData.title}}</p>
+            }
         </div>
         <div class="flex items-center space-x-4">
             <div class="text-right">
@@ -22,12 +38,12 @@
     </div>
 
     <div class="mb-8">
-        <div class="h-2 bg-gray-200 rounded-full">
-            <div class="h-2 bg-blue-500 rounded-full w-1/3"></div>
-        </div>
+        <mat-progress-bar class="custom-annual-progress" [color]="'yellow'" mode="determinate" [value]="((currentStep()+1)/QuizData.questions.length)*100">
+        </mat-progress-bar>
+
         <div class="flex justify-between text-sm text-gray-600 mt-2">
             <span>Question {{currentStep()+1}} of {{QuizData.questions.length}}</span>
-            <span>33% Complete</span>
+            <span>{{(((currentStep()+1)/QuizData.questions.length)*100).toFixed()}}% Complete</span>
         </div>
     </div>
     <form [formGroup]="QuizForm">
@@ -57,13 +73,17 @@
         </button>
 
         <div class="flex items-center space-x-4">
-            <button class="px-6 py-2 border rounded-lg text-gray-600 hover:bg-gray-50">
-                Flag Question
+            @if (currentStep() === QuizData.questions.length - 1) {
+            <button (click)="openSubmitAlert()" class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Submit Quiz
             </button>
+            }
+            @else {
             <button [disabled]="currentStep() === QuizData.questions.length - 1" (click)="handleNextStep()"
                 class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                 Next Question
             </button>
+            }
         </div>
     </div>
 

@@ -44,6 +44,7 @@ export class QuestionSolveFormComponent implements ControlValueAccessor {
   }
 
   onRadioChange() {
+    this.onTouch();
     if (this.SelectedIndex() == this.correctIndex) {
       this.isCorrect.set(true);
       this.onChange(this.isCorrect());

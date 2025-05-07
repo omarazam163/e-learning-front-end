@@ -23,3 +23,28 @@
   margin: 0 !important;
   padding: 0 !important;
 }
+
+::ng-deep.mat-mdc-progress-bar {
+    background-color: #f0f0f0 !important; /* Light gray track */
+    height: 10px !important;
+    border-radius: 4px !important; /* Full rounded ends for the track */
+    overflow: hidden; /* To contain the indicator */
+}
+
+::ng-deep .mat-mdc-progress-bar .mdc-linear-progress__track {
+    height: 100% !important; /* Ensure track fills container height */
+}
+
+::ng-deep .mat-mdc-progress-bar .mdc-linear-progress__indicator-container {
+    height: 100% !important; /* Indicator container fills track */
+}
+
+::ng-deep .mat-mdc-progress-bar[dir="rtl"] .mdc-linear-progress__indicator {
+    margin-left: 0 !important;
+    margin-right: 2px !important;
+}
+
+::ng-deep .mat-mdc-progress-bar .mdc-linear-progress__buffer-bar {
+    background-color: #f0f0f0 !important; /* Lighter blue buffer */
+    border-radius: 4px !important;
+}

@@ -1,0 +1,51 @@
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes modal-in {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Delay the container visibility */
+.checkmark-container {
+  opacity: 0;
+  animation: fade-in 0.2s ease forwards;
+  animation-delay: 0.3s; /* Matches modal-in duration */
+}
+
+/* Animate the checkmark after fade-in */
+.animate-checkmark {
+  animation: checkmark 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+  animation-delay: 0.5s; /* 0.3s for modal + 0.2s fade-in */
+}
+
+.animate-modal-in {
+  animation: modal-in 0.3s ease-out forwards;
+}
