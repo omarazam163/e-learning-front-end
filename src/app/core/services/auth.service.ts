@@ -6,7 +6,7 @@ import { Register } from '../../shared/interfaces/register';
 import { BehaviorSubject } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
-import { Console } from 'console';
+
 @Injectable({
   providedIn: 'root',
 })

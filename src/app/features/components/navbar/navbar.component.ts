@@ -16,7 +16,7 @@ export class NavbarComponent {
   _auth = inject(AuthService);
   isLoggedIn = false;
   User: User = {} as User;
-  
+
   openMenu() {
     (this.menu.nativeElement as HTMLElement).classList.toggle('hidden');
   }
@@ -27,7 +27,7 @@ export class NavbarComponent {
         this.isLoggedIn = true;
         this._auth.UserData.subscribe((user: User) => {
           this.User = user;
-          console.log(this.User, 'user from navbar component');
+          // console.log(this.User, 'user from navbar component');
         });
       } else this.isLoggedIn = false;
     });

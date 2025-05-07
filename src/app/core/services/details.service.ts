@@ -7,8 +7,7 @@ import { Notification } from '../../shared/interfaces/notifications';
 })
 export class DetailsService {
   details: Details = {
-    imagePath:
-      'https://th.bing.com/th/id/OIP.YIre5HGHiqBa7DCmrF4KwwHaJQ?rs=1&pid=ImgDetMain',
+    imagePath: 'https://th.bing.com/th/id/OIP.YIre5HGHiqBa7DCmrF4KwwHaJQ?rs=1&pid=ImgDetMain',
     name: 'Mohamed Ali',
     email: 'mohamedAli@gmail.com',
     address: '127 , ElSalaam , cairo , Egypt',

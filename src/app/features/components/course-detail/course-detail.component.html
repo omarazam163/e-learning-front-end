@@ -115,8 +115,8 @@
 
 
     <div *ngIf="activeCourseLink=='Reviews'">
-      <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        <div>
+      <section class="">
+        <!-- <div>
           <h2 class="font-medium text-lg mb-2">Average Rating</h2>
           <p class="flex flex-col gap-2 items-center justify-center bg-blue-500 bg-opacity-10 p-5 rounded-lg text-lg">
             <span class="font-medium text-xl text-blue-500">4.3</span>
@@ -146,29 +146,41 @@
                       class="block h-2 bg-violet-500 rounded-lg"></span></span>
             </li>
           </ul>
+        </div> -->
+        <!-- <div class="flex items-center gap-2 mb-2 ">
+          <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt=""
+            class="w-12 h-12 rounded-full shadow-lg">
+          <p class="flex flex-col">
+            <span class="font-medium mb-1">John Doe</span>
+            <span class="flex items-center gap-1 text-sm">
+              <i class="fa-solid fa-star text-yellow-500"></i>
+              <i class="fa-solid fa-star text-yellow-500"></i>
+              <i class="fa-solid fa-star text-yellow-500"></i>
+              <i class="fa-solid fa-star text-yellow-500"></i>
+              <i class="fa-solid fa-star text-neutral-200"></i>
+            </span>
+          </p>
         </div>
-        <div class="lg:col-span-3">
-          <div class="flex items-center gap-2 mb-2 ">
-            <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt=""
-              class="w-12 h-12 rounded-full shadow-lg">
-            <p class="flex flex-col">
-              <span class="font-medium mb-1">John Doe</span>
-              <span class="flex items-center gap-1 text-sm">
-                <i class="fa-solid fa-star text-yellow-500"></i>
-                <i class="fa-solid fa-star text-yellow-500"></i>
-                <i class="fa-solid fa-star text-yellow-500"></i>
-                <i class="fa-solid fa-star text-yellow-500"></i>
-                <i class="fa-solid fa-star text-neutral-200"></i>
-              </span>
-            </p>
-          </div>
-          <p>I don't have much time and the opprotunity to go outside learnig this class. This online Figma course is
-            the best solution for me.</p>
+        <p>I don't have much time and the opprotunity to go outside learnig this class. This online Figma course is
+          the best solution for me.</p> -->
+        <div class="flex flex-col gap-3">
           <textarea
-            class="h-32 w-full mt-3 mb-2 border-2 border-neutral-200 resize-none p-3 rounded-lg duration-300 hover:outline-blue-500"
+            [(ngModel)]="reviewMessage"
+            [ngClass]="errorReviewMessage ? 'border-red-500' : 'border-neutral-200'"
+            class="h-32 w-full border-2 border-neutral-200 resize-none p-3 rounded-lg duration-300 outline-blue-500"
             placeholder="feedback here"></textarea>
+            <div class="flex items-center gap-5">
+              <span class="font-medium mb-1" [ngClass]="errorReviewRating ? 'text-red-500' : 'text-black'">Your Rate : </span>
+              <span class="flex items-center gap-1 text-sm">
+                <i (click)="reviewRating = (reviewRating == 1 ? 0 : 1)" [ngClass]="reviewRating > 0? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
+                <i (click)="reviewRating = (reviewRating == 2 ? 1 : 2)" [ngClass]="reviewRating > 1? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
+                <i (click)="reviewRating = (reviewRating == 3 ? 2 : 3)" [ngClass]="reviewRating > 2? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
+                <i (click)="reviewRating = (reviewRating == 4 ? 3 : 4)" [ngClass]="reviewRating > 3? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
+                <i (click)="reviewRating = (reviewRating == 5 ? 4 : 5)" [ngClass]="reviewRating > 4? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
+              </span>
+            </div>
           <button
-            class="px-6 py-1 rounded-lg text-xl text-white bg-blue-500 duration-300 hover:shadow-md hover:shadow-blue-500">Submit</button>
+            class="px-6 py-1 rounded-lg text-xl text-white bg-blue-500 duration-300 hover:shadow-md hover:shadow-blue-500" (click)="SendReview()">Submit</button>
         </div>
       </section>
     </div>
