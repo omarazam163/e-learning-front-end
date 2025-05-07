@@ -5,10 +5,9 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CourseModulesService } from '../../../core/services/course-modules.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, pipe } from 'rxjs';
 import { InstructorsService } from '../../../core/services/instructors.service';
-import { Instructor } from '../../../shared/interfaces/Instructor';
 import { Course } from '../../../shared/interfaces/course';
+import { Module } from '../../../shared/interfaces/module';
 
 @Component({
   selector: 'app-course-detail',
@@ -22,7 +21,7 @@ export class CourseDetailComponent {
   handleActiveLink(active: string) {
     this.activeCourseLink = active;
   }
-  modules: any[] = [];
+  modules: Module[] = [];
   courseDetails!: Course;
   videoUrl: string = '';
   videoTitle: string = '';
@@ -33,27 +32,22 @@ export class CourseDetailComponent {
     public courseModulesService: CourseModulesService,
     private CoursesService: CoursesService,
     public instructorsService: InstructorsService,
-    public authService: AuthService
+    public authService: AuthService,
+    private _ModuleService: CourseModulesService
   ) {}
 
   ngOnInit(): void {
     this.courseId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.GetModules().subscribe((res) => (this.modules = res));
+    this._ModuleService
+      .getCourseModules(this.courseId)
+      .subscribe((res: Module[]) => {
+        this.modules = res;
+      });
     this.CoursesService.getCourseById(this.courseId).subscribe(
       (res: Course) => {
         this.courseDetails = res;
       }
     );
-  }
-
-  GetModules(): Observable<any[]> {
-    return this.http
-      .get<any>(`https://localhost:7180/api/Modules/Course/${this.courseId}`)
-      .pipe(
-        map((res) => {
-          return res.data;
-        })
-      );
   }
 
   handleActiveVideo(vu: string, vt: string) {

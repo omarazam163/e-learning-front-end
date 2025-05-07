@@ -1,0 +1,24 @@
+@if (Question) {
+<div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-800">Question 3</h2>
+        <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">2 points</span>
+    </div>
+
+    <div class="mb-6">
+        <p class="text-gray-700 leading-relaxed">
+            {{Question.text}}
+        </p>
+    </div>
+
+    <!-- Answer Options -->
+    <div class="space-y-4">
+        @for (Choice of Question.choices; track $index) {
+        <label class="flex items-center p-4 border rounded-lg hover:border-blue-300 cursor-pointer transition-all">
+            <input type="radio" (change)="onRadioChange()" [value]="$index" [(ngModel)]="SelectedIndex" name="{{QuestionNumber}}" class="h-5 w-5 text-blue-500 border-gray-300">
+            <span class="ml-3 text-gray-700">{{Choice.text}}</span>
+        </label>
+        }
+    </div>
+</div>
+}

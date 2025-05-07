@@ -1,0 +1,25 @@
+::ng-deep .mat-horizontal-stepper-header {
+  display: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+  background-color: white; 
+}
+
+::ng-deep .mat-horizontal-stepper,
+::ng-deep .mat-horizontal-stepper-header-container,
+::ng-deep .mat-step-header,
+::ng-deep .mat-stepper-horizontal-line {
+  border: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header-container {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}

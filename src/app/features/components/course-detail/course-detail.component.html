@@ -1,5 +1,5 @@
 @if (courseDetails) {
-  <section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
+<section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
 
   <section class="lg:col-span-2 bg-white rounded-lg p-5">
 
@@ -185,12 +185,24 @@
         <p class="flex justify-between items-center">
           <span class="font-medium text-xl">{{module.title}}</span>
         </p>
-        <p *ngFor="let video of module.videos" (click)="handleActiveVideo(video.url,video.title)"
+        @for (video of module.videos; track $index) {
+        <div (click)="handleActiveVideo(video.url,video.title)"
           class="flex flex-col gap-0 ps-5 my-1 py-1 cursor-pointer bg-blue-500 bg-opacity-5 duration-300 hover:bg-opacity-20 rounded-lg">
           <span class="text-sm font-medium ">{{video.title}}</span>
           <span class="text-neutral-500 text-sm flex items-center gap-2 mt-[0.5px]"><i
               class="fa-solid fa-circle-play text-xs text-blue-500"></i>{{(video.duration.slice(0,8))}}</span>
-        </p>
+        </div>
+        }
+        @for (quiz of module.quizzes; track $index) {
+        <div [routerLink]='["/quizRoom", quiz.id]'
+          class="flex flex-col gap-0 ps-5 my-1 py-1 cursor-pointer bg-purple-500 bg-opacity-5 duration-300 hover:bg-opacity-20 rounded-lg">
+          <span class="text-sm font-medium">{{quiz.title}}</span>
+          <span class="text-neutral-500 text-sm flex items-center gap-2 mt-[0.5px]">
+            <i class="fa-solid fa-list-check text-xs text-purple-500"></i>
+            Quiz
+          </span>
+        </div>
+        }
       </li>
     </ul>
     }@else {

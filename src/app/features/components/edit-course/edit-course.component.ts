@@ -6,7 +6,6 @@ import {
   HostListener,
   inject,
   signal,
-  viewChild,
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -65,6 +64,7 @@ export class EditCourseComponent {
   isVideoPlayerOpen = signal<boolean>(false);
   source = signal<string>('');
 
+
   // host listner
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent): void {
@@ -84,9 +84,9 @@ export class EditCourseComponent {
         .getCourseModules(this.CourseData.id)
         .subscribe((res: Module[]) => {
           this.Modueles.set(res);
-          console.log(this.Modueles());
           if (this.Modueles().length > 0) {
             this.SelectedModule.set(this.Modueles()[0]);
+
           }
         });
     });
