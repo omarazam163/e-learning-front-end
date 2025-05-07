@@ -100,4 +100,9 @@ export class CoursesService {
       return course;
     }));
   }
+
+  deleteCourse(id: number): Observable<any> {
+    return this.http.delete(this.courseURL + '/' + id);
+  }
+
 }

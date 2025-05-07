@@ -1,6 +1,5 @@
 import { coursePreview } from './../../../shared/interfaces/privewCourse';
-import { category } from './../../../shared/interfaces/category';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { User } from '../../../shared/interfaces/user.';
 import { MatInputModule } from '@angular/material/input';
@@ -14,7 +13,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
-import { CategoryService } from '../../../core/services/category.service';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Router } from '@angular/router';
 import { AddCourseFormComponent } from '../add-course-form/add-course-form.component';
