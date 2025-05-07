@@ -6,44 +6,59 @@ import {
   FormControl,
   Validators,
   FormArray,
+  AbstractControl,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { QuizService } from '../../../core/services/quiz.service';
 import { Quiz } from '../../../shared/interfaces/quiz';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
 @Component({
-  selector: 'app-add-quiz',
+  selector: 'app-edit-quiz',
   imports: [ReactiveFormsModule, QuestionFormComponent, CommonModule],
-  templateUrl: './add-quiz.component.html',
-  styleUrl: './add-quiz.component.scss',
+  templateUrl: './edit-quiz.component.html',
+  styleUrl: './edit-quiz.component.scss',
 })
-export class AddQuizComponent {
+export class EditQuizComponent {
   // services
-  _activeRouter = inject(ActivatedRoute);
+  _activeRoute = inject(ActivatedRoute);
   _quizService = inject(QuizService);
   _Router = inject(Router);
 
   Questions!: FormArray;
   QuizForm = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    questions: new FormArray([new FormControl(null)]),
+    questions: new FormArray([]),
   });
 
-  //varibales
-  CourseId!: number;
-  ModuleId!: number;
+  // variables
+  QuizData!: Quiz;
+  QuizId!: number;
   isloading = signal(false);
   valid = signal(false);
   ngOnInit() {
     this.QuizForm.valueChanges.subscribe((value) => {
       this.valid.set(this.QuizForm.valid);
     });
-    this.Questions = this.getQuestions();
-    this._activeRouter.queryParams.subscribe((params) => {
-      this.CourseId = params['courseId'];
-      this.ModuleId = params['moduleId'];
+    this._activeRoute.params.subscribe((params) => {
+      this.QuizId = params['quizId'];
     });
+
+    this._quizService.getQuizWithId(this.QuizId).subscribe((res: Quiz) => {
+      this.QuizData = res;
+      this.setOldQuizData();
+    });
+  }
+
+  setOldQuizData() {
+    this.QuizForm.get('title')?.setValue(this.QuizData.title);
+    this.QuizData.questions.forEach((question) => {
+      (this.QuizForm.get('questions') as FormArray)?.push(
+        new FormControl(question)
+      );
+    });
+    this.Questions = this.getQuestions();
   }
 
   getQuestions(): FormArray {
@@ -56,18 +71,18 @@ export class AddQuizComponent {
     this.valid.set(false);
   }
 
-  addQuiz() {
+  editQuiz() {
     if (this.QuizForm.valid) {
       let quiz: Quiz = {
         title: this.QuizForm.get('title')?.value as string,
-        courseId: this.CourseId,
-        moduleId: this.ModuleId,
+        courseId: this.QuizData.courseId,
+        moduleId: this.QuizData.moduleId,
         questions: (this.QuizForm.get('questions') as FormArray).value,
       };
       this.isloading.set(true);
-      this._quizService.addQuiz(quiz).subscribe((res) => {
+      this._quizService.editQuiz(this.QuizId, quiz).subscribe((res) => {
         this.isloading.set(false);
-        this._Router.navigate(['/editCourse', this.CourseId]);
+        this._Router.navigate(['/editCourse', this.QuizData.courseId]);
       });
     }
   }
@@ -75,4 +90,5 @@ export class AddQuizComponent {
   deleteQuestion(index: number) {
     this.Questions.removeAt(index);
   }
+  
 }

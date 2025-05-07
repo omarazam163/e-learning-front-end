@@ -21,6 +21,7 @@ import { AccountSettingsComponent } from './features/components/account-settings
 import { isloggedGuard } from './core/guards/islogged.guard';
 import { CartComponent } from './features/components/cart/cart.component';
 import { AddQuizComponent } from './features/components/add-quiz/add-quiz.component';
+import { EditQuizComponent } from './features/components/edit-quiz/edit-quiz.component';
 
 
 export const routes: Routes = [
@@ -109,6 +110,12 @@ export const routes: Routes = [
     path:"addQuiz",
     component: AddQuizComponent,
     title: "Add Quiz",
+    canActivate: [instructorGuard],
+  },
+  {
+    path: "editQuiz/:quizId",
+    component: EditQuizComponent,
+    title: "Edit Quiz",
     canActivate: [instructorGuard],
   },
   {

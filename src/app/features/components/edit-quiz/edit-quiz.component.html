@@ -1,16 +1,17 @@
 <div class="max-w-3xl mx-auto py-8 px-4">
     <div class="flex justify-between items-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-900">Create New Quiz</h1>
+        <h1 class="text-2xl font-bold text-gray-900">Edit Quiz</h1>
         <div class="flex items-center gap-4">
-            <button (click)="addQuiz()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-            [disabled]="!valid()"
-            [ngClass]="{'opacity-50 cursor-not-allowed bg-gray-500': !valid()}"
-            >
+            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">
+                Save Draft
+            </button>
+            <button (click)="editQuiz()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                [disabled]="!valid()" [ngClass]="{'opacity-50 cursor-not-allowed bg-gray-500': !valid()}">
                 @if (isloading()) {
-                    <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
                 }
                 @else {
-                    publish Quiz
+                Save Changes
                 }
             </button>
         </div>
@@ -39,12 +40,13 @@
         </div>
         <div>
             <div formArrayName="questions">
+                @if (Questions) {
                 @for (item of Questions.controls||[]; track item) {
                 <div class="mb-4">
                     <app-question-form formControlName="{{$index}}" [questionNumber]="$index +1"
-                    (onDeleteQuestion)="deleteQuestion($index)"
-                    ></app-question-form>
+                        (onDeleteQuestion)="deleteQuestion($index)"></app-question-form>
                 </div>
+                }
                 }
             </div>
         </div>

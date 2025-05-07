@@ -19,6 +19,7 @@ import { CommonModule } from '@angular/common';
 import { VideoService } from '../../../core/services/video.service';
 import { HttpEventType } from '@angular/common/http';
 import { VideoPlayerComponent } from '../../helpers/video-player/video-player.component';
+import { QuizService } from '../../../core/services/quiz.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -37,10 +38,17 @@ export class EditCourseComponent {
   @ViewChild('newModuleInput') newModuleInput!: ElementRef;
   @ViewChild('progressBar') progressBar!: ElementRef;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
+
+
+
   //services
   _activeRoute = inject(ActivatedRoute);
   _ModuleService = inject(CourseModulesService);
   _videoService = inject(VideoService);
+  _QuizService = inject(QuizService);
+
+
+
 
   //variables
   Id: number = this._activeRoute.snapshot.params['id'];
@@ -56,6 +64,8 @@ export class EditCourseComponent {
   fileUploading = signal<boolean>(false);
   isVideoPlayerOpen = signal<boolean>(false);
   source = signal<string>('');
+
+  // host listner
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent): void {
     if (
@@ -65,6 +75,8 @@ export class EditCourseComponent {
       this.isVideoPlayerOpen.set(false);
     }
   }
+
+
   ngOnInit(): void {
     this.courseService.getCourseById(this.Id).subscribe((res: Course) => {
       this.CourseData = res;
@@ -72,6 +84,7 @@ export class EditCourseComponent {
         .getCourseModules(this.CourseData.id)
         .subscribe((res: Module[]) => {
           this.Modueles.set(res);
+          console.log(this.Modueles());
           if (this.Modueles().length > 0) {
             this.SelectedModule.set(this.Modueles()[0]);
           }
@@ -187,5 +200,11 @@ export class EditCourseComponent {
     //   this.source.set('');
     // });
     console.log("here");
+  }
+
+  deleteQuiz(quizId: number) {
+    this._QuizService.deleteQuiz(quizId).subscribe((res) => {
+      this.refreshModules();
+    });
   }
 }

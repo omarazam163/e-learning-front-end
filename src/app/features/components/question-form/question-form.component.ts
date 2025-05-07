@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, output, EventEmitter } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -34,6 +34,7 @@ import { Question } from '../../../shared/interfaces/question';
 })
 export class QuestionFormComponent implements ControlValueAccessor, Validator {
   @Input({required:true}) questionNumber!: number;
+  @Output() onDeleteQuestion:EventEmitter<void> = new EventEmitter<void>();
   quesForm: FormGroup = new FormGroup({
     text: new FormControl('', [Validators.required]),
     choices: new FormArray([
