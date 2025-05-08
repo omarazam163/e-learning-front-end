@@ -10,11 +10,8 @@ export class VideoService {
   public moduleURL = 'https://localhost:7180/api/Modules';
   addVideotoModule(data: FormData): Observable<any> {
     return this._htttp
-      .post(this.moduleURL + '/Video', data, {
-        reportProgress: true,
-        observe: 'events' as const,
-      })
-      .pipe(timeout(600000));
+      .post(this.moduleURL + '/Video', data)
+      .pipe(timeout(60*10*60*1000));
   }
 
   // removeVideoFromModule(videoId: number): Observable<any> {

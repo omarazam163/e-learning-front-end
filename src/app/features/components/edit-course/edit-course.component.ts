@@ -138,27 +138,12 @@ export class EditCourseComponent {
       Data.append('VideoFile', this.selectedVideoFile);
       this.fileUploading.set(true);
       this.progressBar.nativeElement.classList.remove('hidden');
-      this._videoService.addVideotoModule(Data).subscribe((event) => {
-        switch (event.type) {
-          case HttpEventType.UploadProgress:
-            if (event.total) {
-              console.log('here');
-              this.progressBarValue.set(
-                Math.round((100 * event.loaded) / event.total)
-              );
-            }
-            break;
-          case HttpEventType.Response:
-            this.progressBarValue.set(0);
-            this.fileUploading.set(false);
-            this.refreshModules();
-            this.selectedVideoFile = undefined;
-            this.selectedVideoTitle.set('');
-            this.progressBar.nativeElement.classList.add('hidden');
-            break;
-          default:
-            break;
-        }
+      this._videoService.addVideotoModule(Data).subscribe((res) => {
+        this.fileUploading.set(false);
+        this.progressBar.nativeElement.classList.add('hidden');
+        this.selectedVideoFile = undefined;
+        this.selectedVideoTitle.set('');
+        this.refreshModules();
       });
     } else {
       this.errorMessage.set('Please enter a title and select a video');
