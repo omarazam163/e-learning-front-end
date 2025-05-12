@@ -18,7 +18,7 @@ export class WorkSpaceComponent {
   Name: string = '';
   ngOnInit() {
     if (this._auth.islogin.getValue() == 'Instructor') {
-      this.Id = this._auth.UserData.getValue().roleId || '0';
+      this.Id = this._auth.UserData.getValue().roleId.toString();
       this.Name = this._auth.UserData.getValue().UserName;
       this._CoursesService
         .getInstructorCourses(this.Id.toString())

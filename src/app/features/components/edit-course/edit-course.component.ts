@@ -118,9 +118,7 @@ export class EditCourseComponent {
   }
 
   submitNewModule() {
-    if (this.newModuleTitle().length > 3) {
-      this.addnewModule();
-    }
+    if (this.newModuleTitle().length>0) this.addnewModule();
     this.newModuleForm.nativeElement.classList.add('hidden');
     this.newModuleTitle.set('');
   }
@@ -179,11 +177,12 @@ export class EditCourseComponent {
   }
 
   removeModule(moduleId: number) {
-    // this._ModuleService.deleteModule(moduleId).subscribe((res) => {
-    //   this.refreshModules();
-    //   this.isVideoPlayerOpen.set(false);
-    //   this.source.set('');
-    // });
+    this._ModuleService.deleteModule(moduleId).subscribe((res) => {
+      this.refreshModules();
+      this.isVideoPlayerOpen.set(false);
+      this.source.set('');
+      this.SelectedModule.set({} as Module);
+    });
     console.log("here");
   }
 

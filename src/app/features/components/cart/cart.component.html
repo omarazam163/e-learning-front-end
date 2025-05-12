@@ -1,133 +1,121 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <h1 class="text-3xl font-bold text-gray-900 mb-8">Shopping Cart</h1>
+<div class="min-h-screen bg-gray-50">
+    <div class="container mx-auto py-8 px-4">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Your Learning Cart</h1>
+            <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                {{Courses().length}} Courses
+            </span>
+        </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Course List -->
-        <div class="lg:col-span-2">
-            <!-- Cart Items -->
-            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <div class="flex items-start justify-between mb-6">
-                    <h2 class="text-xl font-semibold">2 Courses in Cart</h2>
-                    <span class="text-gray-500">Price</span>
-                </div>
-
-                <!-- Course Item -->
-                <div class="border-t border-gray-200 py-6">
-                    <div class="flex items-start gap-4">
-                        <img src="/course-thumbnail.jpg" alt="Course thumbnail"
-                            class="w-32 h-20 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">The Complete Web Development Bootcamp</h3>
-                            <p class="text-sm text-gray-500">By John Doe</p>
-                            <div class="mt-2 flex items-center gap-4">
-                                <button class="text-blue-600 text-sm hover:text-blue-700">
-                                    Remove
-                                </button>
-                                <button class="text-gray-600 text-sm hover:text-gray-700">
-                                    Save for later
+        @if (Courses().length>0) {
+        <!-- Cart Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Cart Items List -->
+            <div class="lg:col-span-2">
+                <div class="space-y-4">
+                    <!-- Cart Item 1 -->
+                    @for (Course of Courses(); track $index) {
+                    <div class="bg-white rounded-lg shadow p-4 flex flex-col sm:flex-row animate-fade-in">
+                        <div class="flex-shrink-0 w-full sm:w-32 h-24 mb-4 sm:mb-0">
+                            <img [src]="Course.image" alt="Course" class="w-full h-full object-cover rounded" />
+                        </div>
+                        <div class="flex-grow px-0 sm:px-4">
+                            <div class="flex flex-col sm:flex-row sm:justify-between">
+                                <div>
+                                    <h3 class="font-semibold text-gray-800">{{Course.title}}</h3>
+                                    <p class="text-sm text-gray-500">by {{Course.instructor.name}}</p>
+                                    <p class="text-xs text-gray-400 mt-1">{{Course.hours}} hours of content</p>
+                                </div>
+                                <div class="mt-2 sm:mt-0 text-right">
+                                    <p class="font-bold text-indigo-600">{{Course.price}}$</p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mt-4">
+                                <button class="text-red-500 hover:text-red-700 flex items-center" (click)="removeFromCart(Course.id)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                    <span class="text-sm">Remove</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <p class="font-semibold text-gray-900">$94.99</p>
-                            <p class="text-sm text-gray-500 line-through">$199.99</p>
-                        </div>
                     </div>
-                </div>
+                    }
 
-                <!-- Second Course Item -->
-                <div class="border-t border-gray-200 py-6">
-                    <div class="flex items-start gap-4">
-                        <img src="/course-thumbnail2.jpg" alt="Course thumbnail"
-                            class="w-32 h-20 object-cover rounded-lg">
-                        <div class="flex-1">
-                            <h3 class="font-semibold text-gray-900">Advanced Python Programming</h3>
-                            <p class="text-sm text-gray-500">By Jane Smith</p>
-                            <div class="mt-2 flex items-center gap-4">
-                                <button class="text-blue-600 text-sm hover:text-blue-700">
-                                    Remove
-                                </button>
-                                <button class="text-gray-600 text-sm hover:text-gray-700">
-                                    Save for later
-                                </button>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="font-semibold text-gray-900">$84.99</p>
-                            <p class="text-sm text-gray-500 line-through">$149.99</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
-            <!-- Promo Code -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <h3 class="text-lg font-semibold mb-4">Apply Promo Code</h3>
-                <div class="flex gap-4">
-                    <input type="text" placeholder="Enter promo code"
-                        class="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                    <button class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                        Apply
+            <!-- Order Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow p-6 sticky top-4">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">Order Summary</h2>
+
+                    <div class="space-y-3 mb-4">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Subtotal ({{Courses().length}} courses)</span>
+                            <span class="font-medium">${{totalPrice()}}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-600">Discounts</span>
+                            <span class="font-medium text-green-600">-$00.00</span>
+                        </div>
+                        <div class="border-t pt-3 flex justify-between">
+                            <span class="font-semibold">Total</span>
+                            <span class="font-bold text-lg">${{totalPrice()}}</span>
+                        </div>
+                    </div>
+
+                    <!-- Coupon -->
+                    <div class="flex mt-4 mb-6">
+                        <input type="text" placeholder="Discount code"
+                            class="flex-grow px-3 py-2 text-sm border rounded-l-md focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+                        <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-r-md">
+                            Apply
+                        </button>
+                    </div>
+
+                    <button (click)="checkOut()"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-md font-medium flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                        Proceed to Checkout
                     </button>
+
+                    <p class="text-xs text-gray-500 mt-4 text-center">
+                        Courses in your cart are not reserved. Checkout now to secure your enrollment.
+                    </p>
                 </div>
             </div>
         </div>
-
-        <!-- Checkout Summary -->
-        <div class="bg-white rounded-lg shadow-sm p-6 h-fit sticky top-8">
-            <h2 class="text-xl font-semibold mb-6">Total:</h2>
-            <div class="space-y-4 mb-6">
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Subtotal:</span>
-                    <span class="font-semibold">$179.98</span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-600">Discount:</span>
-                    <span class="text-green-600">-$115.00</span>
-                </div>
-                <div class="flex justify-between border-t border-gray-200 pt-4">
-                    <span class="font-semibold">Total:</span>
-                    <span class="font-semibold text-2xl">$64.98</span>
-                </div>
+        }
+        @else {
+        <!-- Empty Cart State (Hidden by default) -->
+        <div class="text-center py-16">
+            <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
             </div>
-
-            <button class="w-full py-3 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700">
-                Checkout
+            <h2 class="text-2xl font-semibold text-gray-800 mb-2">Your cart is empty</h2>
+            <p class="text-gray-500 mb-8">Discover courses and add them to your cart</p>
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-6 rounded-md font-medium">
+                Browse Courses
             </button>
-
-            <p class="text-xs text-gray-500 mt-4 text-center">
-                30-Day Money-Back Guarantee
-            </p>
-
-            <div class="mt-6">
-                <h3 class="text-sm font-semibold mb-2">Secure Checkout</h3>
-                <div class="flex justify-center gap-4">
-                    <svg class="w-12 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                        <!-- Credit card icons -->
-                    </svg>
-                    <svg class="w-12 h-8 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                        <!-- PayPal icon -->
-                    </svg>
-                </div>
-            </div>
         </div>
-    </div>
-
-    <!-- Saved Items -->
-    <div class="mt-8 bg-white rounded-lg shadow-sm p-6">
-        <h2 class="text-xl font-semibold mb-4">Saved for later (1 item)</h2>
-        <div class="flex items-start gap-4">
-            <img src="/saved-course.jpg" alt="Saved course" class="w-24 h-16 object-cover rounded-lg">
-            <div class="flex-1">
-                <h3 class="font-semibold text-gray-900">React Native Mobile Development</h3>
-                <p class="text-sm text-gray-500">By Sarah Johnson</p>
-            </div>
-            <div class="text-right">
-                <p class="font-semibold text-gray-900">$129.99</p>
-                <button class="text-blue-600 text-sm hover:text-blue-700 mt-2">
-                    Add to cart
-                </button>
-            </div>
-        </div>
+        }
     </div>
 </div>

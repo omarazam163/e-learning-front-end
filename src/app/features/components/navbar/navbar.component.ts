@@ -1,8 +1,9 @@
 import { AuthService } from '../../../core/services/auth.service';
-import { Component, ElementRef, ViewChild, inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../../../shared/interfaces/user.';
+import { CartService } from '../../../core/services/cart.service';
 @Component({
   selector: 'app-navbar',
   imports: [CommonModule, RouterLink, RouterLinkActive],
@@ -14,9 +15,10 @@ export class NavbarComponent {
   @ViewChild('dropdownMenu') dropdown!: ElementRef;
   @ViewChild('dropdownMenuMobile') dropdownMobile!: ElementRef;
   _auth = inject(AuthService);
+  _CartService = inject(CartService);
   isLoggedIn = false;
   User: User = {} as User;
-
+  cartitemsNumber = signal<number>(0);
   openMenu() {
     (this.menu.nativeElement as HTMLElement).classList.toggle('hidden');
   }
@@ -31,6 +33,10 @@ export class NavbarComponent {
         });
       } else this.isLoggedIn = false;
     });
+
+    this._CartService._cartItems.subscribe((items) => {
+      this.cartitemsNumber.set(items.length);
+    })
   }
 
   signOut() {

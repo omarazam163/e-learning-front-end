@@ -11,9 +11,12 @@
         </div>
         <div class="flex gap-3">
           <ul class="hidden lg:flex items-center space-x-1">
-            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Home</a>
-            <a href="coming-soon.html" routerLink="/courses" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Courses</a>
-            <a href="coming-soon.html" routerLink="/instructors" routerLinkActive="text-blue-500" class="py-5 px-3 hover:text-blue-600">Instructors</a>
+            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Home</a>
+            <a href="coming-soon.html" routerLink="/courses" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Courses</a>
+            <a href="coming-soon.html" routerLink="/instructors" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Instructors</a>
           </ul>
         </div>
       </div>
@@ -42,9 +45,9 @@
           <div class="divide-y">
             <div class="py-2">
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
-              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
-                <a routerLink="/cart">My cart</a>
-                <span class="bg-blue-500 text-white text-xs rounded-full px-2">1</span>
+              <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <p>My cart</p>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
               </a>
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
             </div>
@@ -100,9 +103,9 @@
         <div class="divide-y">
           <div class="py-2">
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
-            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
-              <a routerLink="/cart">My cart</a>
-              <span class="bg-blue-500 text-white text-xs rounded-full px-2">1</span>
+            <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <p>My cart</p>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
             </a>
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
           </div>
@@ -132,12 +135,16 @@
       </div>
     </div>
     }
-    <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home" routerLinkActive="text-blue-500">Home</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/courses" routerLinkActive="text-blue-500" >Courses</a>
-    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/instructors" routerLinkActive="text-blue-500">Instructors</a>
+    <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home"
+      routerLinkActive="text-blue-500">Home</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/courses"
+      routerLinkActive="text-blue-500">Courses</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/instructors"
+      routerLinkActive="text-blue-500">Instructors</a>
     @if (!isLoggedIn) {
-      <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/login">Log in</a>
-      <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/chooseRole">Register Now</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/login">Log in</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/chooseRole">Register
+      Now</a>
     }
   </div>
 </nav>

@@ -7,8 +7,8 @@ export interface Module {
   quizzes: QuizzName[];
 }
 
-interface QuizzName
-{
+interface QuizzName {
   id: number;
   title: string;
+  numberOfQuestions:number;
 }

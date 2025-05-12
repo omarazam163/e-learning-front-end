@@ -29,7 +29,7 @@
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
     "@swimlane/ngx-charts": "^22.0.0-alpha.0",
-    "@tailwindcss/postcss": "^4.0.14",
+    "@tailwindcss/postcss": "^4.1.6",
     "@videogular/ngx-videogular": "^10.0.1",
     "angular-highcharts": "^17.0.1",
     "d3": "^7.9.0",

@@ -1,224 +1,238 @@
 @if (courseDetails) {
-<section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
-
-  <section class="lg:col-span-2 bg-white rounded-lg p-5">
-
-    @if ( videoUrl ){
-    <video controls [src]="videoUrl" type="video/mp4" [poster]="courseDetails.image"
-      class="rounded-lg aspect-video w-full shadow-lg mb-3"></video>
-    }@else{
-    <img [src]="courseDetails.image" alt="" class="rounded-lg aspect-video w-full shadow-lg shadow-blue-200 mb-3">
-    }
-
-    <h1 *ngIf="videoTitle" class="text-lg md:text-xl font-medium">{{videoTitle}}</h1>
-    <p class="flex items-center gap-2 text-neutral-500 font-medium text-lg mb-4 mt-2">
-      @if ( courseDetails.instructor.image) {
-      <img [src]="courseDetails.instructor.image" class="w-10 h-10 shadow-md rounded-full" alt="">
-      }
-      @else {
-      <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" class="w-10 h-10 shadow-md rounded-full" alt="">
-      }
-      <span>{{courseDetails.instructor.name}} </span>
-    </p>
-
-    <ul class="flex gap-2 items-center border-b-2 border-neutral-50 mb-5">
-      <li (click)="handleActiveLink('Overview')"
-        class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Overview'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">
-        Overview</li>
-      <li (click)="handleActiveLink('FAQ')"
-        class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='FAQ'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">
-        FAQ</li>
-      <li (click)="handleActiveLink('Discussion')"
-        class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Discussion'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">
-        Discussion</li>
-      <li (click)="handleActiveLink('Reviews')"
-        class="p-2 border-b-2 rounded-sm cursor-pointer {{activeCourseLink=='Reviews'?'border-b-blue-500 text-blue-500':'text-neutral-500 border-b-transparent'}}">
-        Reviews</li>
-    </ul>
-
-    <div *ngIf="activeCourseLink=='Overview'">
-      <h2 class="text-lg font-medium mb-0 ">Course Description</h2>
-      <p class="text-neutral-500 font-normal text-sm">{{courseDetails.description}}</p>
-      <h2 class="text-lg font-medium mb-0 mt-3">Course Outcomes</h2>
-      <ul class="grid grid-cols-1 lg:grid-cols-2 gap-3 text-sm font-normal text-neutral-500">
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> 15 lectures
-          and 5.5 hours of content!</li>
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> Live project
-          end to end software.</li>
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> All about
-          Figma.</li>
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> Basics
-          designing in Figma.</li>
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> Wire Frame,
-          UX-UI design.</li>
-        <li class="flex items-center gap-2"> <span class="block w-2 h-2 rounded-full bg-blue-500"></span> Design mobile
-          and desktop apps.</li>
-      </ul>
-      <h2 class="text-lg font-medium mb-0 mt-3">Audience</h2>
-      <p class="text-neutral-500 font-normal text-sm">Credibly recaptiualize parallel sources and visionary mindshare.
-        Conveniently fabricate out-of-the-box functionalities vis-a-vis excellent
-        core competencies. Compellingly re-engineer user friendly scenarios vis-a-vis magnetic infrastructures..
-        Intrinsicly enhance world-class paradigms for standardized</p>
-    </div>
-
-    <div *ngIf="activeCourseLink=='FAQ'" class="flex flex-col gap-5">
-      <h2 class="flex items-center justify-between text-lg">
-        Marketing Introduction
-        <span
-          class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-blue-500 bg-opacity-10 text-blue-500"><i
-            class="fa-solid fa-minus"></i></span>
-      </h2>
-      <p class="text-neutral-500 text-sm font-normal flex items-center justify-between">
-        Progressively synthesize clicks-and-mortar infrastructures for impactful quality vectors. Seamlessly innovate
-        corporate best practices via standardized models. Intrinsicly grow sustainable relationships with world-class
-        relationships.
-        <span class="flex w-8 h-8"></span>
-      </p>
-      <h2 class="flex items-center justify-between text-lg">
-        Marketing tools
-        <span
-          class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-blue-500 bg-opacity-10 text-blue-500"><i
-            class="fa-solid fa-plus"></i></span>
-      </h2>
-      <h2 class="flex items-center justify-between text-lg">
-        Digital Marketing
-        <span
-          class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-blue-500 bg-opacity-10 text-blue-500"><i
-            class="fa-solid fa-plus"></i></span>
-      </h2>
-      <h2 class="flex items-center justify-between text-lg">
-        How to marketing for my website?
-        <span
-          class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-blue-500 bg-opacity-10 text-blue-500"><i
-            class="fa-solid fa-plus"></i></span>
-      </h2>
-      <h2 class="flex items-center justify-between text-lg">
-        Marketing Rools
-        <span
-          class="flex items-center justify-center w-8 h-8 text-xl cursor-pointer rounded-full bg-blue-500 bg-opacity-10 text-blue-500"><i
-            class="fa-solid fa-plus"></i></span>
-      </h2>
-    </div>
-
-    <div *ngIf="activeCourseLink=='Discussion'">
-      <div class="flex items-center gap-2 mb-2">
-        <img [src]="courseDetails.instructor.image" alt="" class="w-10 h-10 rounded-full shadow-lg">
-        <p class="font-medium">{{courseDetails.instructor.name}}</p>
-      </div>
-      <p class="text-sm font-normal text-neutral-500 mb-5">{{courseDetails.instructor.bio}}</p>
-      <div class="flex items-center gap-2 mb-2">
-        <img [src]="courseDetails.instructor.image" alt="" class="w-10 h-10 rounded-full shadow-lg">
-        <p class="font-medium">{{courseDetails.instructor.name}}</p>
-      </div>
-      <p class="text-sm font-normal text-neutral-500">{{courseDetails.instructor.bio}}</p>
-    </div>
-
-
-    <div *ngIf="activeCourseLink=='Reviews'">
-      <section class="">
-        <!-- <div>
-          <h2 class="font-medium text-lg mb-2">Average Rating</h2>
-          <p class="flex flex-col gap-2 items-center justify-center bg-blue-500 bg-opacity-10 p-5 rounded-lg text-lg">
-            <span class="font-medium text-xl text-blue-500">4.3</span>
-            <span class="flex items-center gap-1 text-sm">
-              <i class="fa-solid fa-star text-blue-500"></i>
-              <i class="fa-solid fa-star text-blue-500"></i>
-              <i class="fa-solid fa-star text-blue-500"></i>
-              <i class="fa-solid fa-star text-blue-500"></i>
-              <i class="fa-solid fa-star text-blue-500 text-opacity-50"></i>
-            </span>
-            <span>Rating</span>
-          </p>
+<div class="bg-gray-50 min-h-screen py-8">
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Main Content Column -->
+    <section class="lg:col-span-2 space-y-6">
+      <!-- Video Player / Course Image -->
+      <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+        <div class="relative">
+          <video controls [src]="videoUrl" [poster]="courseDetails.image"
+            class="w-full aspect-video object-cover"></video>
+          <!-- Play button overlay for image -->
         </div>
-        <div class="lg:col-span-2">
-          <h2 class="font-medium text-lg">Details Rating</h2>
-          <ul class="flex flex-col gap-1">
-            <li *ngFor="let i of [57,26,12,3,80]" class="flex gap-5 items-center">
-              <span>{{i<10?"0"+i:i}} </span>
-                  <span class="flex items-center gap-1 text-sm">
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-yellow-500"></i>
-                    <i class="fa-solid fa-star text-neutral-200"></i>
-                  </span>
-                  <span class="block flex-1 h-2 bg-neutral-200 rounded-lg"><span style.width="{{i}}%"
-                      class="block h-2 bg-violet-500 rounded-lg"></span></span>
-            </li>
-          </ul>
-        </div> -->
-        <!-- <div class="flex items-center gap-2 mb-2 ">
-          <img src="https://th.bing.com/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?rs=1&pid=ImgDetMain" alt=""
-            class="w-12 h-12 rounded-full shadow-lg">
-          <p class="flex flex-col">
-            <span class="font-medium mb-1">John Doe</span>
-            <span class="flex items-center gap-1 text-sm">
-              <i class="fa-solid fa-star text-yellow-500"></i>
-              <i class="fa-solid fa-star text-yellow-500"></i>
-              <i class="fa-solid fa-star text-yellow-500"></i>
-              <i class="fa-solid fa-star text-yellow-500"></i>
-              <i class="fa-solid fa-star text-neutral-200"></i>
-            </span>
-          </p>
-        </div>
-        <p>I don't have much time and the opprotunity to go outside learnig this class. This online Figma course is
-          the best solution for me.</p> -->
-        <!-- <div class="flex flex-col gap-3">
-          <textarea
-            [(ngModel)]="reviewMessage"
-            [ngClass]="errorReviewMessage ? 'border-red-500' : 'border-neutral-200'"
-            class="h-32 w-full border-2 border-neutral-200 resize-none p-3 rounded-lg duration-300 outline-blue-500"
-            placeholder="feedback here"></textarea>
-            <div class="flex items-center gap-5">
-              <span class="font-medium mb-1" [ngClass]="errorReviewRating ? 'text-red-500' : 'text-black'">Your Rate : </span>
-              <span class="flex items-center gap-1 text-sm">
-                <i (click)="reviewRating = (reviewRating == 1 ? 0 : 1)" [ngClass]="reviewRating > 0? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
-                <i (click)="reviewRating = (reviewRating == 2 ? 1 : 2)" [ngClass]="reviewRating > 1? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
-                <i (click)="reviewRating = (reviewRating == 3 ? 2 : 3)" [ngClass]="reviewRating > 2? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
-                <i (click)="reviewRating = (reviewRating == 4 ? 3 : 4)" [ngClass]="reviewRating > 3? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
-                <i (click)="reviewRating = (reviewRating == 5 ? 4 : 5)" [ngClass]="reviewRating > 4? 'text-yellow-500':'text-neutral-200'" class="fa-solid fa-star text-neutral-200 cursor-pointer"></i>
-              </span>
+
+        <!-- Video Title & Instructor -->
+        <div class="p-6">
+          <h1 class="text-2xl font-bold text-gray-800">{{courseDetails.title}}</h1>
+          <div class="flex items-center gap-3 mt-4">
+            <img [src]="courseDetails.instructor.image" class="w-12 h-12 rounded-full object-cover ring-2 ring-blue-100"
+              alt="Instructor">
+            <div>
+              <p class="font-medium text-gray-800">{{courseDetails.instructor.name}}</p>
+              <p class="text-sm text-gray-500">Senior UX Designer • 4.8 ★</p>
             </div>
-          <button
-            class="px-6 py-1 rounded-lg text-xl text-white bg-blue-500 duration-300 hover:shadow-md hover:shadow-blue-500" (click)="SendReview()">Submit</button>
-        </div> -->
-      </section>
-    </div>
-
-  </section>
-
-  <section class=" bg-white rounded-lg p-5">
-    <h2 class="text-lg font-medium ">{{courseDetails.title}}</h2>
-    <p class="text-sm text-neutral-500 mb-5">{{courseDetails.price}} $ <span class="inline-block px-1"></span>
-      {{courseDetails.hours}} h</p>
-    @if (modules.length > 0) {
-    <ul class="flex flex-col gap-5">
-      <li *ngFor="let module of modules" class="">
-        <p class="flex justify-between items-center">
-          <span class="font-medium text-xl">{{module.title}}</span>
-        </p>
-        @for (video of module.videos; track $index) {
-        <div (click)="handleActiveVideo(video.url,video.title)"
-          class="flex flex-col gap-0 ps-5 my-1 py-1 cursor-pointer bg-blue-500 bg-opacity-5 duration-300 hover:bg-opacity-20 rounded-lg">
-          <span class="text-sm font-medium ">{{video.title}}</span>
-          <span class="text-neutral-500 text-sm flex items-center gap-2 mt-[0.5px]"><i
-              class="fa-solid fa-circle-play text-xs text-blue-500"></i>{{(video.duration.slice(0,8))}}</span>
+          </div>
         </div>
-        }
-        @for (quiz of module.quizzes; track $index) {
-        <div [routerLink]='["/quizRoom", quiz.id]'
-          class="flex flex-col gap-0 ps-5 my-1 py-1 cursor-pointer bg-purple-500 bg-opacity-5 duration-300 hover:bg-opacity-20 rounded-lg">
-          <span class="text-sm font-medium">{{quiz.title}}</span>
-          <span class="text-neutral-500 text-sm flex items-center gap-2 mt-[0.5px]">
-            <i class="fa-solid fa-list-check text-xs text-purple-500"></i>
-            Quiz
-          </span>
+      </div>
+
+      <!-- Content Tabs Navigation -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+
+        <!-- Tab Content: Overview -->
+        <mat-tab-group>
+          <mat-tab label="OverView">
+            <div class="p-6">
+              <div class="space-y-6">
+                <!-- Course Description -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">Course Description</h2>
+                  <p class="mt-2 text-gray-600 leading-relaxed">
+                    {{courseDetails.description}}
+                  </p>
+                </div>
+
+                <!-- Course Outcomes -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">What You'll Learn</h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">15 lectures and 5.5 hours of content!</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Live project end to end software</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">All about Figma</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Basics designing in Figma</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Wire Frame, UX-UI design</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Design mobile and desktop apps</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Audience -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">Who This Course is For</h2>
+                  <p class="mt-2 text-gray-600 leading-relaxed">
+                    This course is perfect for aspiring UX/UI designers, product managers, and developers who want to
+                    understand design principles. Whether you're a complete beginner or have some experience with design
+                    tools, this course will help you build professional-level skills in Figma and UX/UI design
+                    methodologies.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Reviews"> Reviews</mat-tab>
+          <mat-tab label="Disccution"> kkk </mat-tab>
+          <mat-tab label="FOQ"> kkk </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </section>
+
+    <!-- Sidebar: Course Modules -->
+    <section class="lg:col-span-1">
+      <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold text-gray-800">Course Content</h2>
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">{{courseDetails.hours}}
+            hours</span>
         </div>
+        <div class="text-sm mb-4 pb-4 border-b border-gray-100">
+          <span class="text-gray-800 font-medium">${{courseDetails.price}}</span>
+          <!-- <span class="text-gray-400 line-through ml-2">$99.99</span>
+          <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded ml-2">30% OFF</span> -->
+        </div>
+
+        <!-- Module List -->
+        <div class="space-y-4">
+          <!-- Module 1 -->
+          @for (module of modules; track module.id) {
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-bold text-gray-800">{{$index+1}}. {{module.title}}</h3>
+              <span class="text-xs text-gray-500">{{calcluteDuration(module.videos)}} min</span>
+            </div>
+            <div class="space-y-2">
+              @for (video of module.videos; track $index) {
+              <div (click)="handleActiveVideo(video.url, video.title)"
+                [ngClass]="{'bg-blue-100': videoUrl === video.url}"
+                class="flex items-start p-3 rounded-lg  hover:bg-blue-100 transition-colors cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-gray-800">Welcome to the course</p>
+                  <p class="text-xs text-gray-500">{{video.duration.slice(3,8)}}</p>
+                </div>
+              </div>
+              }
+
+              @for (quiz of module.quizzes; track quiz.id) {
+              <div [routerLink]="['/quizRoom', quiz.id]"
+                class="flex items-start p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mr-2 mt-0.5" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                  <path fill-rule="evenodd"
+                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                    clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-gray-800">{{quiz.title}}</p>
+                  <p class="text-xs text-purple-600">{{quiz.numberOfQuestions}} questions</p>
+                </div>
+              </div>
+              }
+            </div>
+            <!-- Videos -->
+          </div>
+          }
+
+
+        </div>
+        @if (!inCart()) {
+        <!-- Enrollment Button -->
+        <button (click)="addtoCart()"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z"
+              clip-rule="evenodd" />
+            <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
+          </svg>
+          Enroll Now
+        </button>
         }
-      </li>
-    </ul>
-    }@else {
-    <p class="font-medium text-3xl text-neutral-500 text-center"><br />There isn't any video<br /></p>
-    }
+        @else {
+        <button routerLink="/cart"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M6 2a1 1 0 00-1 1v1H3a1 1 0 000 2h1l.6 3.5a3 3 0 002.9 2.5h6.2a3 3 0 002.9-2.5L17 6a1 1 0 00-1-1H7V3a1 1 0 00-1-1zM6 15a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z"
+              clip-rule="evenodd" />
+          </svg>
+
+          already in cart
+        </button>
+        }
+      </div>
+    </section>
   </section>
-</section>}
+</div>
+}`

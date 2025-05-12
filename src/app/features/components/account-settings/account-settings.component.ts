@@ -58,7 +58,7 @@ export class AccountSettingsComponent {
         'Image',
         this.editForm.get('image')?.value as unknown as File
       );
-      formData.append('Id', this._auth.UserData.getValue().roleId as string);
+      formData.append('Id', this._auth.UserData.getValue().roleId.toString());
       formData.append('Email', this._auth.UserData.getValue().Email as string);
       this._instructorService.updateInstructor(formData).subscribe(() => {
         console.log('done');
@@ -68,7 +68,7 @@ export class AccountSettingsComponent {
 
   loadInstructorData() {
     this._instructorService
-      .getSpecificInstructor(this._auth.UserData.getValue().roleId)
+      .getSpecificInstructor(this._auth.UserData.getValue().roleId.toString())
       .subscribe({
         next: (res: Instructor) => {
           this.instructorData = res;
