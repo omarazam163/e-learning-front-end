@@ -1,0 +1,253 @@
+<!-- Hero Section -->
+<section class="relative bg-gradient-to-r from-blue-600 to-violet-600 min-h-[600px] flex items-center">
+  <div class="absolute inset-0 bg-black/30"></div>
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="max-w-3xl text-white">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">Transform Your Future with Online Learning</h1>
+      <p class="text-xl md:text-2xl mb-8 text-gray-200">Access world-class education from anywhere. Learn from industry
+        experts and advance your career.</p>
+      <div class="flex gap-4">
+        <a [routerLink]="['/courses']"
+          class="bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300">
+          Explore {{statistics.courses}}+ Courses
+        </a>
+        <a [routerLink]="['/register/Student']"
+          class="border-2 border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white hover:text-blue-600 transition duration-300">
+          Join Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center">
+        <div class="text-blue-600 text-3xl mb-4">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3 class="text-4xl font-bold text-blue-600 mb-2">{{statistics.students > 0 ? statistics.students : '1000'}}+
+        </h3>
+        <p class="text-gray-600">Active Students</p>
+      </div>
+      <div class="text-center">
+        <div class="text-blue-600 text-3xl mb-4">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <h3 class="text-4xl font-bold text-blue-600 mb-2">{{statistics.courses}}+</h3>
+        <p class="text-gray-600">Total Courses</p>
+      </div>
+      <div class="text-center">
+        <div class="text-blue-600 text-3xl mb-4">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+        <h3 class="text-4xl font-bold text-blue-600 mb-2">{{statistics.instructors}}+</h3>
+        <p class="text-gray-600">Expert Instructors</p>
+      </div>
+      <div class="text-center">
+        <div class="text-blue-600 text-3xl mb-4">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3 class="text-4xl font-bold text-blue-600 mb-2">{{statistics.ratings > 0 ? statistics.ratings : '4.8'}}</h3>
+        <p class="text-gray-600">Average Rating</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section class="py-16">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Explore Our Categories</h2>
+      <p class="text-gray-600">Find the perfect course in your preferred category</p>
+    </div>
+
+    <div *ngIf="categories && categories.length">
+      <owl-carousel-o [options]="categoryOptions">
+        <ng-template carouselSlide *ngFor="let category of categories">
+          <div [routerLink]="['/courses']" class="mx-2">
+            <div
+              class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition duration-300 cursor-pointer">
+              <div class="text-blue-600 text-4xl mb-4">
+                <i [class]="getCategoryIcon(category.categoryName)"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">{{category.categoryName}}</h3>
+              <p class="text-gray-600 text-sm">Explore courses</p>
+            </div>
+          </div>
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Courses Section -->
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">Featured Courses</h2>
+      <p class="text-gray-600">Start learning from our most popular courses</p>
+    </div>
+
+    <div *ngIf="featuredCourses().length === 0" class="text-center text-gray-600">
+      <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+      <p>Loading courses...</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div *ngFor="let course of featuredCourses()"
+        class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+        <img [src]="course.image || 'assets/images/course-placeholder.jpg'" [alt]="course.title"
+          class="w-full h-48 object-cover">
+        <div class="p-6">
+          <div class="flex items-center gap-2 mb-4">
+            <img [src]="course.instructor.image || 'assets/images/default-avatar.png'" alt="Instructor"
+              class="w-10 h-10 rounded-full">
+            <div>
+              <h4 class="font-medium">{{course.instructor.name}}</h4>
+              <p class="text-sm text-gray-600">Instructor</p>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">{{course.title}}</h3>
+          <p class="text-gray-600 mb-4 line-clamp-2">{{course.description}}</p>
+          <div class="flex items-center justify-between">
+            <span class="text-blue-600 font-bold">${{course.price}}</span>
+            <span class="text-gray-600"><i class="far fa-clock mr-2"></i>{{course.hours}} hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12">
+      <a [routerLink]="['/courses']"
+        class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300">
+        View All {{statistics.courses}}+ Courses
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-16">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold mb-4">What Our Students Say</h2>
+      <p class="text-gray-600">Read testimonials from our successful students</p>
+    </div>
+
+    <div *ngIf="reviews().length === 0" class="text-center text-gray-600">
+      <i class="fas fa-spinner fa-spin text-4xl mb-4"></i>
+      <p>Loading reviews...</p>
+    </div>
+
+    <owl-carousel-o [options]="testimonialOptions" *ngIf="reviews().length > 0">
+      <ng-template carouselSlide *ngFor="let review of reviews()">
+        <div class="mx-2">
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <div class="flex items-center gap-4 mb-6">
+              <img [src]="review.image || 'assets/images/default-avatar.png'" alt="Student"
+                class="w-16 h-16 rounded-full object-cover">
+              <div>
+                <h4 class="font-semibold">{{review.studentName}}</h4>
+                <div class="flex text-yellow-400">
+                  <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5].slice(0, review.rating)"></i>
+                  <i class="far fa-star" *ngFor="let star of [1,2,3,4,5].slice(review.rating)"></i>
+                </div>
+              </div>
+            </div>
+            <p class="text-gray-600">{{review.comment}}</p>
+            <p class="text-sm text-gray-500 mt-4">{{review.createdAt | date}}</p>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-20 bg-gradient-to-r from-blue-600 to-violet-600 text-white">
+  <div class="container mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold mb-6">Ready to Start Learning?</h2>
+    <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of students who are already learning and growing their
+      careers with our courses.</p>
+    <div class="flex justify-center gap-4">
+      <a [routerLink]="['/register/Student']"
+        class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition duration-300">
+        Get Started Now
+      </a>
+      <a [routerLink]="['/courses']"
+        class="inline-block border-2 border-white text-white px-8 py-3 rounded-full font-medium hover:bg-white/10 transition duration-300">
+        Browse Courses
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-6">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold mb-4">Get in Touch</h2>
+        <p class="text-gray-600">Have questions? We'd love to hear from you.</p>
+      </div>
+
+      <form (submit)="sendEmail()" class="space-y-6">
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <input type="email" id="email" [(ngModel)]="email" name="email"
+            class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Enter your email" required>
+          <p class="text-red-500 text-sm mt-1">{{emailError}}</p>
+        </div>
+
+        <div>
+          <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+          <textarea id="message" [(ngModel)]="message" name="message" rows="4"
+            class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Your message" required></textarea>
+          <p class="text-red-500 text-sm mt-1">{{messageError}}</p>
+        </div>
+
+        <div class="text-center">
+          <button type="submit"
+            class="bg-blue-600 text-white px-8 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300">
+            Send Message
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-blue-600 text-white py-6">
+  <div class="container mx-auto px-6 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="text-xl font-semibold mb-4">About Us</h3>
+        <p class="text-gray-200">Empowering learners worldwide with quality online education.</p>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+        <div class="flex flex-col gap-2">
+          <a [routerLink]="['/courses']" class="text-gray-200 hover:text-white">Courses</a>
+          <a [routerLink]="['/register/Student']" class="text-gray-200 hover:text-white">Register</a>
+          <a [routerLink]="['/login']" class="text-gray-200 hover:text-white">Login</a>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-xl font-semibold mb-4">Contact</h3>
+        <div class="flex flex-col gap-2 text-gray-200">
+          <p><i class="fas fa-envelope mr-2"></i> supportxcelerate.com</p>
+          <p><i class="fas fa-phone mr-2"></i> +1 234 567 890</p>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/20 pt-8">
+      <p>&copy; <span class="font-medium">Xcelerate</span> {{currentYear}} All rights reserved</p>
+    </div>
+  </div>
+</footer>

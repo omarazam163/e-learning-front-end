@@ -1,25 +1,47 @@
-// @import "primeng/resources/themes/lara-light-blue/theme.css";
-// @import "primeng/resources/primeng.css";
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-
-// html {
-//   @include mat.theme((
-//     color: (
-//       theme-type: light,
-//       primary: mat.$azure-palette,
-//       tertiary: mat.$blue-palette,
-//     ),
-//     typography: Roboto,
-//     density: 0,
-//   ));
-// }
+// @import '~css-star-rating/scss/star-rating';
+// @import '~css-star-rating/scss/star-rating';
+@import '../node_modules/css-star-rating/scss/star-rating';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "flowbite/src/themes/default";
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
-/* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.rating.color-negative .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-ok .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-positive .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-default .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}

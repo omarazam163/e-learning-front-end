@@ -1,0 +1,93 @@
+<form class="space-y-6 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" [formGroup]="addCourseForm" (ngSubmit)="next.emit()">
+
+    <!-- Course Title -->
+    <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Course Title</label>
+        <input type="text" placeholder="e.g. Learn JavaScript from Scratch" formControlName="courseName"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        @if (addCourseForm.get("courseName")?.touched && addCourseForm.get("courseName")?.getError("required")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">course Name is required</span></p>
+        }
+        @if (addCourseForm.get("courseName")?.touched && addCourseForm.get("courseName")?.getError("minlength")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">course Name should be at least 3
+                characters</span></p>
+        }
+        @if (addCourseForm.get("courseName")?.touched && addCourseForm.get("courseName")?.getError("maxlength")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">course Name should be at most 25
+                characters</span></p>
+        }
+    </div>
+
+    <!-- Description -->
+    <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+        <textarea rows="4" placeholder="What is this course about?" formControlName="courseDescription"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+        @if (addCourseForm.get("courseDescription")?.touched &&
+        addCourseForm.get("courseDescription")?.getError("required")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">Description is required</span></p>
+        }
+        @if (addCourseForm.get("courseDescription")?.touched &&
+        addCourseForm.get("courseDescription")?.getError("minlength")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">Description should be at least 50
+                characters</span></p>
+        }
+        @if (addCourseForm.get("courseDescription")?.touched &&
+        addCourseForm.get("courseDescription")?.getError("maxlength")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">Description should be at most 500
+                characters</span></p>
+        }
+    </div>
+
+    <!-- Price & Duration -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Price ($)</label>
+            <input type="number" placeholder="e.g. 49.99" formControlName="coursePrice"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            @if (addCourseForm.get("coursePrice")?.touched && addCourseForm.get("coursePrice")?.getError("required")) {
+            <p class="mt-2 text-xs text-red-600"><span class="font-medium">Price is required</span></p>
+            }
+        </div>
+        <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Total Hours</label>
+            <input type="number" placeholder="e.g. 12" formControlName="courseDuration"
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            @if (addCourseForm.get("courseDuration")?.touched &&
+            addCourseForm.get("courseDuration")?.getError("required")) {
+            <p class="mt-2 text-xs text-red-600"><span class="font-medium">Total Hours is required</span></p>
+            }
+        </div>
+    </div>
+
+    <!-- Category -->
+    <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Category</label>
+        <select formControlName="courusecategory"
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            @for (item of categories(); track $index) {
+            <option [value]="item.categoryId + '-' + item.categoryName">{{ item.categoryName }}</option>
+            }
+        </select>
+        @if (addCourseForm.get("courusecategory")?.touched &&
+        addCourseForm.get("courusecategory")?.getError("required")) {
+        <p class="mt-2 text-xs text-red-600"><span class="font-medium">Category is required</span></p>
+        }
+    </div>
+
+    <!-- Thumbnail -->
+    <div>
+        <label class="block text-sm font-semibold text-gray-700 mb-2">Course Thumbnail</label>
+        <input type="file" accept="image/*" (change)="onFileChange($event)"
+            class="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600" />
+    </div>
+
+    <!-- Submit -->
+    <div>
+        <button type="submit" [disabled]="addCourseForm.invalid" [class.pointer-events-none]="addCourseForm.invalid"
+            [class.bg-gray-500]="addCourseForm.invalid"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition">
+            Create Course
+        </button>
+    </div>
+</form>

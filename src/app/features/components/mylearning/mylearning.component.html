@@ -1,0 +1,23 @@
+<div class="relative App min-h-screen flex w-full bg-gradient-to-b from-blue-500/10 to-red-500/10"
+[class.flex-col]="isMobile"
+    >
+    @if(isMobile)
+    {
+    <div class="text-right px-8">
+        <i class="fa-solid fa-bars text-3xl pt-7 cursor-pointer" (click)="toggleSidebar()"></i>
+        @if(showSidebar)
+        {
+        <div class="absolute top-2 left-0 w-60 h-[90vh] bg-white flex justify-center rounded-lg z-50">
+            <app-sidebar></app-sidebar>
+        </div>
+        }
+    </div>
+
+    }
+    @else{
+    <app-sidebar></app-sidebar>
+    }
+    <section class="flex-1 h-full p-5 overflow-auto">
+        <router-outlet></router-outlet>
+    </section>
+</div>

@@ -1,0 +1,455 @@
+@if (courseDetails) {
+<div class="bg-gray-50 min-h-screen py-8">
+  <section class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Main Content Column -->
+    <section class="lg:col-span-2 space-y-6">
+      <!-- Video Player / Course Image -->
+      <div class="bg-white rounded-xl overflow-hidden shadow-lg">
+        <div class="relative">
+          @if (selectedVideo().url == undefined) {
+          <img [src]="courseDetails.image" alt="Course Image" class="w-full object-cover">
+          }
+          @else if (selectedVideo().url == 'not signed in') {
+          <div class="flex flex-col items-center justify-center py-16 px-6 text-center bg-gray-50 aspect-video">
+            <div class="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center mb-6">
+              <!-- User-X Icon -->
+              <svg class="h-8 w-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zm-4 7a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 18L6 6"></path>
+              </svg>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4">
+              Sign In Required
+            </h2>
+
+            <p class="text-gray-600 mb-6 max-w-md">
+              Please sign in to your account to view this course content.
+            </p>
+
+            <div class="flex space-x-4">
+              <button class="bg-blue-600 text-white hover:bg-blue-700 transition-colors py-2 px-6 rounded-md">
+                Sign In
+              </button>
+              <button
+                class="bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors py-2 px-6 rounded-md border border-gray-300">
+                Create Account
+              </button>
+            </div>
+          </div>
+          }
+          @else if (selectedVideo().url == 'you are not enrolled in this course') {
+          <div class="flex flex-col items-center justify-center py-16 px-6 text-center bg-gray-50 aspect-video">
+            <div class="h-16 w-16 rounded-full bg-amber-100 flex items-center justify-center mb-6">
+              <!-- Lock Icon -->
+              <svg class="h-8 w-8 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+                </path>
+              </svg>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl font-semibold text-gray-800 mb-4">
+              Course Content Locked
+            </h2>
+
+            <p class="text-gray-600 mb-6 max-w-md">
+              This content is exclusively available to enrolled students.
+              Enroll now to unlock all course materials and videos.
+            </p>
+
+            <div class="w-full max-w-md bg-white border border-gray-200 shadow-sm rounded-lg overflow-hidden">
+              <div class="px-6 py-4">
+                <h3 class="text-lg font-semibold mb-2">What You'll Get</h3>
+                <ul class="space-y-2 mb-4">
+                  <li class="flex items-center">
+                    <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Access to all video lectures</span>
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="h-5 w-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Downloadable resources</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="px-6 py-4 bg-gray-50">
+                @if (islogin=='Student') {
+                @if (!inCart()) {
+                <button (click)="addtoCart()"
+                  class="w-full bg-blue-600 text-white hover:bg-blue-700 transition-colors py-2 px-4 rounded-md">
+                  Enroll Now
+                </button>
+                }
+                @else
+                {
+                <button routerLink="/cart"
+                  class="w-full bg-blue-600 text-white hover:bg-blue-700 transition-colors py-2 px-4 rounded-md">
+                  in cart
+                </button>
+                }
+                }
+                @else
+                {
+                <button routerLink="/login"
+                  class="w-full bg-blue-600 text-white hover:bg-blue-700 transition-colors py-2 px-4 rounded-md">
+                  Login as Student to enroll
+                </button>
+                }
+              </div>
+            </div>
+          </div>
+
+          }
+          @else {
+          <div class="flex flex-col items-end gap-y-4">
+            <video controls [src]="selectedVideo().url" [poster]="courseDetails.image"
+              class="w-full aspect-video object-cover">
+            </video>
+          </div>
+          }
+        </div>
+
+        <!-- Video Title & Instructor -->
+        <div class="p-6 flex justify-between items-center">
+          <div>
+            <h1 class="text-2xl font-bold text-gray-800">{{courseDetails.title}}</h1>
+            <div class="flex items-center gap-3 mt-4">
+              <img [src]="courseDetails.instructor.image"
+                class="w-12 h-12 rounded-full object-cover ring-2 ring-blue-100" alt="Instructor">
+              <div>
+                <p class="font-medium text-gray-800">{{courseDetails.instructor.name}}</p>
+                <p class="text-sm text-gray-500">{{courseDetails.instructor.position}} • 4.8 ★</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Tabs Navigation -->
+      <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+
+
+        <!-- Tab Content: Overview -->
+        <mat-tab-group>
+          <mat-tab label="OverView">
+            <div class="p-6">
+              <div class="space-y-6">
+                <!-- Course Description -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">Course Description</h2>
+                  <p class="mt-2 text-gray-600 leading-relaxed">
+                    {{courseDetails.description}}
+                  </p>
+                </div>
+
+                <!-- Course Outcomes -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">What You'll Learn</h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">15 lectures and 5.5 hours of content!</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Live project end to end software</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">All about Figma</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Basics designing in Figma</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Wire Frame, UX-UI design</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                      <span
+                        class="flex-shrink-0 mt-1 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 text-white" viewBox="0 0 20 20"
+                          fill="currentColor">
+                          <path fill-rule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      <span class="text-gray-700">Design mobile and desktop apps</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Audience -->
+                <div>
+                  <h2 class="text-xl font-bold text-gray-800">Who This Course is For</h2>
+                  <p class="mt-2 text-gray-600 leading-relaxed">
+                    This course is perfect for aspiring UX/UI designers, product managers, and developers who want to
+                    understand design principles. Whether you're a complete beginner or have some experience with
+                    design
+                    tools, this course will help you build professional-level skills in Figma and UX/UI design
+                    methodologies.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Reviews">
+            <app-review [CourseId]="courseId"></app-review>
+          </mat-tab>
+          <mat-tab label="Disccution"> kkk </mat-tab>
+          <mat-tab label="FOQ"> kkk </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </section>
+
+    <!-- Sidebar: Course Modules -->
+    <section class="lg:col-span-1">
+      <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold text-gray-800">Course Content</h2>
+          <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">{{courseDetails.hours}}
+            hours</span>
+        </div>
+        <div class="text-sm mb-4 pb-4 border-b border-gray-100">
+          <span class="text-gray-800 font-medium">${{courseDetails.price}}</span>
+          <!-- <span class="text-gray-400 line-through ml-2">$99.99</span>
+          <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded ml-2">30% OFF</span> -->
+        </div>
+
+        <!-- Module List -->
+        <div class="space-y-4">
+          <!-- Module 1 -->
+          @for (module of modules; track module.id) {
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="font-bold text-gray-800">{{$index+1}}. {{module.title}}</h3>
+              <span class="text-xs text-gray-500">{{calcluteDuration(module.videos)}} min</span>
+            </div>
+            <div class="space-y-2">
+              @for (video of module.videos; track $index) {
+              <div (click)="handleActiveVideo(video)" [ngClass]="{'bg-blue-100': selectedVideo().url === video.url}"
+                class="flex items-start p-3 rounded-lg hover:bg-blue-100 transition-colors cursor-pointer">
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600 mr-2 mt-0.5" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                    clip-rule="evenodd" />
+                </svg>
+
+                <div class="flex-1">
+                  <p class="text-sm font-medium text-gray-800">Welcome to the course</p>
+                  <p class="text-xs text-gray-500">{{ video.duration.slice(3, 8) }}</p>
+                </div>
+
+                <!-- ✅ Done Button -->
+                @if (isEnrolled()&&islogin=='Student') {
+                <button (click)="markVideoAsDone(video);$event.stopPropagation()"
+                  [class.pointer-events-none]="video.isWatched" [disabled]="video.isWatched"
+                  class="ml-2 w-5 h-5 rounded border border-gray-400 flex items-center justify-center text-white text-xs"
+                  [ngClass]="{'bg-green-500': video.isWatched}">
+                  <svg *ngIf="video.isWatched" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </button>
+                }
+              </div>
+              }
+              @for (quiz of module.quizzes; track quiz.id) {
+              <div (click)="hanldeQuizNav(quiz.id)" [class.pointer-events-none]="quiz.score!=-1"
+                class="flex items-start p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mr-2 mt-0.5" viewBox="0 0 20 20"
+                  fill="currentColor">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                  <path fill-rule="evenodd"
+                    d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z"
+                    clip-rule="evenodd" />
+                </svg>
+                <div>
+                  <p class="text-sm font-medium text-gray-800">{{quiz.title}}</p>
+                  <p class="text-xs text-purple-600">{{quiz.numberOfQuestions}} questions</p>
+                  @if (islogin=='Student'&&isEnrolled()) {
+                  @if (quiz.score>-1) {
+                  <p class="text-xs text-green-600">Score: {{quiz.score}}</p> <!-- ✅ Added line -->
+                  }
+                  }
+                </div>
+              </div>
+              }
+            </div>
+            <!-- Videos -->
+          </div>
+          }
+
+
+        </div>
+        @if (islogin=='Student') {
+        @if(!isEnrolled()){
+        @if (!inCart()) {
+        <!-- Enrollment Button -->
+        <button (click)="addtoCart()"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z"
+              clip-rule="evenodd" />
+            <path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z" />
+          </svg>
+          Enroll Now
+        </button>
+        }
+        @else {
+        <button routerLink="/cart"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M6 2a1 1 0 00-1 1v1H3a1 1 0 000 2h1l.6 3.5a3 3 0 002.9 2.5h6.2a3 3 0 002.9-2.5L17 6a1 1 0 00-1-1H7V3a1 1 0 00-1-1zM6 15a2 2 0 11-4 0 2 2 0 014 0zm10 0a2 2 0 11-4 0 2 2 0 014 0z"
+              clip-rule="evenodd" />
+          </svg>
+
+          already in cart
+        </button>
+        }
+        }
+        @else {
+        <!-- Enrolled Button -->
+        <button
+          class="mt-6 w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors"
+          disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd" />
+          </svg>
+          Enrolled
+        </button>
+        }
+        }
+        @else if (islogin=='Instructor') {
+        <button routerLink="/login"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+          Login as Student to enroll
+        </button>
+        }
+        @else {
+        <button routerLink="/login"
+          class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg flex items-center justify-center transition-colors">
+
+          Login to enroll
+        </button>
+        }
+
+      </div>
+
+    </section>
+  </section>
+</div>
+}
+
+@if(showPopUpSignal()){
+<div class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 backdrop-blur-sm">
+  <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4 overflow-hidden animate-fade-in">
+    <!-- Top section with dark background -->
+    <div class="bg-blue-600 p-6 text-center">
+      <div class="mx-auto h-16 w-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
+        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
+          </path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-white">Enroll to Get Full Access</h2>
+      <p class="text-blue-100 mt-2">Unlock all course materials and videos by enrolling now!</p>
+    </div>
+
+    <!-- Content section -->
+    <div class="p-6">
+      <ul class="space-y-3 mb-6">
+        <li class="flex items-start">
+          <svg class="h-5 w-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Access to all video lectures</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="h-5 w-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Downloadable resources & materials</span>
+        </li>
+        <li class="flex items-start">
+          <svg class="h-5 w-5 text-green-500 mr-3 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span>Certificate upon completion</span>
+        </li>
+      </ul>
+
+      <div class="flex flex-col space-y-3">
+        <button (click)="addtoCart()"
+          class="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-medium">
+          Enroll Now
+        </button>
+        <button (click)="closePopUp()"
+          class="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-md hover:bg-gray-200 transition-colors font-medium">
+          Exit
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+}

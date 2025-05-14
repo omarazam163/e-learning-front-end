@@ -1,0 +1,170 @@
+<nav class="bg-white shadow-lg relative">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between items-center">
+      <div class="flex space-x-4">
+        <div>
+          <a href="#" class="flex items-center py-5 px-2 text-blue-600">
+            <svg class="h-6 w-6 mr-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0L15.09 7.26L23 8.34L17 13.97L18.18 21.66L12 18L5.82 21.66L7 13.97L1 8.34L8.91 7.26L12 0Z" />
+            </svg> <span class="font-bold">Xcelerate</span>
+          </a>
+        </div>
+        <div class="flex gap-3">
+          <ul class="hidden lg:flex items-center space-x-1">
+            <a href="coming-soon.html" routerLink="/home" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Home</a>
+            <a href="coming-soon.html" routerLink="/courses" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Courses</a>
+            <a href="coming-soon.html" routerLink="/instructors" routerLinkActive="text-blue-500"
+              class="py-5 px-3 hover:text-blue-600">Instructors</a>
+          </ul>
+        </div>
+      </div>
+      @if (!isLoggedIn) {
+      <div class="hidden lg:flex items-center space-x-1">
+        <a href="coming-soon.html" class="py-5 px-3 hover:text-blue-600" routerLink="/login">Log in</a>
+        <a href="coming-soon.html"
+          class="py-2 px-3 bg-blue-600 text-white rounded hover:bg-blue-500 transition duration-300"
+          routerLink="/chooseRole">Register Now</a>
+      </div>
+      }
+      @else {
+      <!-- Dropdown Wrapper -->
+      <div (click)="toggleDropdown()" class="hidden lg:inline-block text-left">
+        <!-- Profile Button -->
+        <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
+          @if (Image != "") {
+          <img class="w-10 h-10 rounded-full" src="{{Image}}" alt="Profile Picture">
+          }
+          @else {
+          <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+            {{User.UserName.slice(0, 2)}}</div>
+          }
+          <div class="text-left">
+            <div class="font-semibold text-sm">{{User.UserName}}</div>
+            <div class="text-xs text-gray-500">{{User.Email}}</div>
+          </div>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div #dropdownMenu class="absolute hidden right-10 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
+          <div class="divide-y">
+            <div class="py-2">
+              @if (User.role== 'Student') {
+              <a routerLink="/myCourses" class="block px-4 py-2 hover:bg-gray-100">My Courses</a>
+              }
+              @if (User.role== 'Student') {
+              <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <p>My cart</p>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
+              </a>
+              }
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
+            </div>
+            <div class="py-2">
+              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <span>Notifications</span>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+              </a>
+              <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+                <span>Messages</span>
+                <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+              </a>
+            </div>
+            <div class="py-2">
+              <a routerLink="/accountSettings" class="block px-4 py-2 hover:bg-gray-100">Account settings</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
+              <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
+              @if (User.role == "Instructor") {
+              <a routerLink="/workSpace" class="block px-4 py-2 hover:bg-gray-100">Workspace</a>
+              }
+            </div>
+            <div class="py-2">
+              <button (click)="signOut()" class="text-left block px-4 py-2 hover:bg-gray-100 w-full">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+      <div class="lg:hidden flex items-center gap-4">
+        <button class="mobile-menu-button" (click)="openMenu()">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-menu hidden lg:hidden" #mobileMenu>
+
+    @if (isLoggedIn) {
+    <!-- Dropdown Wrapper -->
+    <div (click)="toggleDropdownMobile()" class="relative inline-block text-left">
+      <!-- Profile Button -->
+      <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
+        @if (Image != "") {
+        <img class="w-10 h-10 rounded-full" src="{{Image}}" alt="Profile Picture">
+        }
+        @else {
+        <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+          {{User.UserName.slice(0, 2)}}</div>
+        }
+        <div class="text-left">
+          <div class="font-semibold text-sm">{{User.UserName}}</div>
+          <div class="text-xs text-gray-500">{{User.Email}}</div>
+        </div>
+      </button>
+      <div #dropdownMenuMobile class="absolute hidden right-[-50%] mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
+        <div class="divide-y">
+          <div class="py-2">
+            @if (User.role== 'Student') {
+            <a routerLink="/myCourses" class="block px-4 py-2 hover:bg-gray-100">My Courses</a>
+            }
+            @if (User.role== 'Student') {
+            <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <p>My cart</p>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
+            </a>
+            }
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
+          </div>
+          <div class="py-2">
+            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <span>Notifications</span>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+            </a>
+            <a href="#" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
+              <span>Messages</span>
+              <span class="bg-blue-500 text-white text-xs rounded-full px-2">9+</span>
+            </a>
+          </div>
+          <div class="py-2">
+            <a routerLink="/accountSettings" class="block px-4 py-2 hover:bg-gray-100">Account settings</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Payment methods</a>
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Subscriptions</a>
+            @if (User.role == "Instructor") {
+            <a routerLink="/workSpace" class="block px-4 py-2 hover:bg-gray-100">Workspace</a>
+            }
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Purchase history</a>
+          </div>
+          <div class="py-2">
+            <button (click)="signOut()" class="text-left block px-4 py-2 hover:bg-gray-100 w-full">Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    <a href="index.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/home"
+      routerLinkActive="text-blue-500">Home</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/courses"
+      routerLinkActive="text-blue-500">Courses</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/instructors"
+      routerLinkActive="text-blue-500">Instructors</a>
+    @if (!isLoggedIn) {
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/login">Log in</a>
+    <a href="coming-soon.html" class="block py-2 px-4 text-sm hover:bg-gray-200" routerLink="/chooseRole">Register
+      Now</a>
+    }
+  </div>
+</nav>

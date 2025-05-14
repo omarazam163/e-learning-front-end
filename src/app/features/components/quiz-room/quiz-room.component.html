@@ -1,0 +1,96 @@
+<!-- Progress Bar -->
+@if (QuizData) {
+@if (ShowSubmitAlert()) {
+    <app-pop-up [qustionNumber]="QuizData.questions.length" [qustionNumberSolved]="QuestionSolved()"
+    (onClose)="closeSubmitAlert()"
+    (onSubmit)="handleSubmit()"
+    ></app-pop-up>
+}
+@if (showScorePopup()) {
+    <app-submit-pop-up
+    [CourseId]="CourseData.id"
+    [CourseName]="CourseData.title"
+    [score]="score()"
+    [totalScore]="QuesAnswers.controls.length"
+    ></app-submit-pop-up>
+}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Quiz Header -->
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">{{QuizData.title}}</h1>
+            @if (CourseData) {
+            <p class="text-gray-600">Course: {{CourseData.title}}</p>
+            }
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-right">
+                <div class="text-sm text-gray-500">Time Remaining</div>
+                <div class="text-xl font-bold text-blue-500">24:59</div>
+            </div>
+            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <mat-progress-bar class="custom-annual-progress" [color]="'yellow'" mode="determinate" [value]="((currentStep()+1)/QuizData.questions.length)*100">
+        </mat-progress-bar>
+
+        <div class="flex justify-between text-sm text-gray-600 mt-2">
+            <span>Question {{currentStep()+1}} of {{QuizData.questions.length}}</span>
+            <span>{{(((currentStep()+1)/QuizData.questions.length)*100).toFixed()}}% Complete</span>
+        </div>
+    </div>
+    <form [formGroup]="QuizForm">
+        <div formArrayName="QuesAnswers">
+            <mat-stepper [linear]="true" #stepper
+                class="mat-elevation-z2 bg-white w-full flex justify-center items-center"
+                [selectedIndex]="currentStep()">
+                @if (QuizData) {
+                @for (Question of QuesAnswers.controls; track Question) {
+                <mat-step>
+                    <ng-template matStepLabel>Course information</ng-template>
+                    <app-question-solve-form [Question]="QuizData.questions[$index]" [QuestionNumber]="$index + 1"
+                        formControlName="{{$index}}"></app-question-solve-form>
+                </mat-step>
+                }
+                }
+            </mat-stepper>
+        </div>
+    </form>
+    <!-- Step 1 -->
+
+    <!-- Navigation Controls -->
+    <div class="flex justify-between items-center">
+        <button class="px-6 py-2 border rounded-lg text-gray-600 hover:bg-gray-50 disabled:opacity-50"
+            [disabled]="currentStep() === 0" (click)="handlePrevStep()">
+            Previous
+        </button>
+
+        <div class="flex items-center space-x-4">
+            @if (currentStep() === QuizData.questions.length - 1) {
+            <button (click)="openSubmitAlert()" class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Submit Quiz
+            </button>
+            }
+            @else {
+            <button [disabled]="currentStep() === QuizData.questions.length - 1" (click)="handleNextStep()"
+                class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Next Question
+            </button>
+            }
+        </div>
+    </div>
+
+    <!-- Quiz Help -->
+    <div class="mt-8 text-center text-sm text-gray-500">
+        <p>Need help? <a href="#" class="text-blue-500 hover:underline">Visit our support center</a></p>
+        <p class="mt-2">This quiz must be completed in one session. Your progress will be saved automatically.</p>
+    </div>
+</div>
+}

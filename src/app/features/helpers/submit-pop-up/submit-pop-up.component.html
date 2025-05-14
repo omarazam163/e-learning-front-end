@@ -1,0 +1,37 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+    <!-- Modal Container with Animation -->
+    <div
+        class="bg-white rounded-xl shadow-2xl w-full max-w-md transform transition-all duration-300 scale-95 opacity-0 animate-modal-in">
+        <!-- Score Content -->
+        <div class="p-6 text-center">
+            <!-- Animated Checkmark -->
+            <div class="checkmark-container mx-auto mb-6 text-center flex justify-center">
+                <svg class="checkmark animate-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"
+                    style="width: 80px; height: 80px;">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" stroke="#3b82f6"
+                        stroke-width="3" />
+                    <path class="checkmark-check" fill="none" stroke="#3b82f6" stroke-width="4"
+                        d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </div>
+
+
+            <!-- Score Display -->
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">Quiz Submitted!</h3>
+
+            <!-- Score Details -->
+            <div class="space-y-2 text-gray-600 mb-6">
+                <p>Correct Answers: <span class="font-semibold">{{score}}/{{totalScore}}</span></p>
+                <p>Course: <span class="font-semibold">{{CourseName}}</span></p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center space-x-4">
+                <a [routerLink]="['/courses',CourseId]"
+                    class="px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    back to Course
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

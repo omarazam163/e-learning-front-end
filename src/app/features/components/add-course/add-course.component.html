@@ -1,0 +1,59 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+    <mat-stepper [linear]="true" #stepper class="mat-elevation-z2 w-full lg:w-1/2 flex justify-center items-center"
+        [selectedIndex]="currentStep">
+        <!-- Step 1 -->
+        <mat-step [stepControl]="addCourseForm">
+            <ng-template matStepLabel>Course information</ng-template>
+            <h2 class="text-3xl font-bold text-blue-600 mb-6">Create Your Course</h2>
+            <app-add-course-form [addCourseForm]="addCourseForm"
+                (next)="handelSubmitCourseData()"></app-add-course-form>
+            <!-- <app-module-form-add></app-module-form-add> -->
+        </mat-step>
+
+        <!-- Step 2 (example for next step) -->
+        <mat-step [stepControl]="addCourseForm">
+            <ng-template matStepLabel>Preview</ng-template>
+            <app-preview-page [course]="coursePreview" (edit)="edit()" (publish)="publish()"></app-preview-page>
+        </mat-step>
+    </mat-stepper>
+</div>
+
+@if (popup) {
+<div class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 p-4 animate-fade-in">
+    <div
+        class="bg-white rounded-xl p-8 md:p-10 shadow-2xl max-w-md w-full text-center transform transition-all animate-scale-in">
+
+        <div class="flex justify-center mb-6">
+            <!-- Warning Shield SVG Icon -->
+            <svg width="100px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" id="Shield">
+                <g transform="translate(0 -1027.362)" fill="#000000" class="color000000 svgShape">
+                    <circle cx="12.5" cy="1039.862" r="12.5" fill="#0748d6" class="color1d67b1 svgShape"></circle>
+                    <path fill="#153782"
+                        d="M16.443 24.346a12.5 12.5 0 0 0 .586-.196 12.5 12.5 0 0 0 1.14-.51 12.5 12.5 0 0 0 1.085-.622 12.5 12.5 0 0 0 1.016-.727 12.5 12.5 0 0 0 .939-.824 12.5 12.5 0 0 0 .852-.914 12.5 12.5 0 0 0 .755-.994 12.5 12.5 0 0 0 .655-1.067 12.5 12.5 0 0 0 .543-1.125 12.5 12.5 0 0 0 .427-1.174 12.5 12.5 0 0 0 .309-1.21 12.5 12.5 0 0 0 .012-.079l-6.407-6.406-.423-.062a8.354 8.354 0 0 1-1.328-.317c-1.263-.412-2.367-1.096-3.66-1.924l-.294-.187-.277.21C10.887 7.34 9.127 8.495 7.463 8.62L7 8.65v.465c0 2.895.133 4.841.922 6.364.115.221.248.429.39.628.045.063.095.123.143.184.103.13.212.258.328.38.035.037.062.078.098.114l7.562 7.56z"
+                        color="#000" font-family="sans-serif" font-weight="400"
+                        style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal"
+                        transform="translate(0 1027.362)" class="color154082 svgShape"></path>
+                    <path fill="#ffffff"
+                        d="m7.973 1.508-.278.21C6.21 2.84 4.45 3.995 2.785 4.12l-.463.031v.465c0 2.895.133 4.841.922 6.364.79 1.522 2.218 2.493 4.543 3.433l.193.08.192-.084c2.254-.971 3.69-1.803 4.514-3.285.823-1.481.992-3.461.992-6.695v-.43l-.424-.062c-1.876-.29-3.264-1.137-4.988-2.24l-.293-.188zm.039 1.197c1.485.945 2.905 1.716 4.648 2.078-.018 2.93-.217 4.719-.85 5.856-.068.123-.147.239-.228.353L5.035 4.445c1.08-.447 2.088-1.078 2.977-1.74ZM3.996 4.82l6.908 6.909c-.677.585-1.619 1.086-2.931 1.662-2.082-.867-3.22-1.672-3.842-2.871-.614-1.185-.777-2.933-.793-5.557.222-.037.441-.085.658-.143Z"
+                        color="#000" font-family="sans-serif" font-weight="400" overflow="visible"
+                        style="line-height:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;block-progression:tb;isolation:auto;mix-blend-mode:normal"
+                        transform="translate(4.678 1031.862)" class="colorffffff svgShape"></path>
+                </g>
+            </svg>
+        </div>
+
+        <h2 class="text-3xl font-bold text-red-600 mb-4">
+            Not Approved
+        </h2>
+        <p class="text-gray-500 mb-8 text-lg">
+            You are not approved. Please wait for administrator approval.
+        </p>
+        <button (click)="closePopUp()"
+            class="bg-blue-600 text-white hover:bg-blue-700 font-semibold py-3 px-6 rounded-lg w-full sm:w-auto transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2">
+            OK
+        </button>
+
+    </div>
+</div>
+
+}
