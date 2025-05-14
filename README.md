@@ -1,59 +1,95 @@
-# DepiProject
+# 🎓 E-Learning Platform (Frontend)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+This is the frontend of an interactive e-learning platform, inspired by Udemy, built using **Angular**. It allows users to browse courses, watch lessons, and take interactive quizzes to test their knowledge.
 
-## Development server
+## 🚀 Features
 
-To start a local development server, run:
+- 🔐 User authentication (login, registration)
+- 🎥 Browse and watch video courses
+- 🧩 Interactive quizzes with instant feedback
+- 🧑‍🏫 Instructor dashboard for managing content
+- 📝 Course details, modules, and video organization
+- 📱 Fully responsive design
+
+## 🛠️ Tech Stack
+
+- **Framework**: Angular 16+
+- **Styling**: Tailwind CSS
+- **Routing**: Angular Router
+- **State Management**: Services & RxJS
+- **Forms**: Reactive Forms
+- **HTTP**: Angular HttpClient
+- **Icons**: FontAwesome / Custom SVG
+- **Backend**: [ASP.NET Core API](https://github.com/Adelmuhammad-23/e-learning-platform) (integrated separately)
+
+## 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/omarazam163/e-learning-front-end.git
+cd e-learning-front-end
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## 🧪 Quizzes Feature
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Each course module can contain quizzes.
+- Supports multiple choice and true/false types.
+- Instant feedback after each answer.
+- Score calculated at the end of each quiz.
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## 📁 Project Structure
 
 ```bash
-ng build
+src/
+├── app/
+│   ├── auth/           # Login & registration
+│   ├── courses/        # Course list and details
+│   ├── quiz/           # Quiz components and logic
+│   ├── shared/         # Reusable components & services
+│   └── core/           # App-level services and guards
+├── assets/             # Images, icons, etc.
+├── environments/       # Environment configs
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🧑‍💻 Development Notes
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+- This project uses **Angular CLI** version 16+.
+- Tailwind CSS is integrated for utility-first styling.
+- You can generate new components using:
 
 ```bash
-ng test
+ng generate component your-component-name
 ```
 
-## Running end-to-end tests
+## ✅ TODOs / Future Enhancements
 
-For end-to-end (e2e) testing, run:
+- Add course reviews and ratings
+- Enable student progress tracking
+- Integrate real-time chat/Q&A
+- Add admin dashboard
+- Improve quiz analytics and reporting
 
-```bash
-ng e2e
-```
+## 📬 Contact
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+If you have any questions or suggestions, feel free to reach out:
 
-## Additional Resources
+- GitHub: [@omarazam163](https://github.com/omarazam163)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
+
+> Built with ❤️ using Angular & Tailwind CSS
