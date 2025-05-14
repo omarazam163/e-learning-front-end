@@ -1,75 +1,111 @@
-<section class="max-w-7xl mx-auto px-4 py-10 flex flex-col gap-5">
-
-  <ul class="w-full flex gap-2 md:gap-4 text-lg" #searchBar>
-    <input [(ngModel)]="inputValue" type="text" placeholder="Search..." class="px-4 py-2 flex-1 border-2 border-blue-500 border-opacity-25 focus:border-opacity-100 duration-300 rounded-lg outline-none" />
-    <button (click)="handleSearch()" class="bg-blue-600 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-blue-500 transition duration-300">Search</button>
-  </ul>
-
-  <div class="block lg:hidden bg-blue-500 px-2 rounded-lg">
-    <select
-      *ngIf="categories.length>0"
-      class="bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300 outline-none border-none w-full"
-      (change)="handleCategoryActiveSelection($event)"
-    >
-      <option
-        *ngFor="let c of categories"
-        [value]="c.categoryId"
-        [selected]="categoryActive == c.categoryId"
-      >
-        {{ c.categoryName }}
-      </option>
-    </select>
+<section class="max-w-7xl mx-auto px-4 py-10">
+  <!-- Search Bar -->
+  <div class="mb-8">
+    <div class="max-w-2xl mx-auto">
+      <div class="relative">
+        <input [(ngModel)]="inputValue" type="text" placeholder="Search courses..."
+          class="w-full px-6 py-4 text-lg border border-gray-200 rounded-full outline-none focus:border-blue-500 transition-colors pl-12" />
+        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <button (click)="handleSearch()"
+          class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+          Search
+        </button>
+      </div>
+    </div>
   </div>
 
-  <ul class="hidden lg:flex flex-wrap justify-center gap-4">
-    <li class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300" [ngClass]="categoryActive == 0 ? 'bg-blue-700' : 'bg-blue-500'" (click)="handleCategoryActive(0)">All</li>
-    <li
-      *ngFor="let c of categories"
-      (click)="handleCategoryActive(c.categoryId)"
-      [ngClass]="categoryActive == c.categoryId ? 'bg-blue-700' : 'bg-blue-500'"
-      class="cursor-pointer text-white py-2 px-4 rounded-lg shadow-md text-center hover:bg-blue-600 transition duration-300"
-    >
-      {{ c.categoryName }}
-    </li>
-  </ul>
+  <!-- Categories - Mobile -->
+  <div class="lg:hidden mb-8">
+    <div class="relative">
+      <select *ngIf="categories.length>0"
+        class="w-full appearance-none bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:border-blue-500"
+        (change)="handleCategoryActiveSelection($event)">
+        <option [value]="0" [selected]="categoryActive == 0">All Categories</option>
+        <option *ngFor="let c of categories" [value]="c.categoryId" [selected]="categoryActive == c.categoryId">
+          {{ c.categoryName }}
+        </option>
+      </select>
+      <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
 
-  @if(courses().length>0){
-      <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-      
-        @for (course of courses(); track $index) {
-        <li
-          class="bg-blue-500 bg-opacity-10 shadow-md hover:shadow-lg transition-all duration-300  rounded-2xl flex flex-col gap-3 cursor-pointer pb-4"
-          [routerLink]="['/courses', course.id]">
-          <img [src]="course.image" class="aspect-video w-full rounded-2xl shadow-md ">
-      
-          <h2 class="px-2 md:px-4 lg:px-6 font-medium">{{course.title}}</h2>
-      
-          <div class="px-2 md:px-4 lg:px-6 flex items-center gap-2 text-neutral-500 font-medium">
-            <img [src]="course.instructor.image" alt="." class="w-8 h-8 rounded-full shadow-md">
-            {{course.instructor.name}}
+  <!-- Categories - Desktop -->
+  <div class="hidden lg:block mb-8">
+    <div class="flex flex-wrap justify-center gap-3">
+      <button (click)="handleCategoryActive(0)"
+        [ngClass]="categoryActive == 0 ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+        class="px-6 py-3 rounded-full font-medium transition duration-300">
+        All Categories
+      </button>
+      <button *ngFor="let c of categories" (click)="handleCategoryActive(c.categoryId)"
+        [ngClass]="categoryActive == c.categoryId ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+        class="px-6 py-3 rounded-full font-medium transition duration-300">
+        {{ c.categoryName }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Courses Grid -->
+  @if(courses().length > 0) {
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (course of courses(); track $index) {
+    <div
+      class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer"
+      [routerLink]="['/courses', course.id]">
+      <!-- Course Image -->
+      <div class="relative">
+        <img [src]="course.image || 'assets/images/course-placeholder.jpg'" [alt]="course.title"
+          class="w-full aspect-video object-cover group-hover:scale-105 transition duration-300">
+        <div
+          class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-blue-600 font-semibold">
+          ${{course.price}}
+        </div>
+      </div>
+
+      <!-- Course Content -->
+      <div class="p-6">
+        <!-- Category Tag -->
+        <div class="flex items-center gap-2 mb-3">
+          <span class="bg-blue-50 text-blue-600 text-sm font-medium px-3 py-1 rounded-full">
+          </span>
+          <span class="text-gray-500 text-sm">
+            <i class="far fa-clock mr-1"></i>{{course.hours}} hours
+          </span>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-xl font-semibold mb-3 line-clamp-2 group-hover:text-blue-600 transition duration-300">
+          {{course.title}}
+        </h3>
+
+        <!-- Description -->
+        <p class="text-gray-600 mb-4 line-clamp-2">
+          {{course.description}}
+        </p>
+
+        <!-- Instructor -->
+        <div class="flex items-center gap-3 pt-4 border-t">
+          <img [src]="course.instructor.image || 'assets/images/default-avatar.png'" [alt]="course.instructor.name"
+            class="w-10 h-10 rounded-full object-cover">
+          <div>
+            <p class="font-medium text-gray-900">{{course.instructor.name}}</p>
+            <p class="text-sm text-gray-500">Instructor</p>
           </div>
-      
-          <div class="px-2 md:px-4 lg:px-6 text-neutral-500">
-            <i class="text-violet-500 font-bold">$</i>
-            {{course.price}}
-            <i class="fa-solid fa-clock ms-4 text-violet-500"></i>
-            {{course.hours}} Hours
-          </div>
-      
-          <!-- <div *ngIf="course.percentage == 100" class="px-2 md:px-4 lg:px-6 flex items-center gap-2 mt-2">
-            <i class="fa-solid fa-circle-check text-blue-500"></i>
-            completed
-          </div> -->
-      
-          <p class="px-2 md:px-4 lg:px-6 text-neutral-500 break-words whitespace-normal">{{course.description}}</p>
-      
-        </li>
-      
-        }
-      
-      </ul>
-
-
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <!-- No Results State -->
+  <div class="text-center py-16">
+    <div class="text-gray-400 text-6xl mb-4">
+      <i class="fas fa-search"></i>
+    </div>
+    <h3 class="text-2xl font-semibold text-gray-700 mb-2">No courses found</h3>
+    <p class="text-gray-500">Try adjusting your search or filter to find what you're looking for.</p>
+  </div>
   }
 </section>
-

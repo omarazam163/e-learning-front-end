@@ -70,22 +70,131 @@
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
                     <input type="email" [value]="userInfo.email" disabled
                         class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed">
-
                 </div>
             </div>
-        @if (role == "Instructor") {
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
-                <textarea rows="4" formControlName="bio" placeholder="Enter your bio"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Please enter your Bio</textarea>
-                @if(editForm.get('bio')?.touched &&
-                editForm.get('bio')?.getError('required')||editForm.get('bio')?.getError('minlength')){
-                <p class="mt-2 text-xs text-red-600"><span class="font-medium">Bio should be at least 10
-                        characters</span></p>
-                }
-                <p class="mt-2 text-sm text-gray-500">Brief description for your profile</p>
+
+            @if (role == "Instructor") {
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Position</label>
+                    <input type="text" formControlName="position"
+                        placeholder="Enter your position (e.g. Senior Developer)"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    @if(editForm.get('position')?.touched && editForm.get('position')?.getError('required')){
+                    <p class="mt-2 text-xs text-red-600"><span class="font-medium">Position is required</span></p>
+                    }
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                    <textarea rows="4" formControlName="bio" placeholder="Enter your bio"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    @if(editForm.get('bio')?.touched &&
+                    editForm.get('bio')?.getError('required')||editForm.get('bio')?.getError('minlength')){
+                    <p class="mt-2 text-xs text-red-600"><span class="font-medium">Bio should be at least 10
+                            characters</span></p>
+                    }
+                    <p class="mt-2 text-sm text-gray-500">Brief description for your profile</p>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Certificates</label>
+                            <p class="text-sm text-gray-500">Add your professional certificates and qualifications</p>
+                        </div>
+                        <button type="button" (click)="addCertificate()"
+                            class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition-colors">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            Add Certificate
+                        </button>
+                    </div>
+
+                    <div class="space-y-4" formArrayName="certificates">
+                        @if(certificatesArray.controls.length === 0) {
+                        <div class="text-center py-6 bg-gray-50 border-2 border-dashed border-gray-200 rounded-lg">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                            </svg>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900">No certificates added</h3>
+                            <p class="mt-1 text-sm text-gray-500">Add your certificates to showcase your qualifications
+                            </p>
+                            <div class="mt-4">
+                                <button type="button" (click)="addCertificate()"
+                                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg>
+                                    Add your first certificate
+                                </button>
+                            </div>
+                        </div>
+                        }
+
+                        @for (certificate of certificatesArray.controls; track $index) {
+                        <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg">
+                            <div class="flex-1">
+                                <div class="relative">
+                                    <input type="file" [id]="'certificate-' + $index"
+                                        (change)="handleCertificateChange($event, $index)" accept=".pdf,.jpg,.jpeg,.png"
+                                        class="hidden">
+
+                                    @if(certificateFiles[$index]) {
+                                    <div class="flex items-center p-3 bg-white border rounded-md">
+                                        <svg class="w-8 h-8 text-blue-500 mr-3" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                        </svg>
+                                        <div class="flex-1 truncate">
+                                            <p class="text-sm font-medium text-gray-900">
+                                                {{certificateFiles[$index].name}}</p>
+                                            <p class="text-xs text-gray-500">
+                                                {{formatFileSize(certificateFiles[$index].size)}}</p>
+                                        </div>
+                                    </div>
+                                    } @else {
+                                    <label [for]="'certificate-' + $index"
+                                        class="flex justify-center items-center p-5 border-2 border-dashed border-gray-300 rounded-md cursor-pointer hover:border-blue-500 transition-colors">
+                                        <div class="space-y-1 text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor"
+                                                fill="none" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                            </svg>
+                                            <div class="text-sm text-gray-600">
+                                                <label [for]="'certificate-' + $index"
+                                                    class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500">
+                                                    <span>Upload a certificate</span>
+                                                </label>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500">PDF, PNG, JPG up to 10MB</p>
+                                        </div>
+                                    </label>
+                                    }
+                                </div>
+                            </div>
+                            <button type="button" (click)="removeCertificate($index)"
+                                class="p-2 text-gray-400 hover:text-red-500 rounded-full hover:bg-red-50 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                    </path>
+                                </svg>
+                            </button>
+                        </div>
+                        }
+                    </div>
+                </div>
             </div>
-        }
+            }
             <div class="pt-6 border-t border-gray-200">
                 <button type="submit" (click)="(role == 'Instructor') ? submitFormInstructor() : submitFormStudent()"
                     [disabled]="editForm.invalid" [class.pointer-events-none]="editForm.invalid"

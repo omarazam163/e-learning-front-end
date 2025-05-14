@@ -1,7 +1,9 @@
 export interface Instructor {
   id: number;
   name: string;
-  image: string | null;
+  image: string;
   email: string;
   bio: string;
+  position: string;
+  certificates: string[];
 }

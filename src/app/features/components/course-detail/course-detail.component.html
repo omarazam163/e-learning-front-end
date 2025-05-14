@@ -127,7 +127,7 @@
                 class="w-12 h-12 rounded-full object-cover ring-2 ring-blue-100" alt="Instructor">
               <div>
                 <p class="font-medium text-gray-800">{{courseDetails.instructor.name}}</p>
-                <p class="text-sm text-gray-500">Senior UX Designer • 4.8 ★</p>
+                <p class="text-sm text-gray-500">{{courseDetails.instructor.position}} • 4.8 ★</p>
               </div>
             </div>
           </div>
@@ -309,7 +309,7 @@
               </div>
               }
               @for (quiz of module.quizzes; track quiz.id) {
-              <div (click)="hanldeQuizNav(quiz.id)"
+              <div (click)="hanldeQuizNav(quiz.id)" [class.pointer-events-none]="quiz.score!=-1"
                 class="flex items-start p-3 rounded-lg bg-purple-50 hover:bg-purple-100 transition-colors cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600 mr-2 mt-0.5" viewBox="0 0 20 20"
                   fill="currentColor">

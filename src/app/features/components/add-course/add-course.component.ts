@@ -12,7 +12,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Router } from '@angular/router';
 import { AddCourseFormComponent } from '../add-course-form/add-course-form.component';
@@ -27,7 +27,7 @@ import { PreviewPageComponent } from '../preview-page/preview-page.component';
     MatButtonModule,
     MatStepperModule,
     PreviewPageComponent,
-    AddCourseFormComponent
+    AddCourseFormComponent,
   ],
   templateUrl: './add-course.component.html',
   styleUrl: './add-course.component.scss',
@@ -41,6 +41,7 @@ export class AddCourseComponent {
   currentStep = 0;
   coursePreview: coursePreview = {} as coursePreview;
   formData = new FormData();
+  popup = false;
   ngOnInit() {
     this._auth.UserData.subscribe((user: User) => {
       this.User = user;
@@ -67,11 +68,10 @@ export class AddCourseComponent {
     ]),
     courusecategory: new FormControl('', [Validators.required]),
     courseImage: new FormControl(null, [Validators.required]),
-    courseImageUrl: new FormControl('',[Validators.required]),
+    courseImageUrl: new FormControl('', [Validators.required]),
   });
 
   handelSubmitCourseData() {
-
     // for form submit
     if (this.addCourseForm.valid) {
       this.isloading = true;
@@ -103,7 +103,6 @@ export class AddCourseComponent {
         this.addCourseForm.get('courseImage')?.value as unknown as File
       );
 
-
       // for preview
       this.coursePreview = {
         title: this.addCourseForm.get('courseName')?.value as string,
@@ -123,18 +122,25 @@ export class AddCourseComponent {
     }
   }
 
-  publish()
-  {
+  publish() {
     this._coursesService.addNewCourse(this.formData).subscribe({
       next: (res) => {
         this.isloading = false;
         this._router.navigate(['/workSpace']);
       },
+      error: (err) => {
+        console.log('here');
+        this.popup = true;
+      },
     });
   }
 
-  edit()
-  {
+  edit() {
     this.currentStep = 0;
+  }
+
+  closePopUp()
+  {
+    this.popup = false;
   }
 }
