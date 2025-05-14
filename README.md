@@ -20,7 +20,10 @@ This is the frontend of an interactive e-learning platform, inspired by Udemy, b
 - **Forms**: Reactive Forms
 - **HTTP**: Angular HttpClient
 - **Icons**: FontAwesome / Custom SVG
-- **Backend**: [ASP.NET Core API](https://github.com/Adelmuhammad-23/e-learning-platform) (integrated separately)
+
+### Backend:
+- **Framework:** ASP.NET Core API
+- **Repository:** [E-Learning Backend Repo](https://github.com/Adelmuhammad-23/e-learning-platform) (integrated separately)
 
 ## 📦 Installation
 
