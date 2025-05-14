@@ -17,13 +17,16 @@ export class CartService {
   _cartItems = new BehaviorSubject<Course[]>([]);
   cart: Cart = { CartId: '', courses: [] };
   constructor() {
-    this._authService.UserData.subscribe((user) => {
-      if (user.Email != null) {
-        this.getCart(user.roleId).subscribe((cart) => {
-          this.cart = cart;
-          this._cartItems.next(cart.courses);
-        });
-      }
+    this._authService.islogin.subscribe((val) => {
+    if(val!=="Student") return;
+      this._authService.UserData.subscribe((user) => {
+        if (user.roleId) {
+          this.getCart(user.roleId).subscribe((res: Cart) => {
+            this.cart = res;
+            this._cartItems.next(res.courses);
+          });
+        }
+      });
     });
   }
 

@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Quiz } from '../../shared/interfaces/quiz';
 import { Observable } from 'rxjs';
 @Injectable({
@@ -24,4 +24,20 @@ export class QuizService {
   editQuiz(quizId:number,newQuiz: Quiz): Observable<any> {
     return this._http.put(`${this.QuizUrl}/${quizId}`, newQuiz);
   }
+
+  submitQuiz(quizId:number,studentId:number,score:number): Observable<any> {
+    const data = {
+      quizId:quizId,
+      studentId:studentId,
+      score:score
+    }
+    console.log(data);
+    const params = new HttpParams({ fromObject:data  });
+    return this._http.patch(
+      `${this.QuizUrl}/submit-score`,
+      {},
+      { params: params }
+    );
+  }
+
 }

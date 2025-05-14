@@ -8,7 +8,6 @@ export const isloggedGuard: CanActivateFn = (route, state) => {
     const router = inject(Router);
     let islogin = _auth.islogin.getValue();
     if ((islogin == 'noLogin')) {
-      console.log("here");
       router.navigate(['/home']);
       return false;
     }

@@ -1,0 +1,59 @@
+<div class="bg-white rounded-lg shadow p-6 mt-8">
+    <div class="space-y-6">
+        <form class="flex items-start space-x-4 rounded-md w-full px-4" [formGroup]="reviewForm"
+        (ngSubmit)="submitReview()"
+        >
+            <!-- Avatar -->
+            <img [src]="userData().image" alt="User Avatar" class="w-10 h-10 rounded-full object-cover" />
+            <div class="flex flex-col w-full items-end">
+            <!-- Input Area -->
+            <div class="w-full">
+                <!-- Comment Input -->
+                <input type="text" placeholder="Add a comment..." formControlName="comment"
+                    class="mb-5 w-full bg-transparent border-b border-gray-600 focus:border-blue-500 focus:outline-none text-sm p-1 placeholder-gray-400" />
+
+                <!-- Rating -->
+                <div class="flex items-center space-x-1 h-3 mb-4">
+                    <star-rating-control [starType]="'svg'"
+                    formControlName="rating"
+                    ></star-rating-control>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm rounded-md transition-colors"
+                [class.pointer-events-none]="!reviewForm.valid"
+                [class.bg-gray-500]="!reviewForm.valid"
+                >
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+            </div>
+        </form>
+        <hr>
+        @for (review of Reviews(); track $index) {
+        <div class="w-full flex  space-x-4">
+            <div class="flex-shrink-0">
+                <img class="w-10 h-10 rounded-full object-cover" [src]="review.image" alt="User Avatar">
+            </div>
+            <div class="w-full">
+                <div class="flex items-center space-x-2 mb-1 justify-between w-full">
+                    <h3 class="text-lg font-medium text-gray-700">{{review.studentName}}</h3>
+                    <div class="flex items-center space-x-1 h-3">
+                        <star-rating [starType]="'svg'" [rating]="review.rating" [disabled]="true"></star-rating>
+                    </div>
+                </div>
+                <p class=" text-base">{{review.comment}}</p>
+                @if (getDate(review.createdAt)>0) {
+                <span class="text-s text-gray-500">{{getDate(review.createdAt)}} days ago</span>
+                }
+                @else {
+                <span class="text-xs text-gray-500">Today</span>
+                }
+            </div>
+        </div>
+        }
+    </div>
+
+
+</div>

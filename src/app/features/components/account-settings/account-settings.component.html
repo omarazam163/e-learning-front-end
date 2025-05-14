@@ -16,8 +16,8 @@
                 <label class="cursor-pointer">
                     <input id="file" type="file" class="hidden" (change)="handleImageChange($event)" accept="image/*">
                     <div class="group w-20 h-20  overflow-hidden">
-                        @if (instructorData.image) {
-                        <img [src]="instructorData.image" class="absolute w-full h-full object-cover rounded-full" />
+                        @if (userInfo.image) {
+                        <img [src]="userInfo.image" class="absolute w-full h-full object-cover rounded-full" />
                         }
                         @else {
                         <div class="absolute w-full h-full rounded-full flex items-center justify-center bg-gray-200">
@@ -60,7 +60,7 @@
                     <input type="text" formControlName="userName" placeholder="Enter your username"
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                     @if(editForm.get('userName')?.touched &&
-                    editForm.get('userName')?.getError('required')||editForm.get('bio')?.getError('minlength')){
+                    editForm.get('userName')?.getError('required')||editForm.get('userName')?.getError('minlength')){
                     <p class="mt-2 text-xs text-red-600"><span class="font-medium">userName should be at least 3
                             characters</span></p>
                     }
@@ -68,12 +68,12 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
-                    <input type="email" [value]="instructorData.email" disabled
+                    <input type="email" [value]="userInfo.email" disabled
                         class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed">
 
                 </div>
             </div>
-
+        @if (role == "Instructor") {
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
                 <textarea rows="4" formControlName="bio" placeholder="Enter your bio"
@@ -85,9 +85,9 @@
                 }
                 <p class="mt-2 text-sm text-gray-500">Brief description for your profile</p>
             </div>
-
+        }
             <div class="pt-6 border-t border-gray-200">
-                <button type="submit" (click)="submitForm()"
+                <button type="submit" (click)="(role == 'Instructor') ? submitFormInstructor() : submitFormStudent()"
                     [disabled]="editForm.invalid" [class.pointer-events-none]="editForm.invalid"
                     [class.bg-gray-500]="editForm.invalid"
                     class="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors">

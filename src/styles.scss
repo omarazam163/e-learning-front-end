@@ -1,12 +1,47 @@
 @use '@angular/material' as mat;
-
-
+// @import '~css-star-rating/scss/star-rating';
+// @import '~css-star-rating/scss/star-rating';
+@import '../node_modules/css-star-rating/scss/star-rating';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 
+
+.rating.color-negative .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-ok .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-positive .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}
+
+.rating.color-default .star-container .star {
+  svg {
+    fill: rgb(238, 179, 16) !important;
+  }
+  i {
+    color: rgb(238, 179, 16) !important;
+  }
+}

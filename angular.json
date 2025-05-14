@@ -28,11 +28,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              { "glob": "**/*", "input": "src/assets/images", "output": "assets/images" },
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/assets/images"
             ],
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",

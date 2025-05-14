@@ -5,13 +5,14 @@ import { FlowbiteService } from './core/services/flowbite.service';
 import { initFlowbite } from 'flowbite';
 import { NavbarComponent } from './features/components/navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { StarRatingModule } from 'angular-star-rating';
 @Component({
   selector: 'app-root',
   imports: [
     ReactiveFormsModule,
     RouterOutlet,
     NavbarComponent,
+    StarRatingModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

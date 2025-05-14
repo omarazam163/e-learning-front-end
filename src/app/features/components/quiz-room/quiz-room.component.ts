@@ -14,6 +14,7 @@ import { PopUpComponent } from '../../helpers/pop-up/pop-up.component';
 import { CoursesService } from '../../../core/services/courses.service';
 import { Course } from '../../../shared/interfaces/course';
 import { SubmitPopUpComponent } from '../../helpers/submit-pop-up/submit-pop-up.component';
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-quiz-room',
   imports: [
@@ -43,6 +44,7 @@ export class QuizRoomComponent {
   _quizService = inject(QuizService);
   _ActiveRoute = inject(ActivatedRoute);
   _CourseService = inject(CoursesService);
+  _AuthService = inject(AuthService);
   //varibles
   QuizData!: Quiz;
   QuizId!: number;
@@ -102,6 +104,15 @@ export class QuizRoomComponent {
     this.score.set(this.calcScore());
     this.ShowSubmitAlert.set(false);
     this.showScorePopup.set(true);
+    this._quizService
+      .submitQuiz(
+        this.QuizId,
+        this._AuthService.UserData.getValue().roleId,
+        this.score()
+      )
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   calcScore(): number {

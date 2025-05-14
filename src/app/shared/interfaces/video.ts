@@ -4,4 +4,5 @@ export interface video {
   url: string;
   moduleId: number;
   duration: string;
+  isWatched?: boolean;
 }

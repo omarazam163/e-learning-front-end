@@ -10,5 +10,6 @@ export interface Module {
 interface QuizzName {
   id: number;
   title: string;
-  numberOfQuestions:number;
+  numberOfQuestions: number;
+  score: number;
 }

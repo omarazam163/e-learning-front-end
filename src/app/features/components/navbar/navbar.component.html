@@ -33,7 +33,13 @@
       <div (click)="toggleDropdown()" class="hidden lg:inline-block text-left">
         <!-- Profile Button -->
         <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
-          <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">OA</div>
+          @if (Image != "") {
+          <img class="w-10 h-10 rounded-full" src="{{Image}}" alt="Profile Picture">
+          }
+          @else {
+          <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+            {{User.UserName.slice(0, 2)}}</div>
+          }
           <div class="text-left">
             <div class="font-semibold text-sm">{{User.UserName}}</div>
             <div class="text-xs text-gray-500">{{User.Email}}</div>
@@ -44,11 +50,15 @@
         <div #dropdownMenu class="absolute hidden right-10 mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
           <div class="divide-y">
             <div class="py-2">
-              <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
+              @if (User.role== 'Student') {
+              <a routerLink="/myCourses" class="block px-4 py-2 hover:bg-gray-100">My Courses</a>
+              }
+              @if (User.role== 'Student') {
               <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
                 <p>My cart</p>
                 <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
               </a>
+              }
               <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
             </div>
             <div class="py-2">
@@ -93,7 +103,13 @@
     <div (click)="toggleDropdownMobile()" class="relative inline-block text-left">
       <!-- Profile Button -->
       <button class="flex items-center gap-2 p-2 rounded-full hover:bg-gray-200 transition">
-        <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">OA</div>
+        @if (Image != "") {
+        <img class="w-10 h-10 rounded-full" src="{{Image}}" alt="Profile Picture">
+        }
+        @else {
+        <div class="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center font-bold">
+          {{User.UserName.slice(0, 2)}}</div>
+        }
         <div class="text-left">
           <div class="font-semibold text-sm">{{User.UserName}}</div>
           <div class="text-xs text-gray-500">{{User.Email}}</div>
@@ -102,11 +118,15 @@
       <div #dropdownMenuMobile class="absolute hidden right-[-50%] mt-2 w-64 bg-white rounded-lg shadow-lg border z-50">
         <div class="divide-y">
           <div class="py-2">
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">My learning</a>
+            @if (User.role== 'Student') {
+            <a routerLink="/myCourses" class="block px-4 py-2 hover:bg-gray-100">My Courses</a>
+            }
+            @if (User.role== 'Student') {
             <a routerLink="/cart" class="flex justify-between items-center px-4 py-2 hover:bg-gray-100">
               <p>My cart</p>
               <span class="bg-blue-500 text-white text-xs rounded-full px-2">{{cartitemsNumber()}}</span>
             </a>
+            }
             <a href="#" class="block px-4 py-2 hover:bg-gray-100">Wishlist</a>
           </div>
           <div class="py-2">

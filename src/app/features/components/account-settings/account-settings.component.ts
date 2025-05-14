@@ -1,3 +1,4 @@
+import { Student } from './../../../shared/interfaces/student';
 import { Component, inject } from '@angular/core';
 import { InstructorsService } from '../../../core/services/instructors.service';
 import { Instructor } from '../../../shared/interfaces/Instructor';
@@ -6,6 +7,9 @@ import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../../core/services/auth.service';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { StudentService } from '../../../core/services/student.service';
+import { role } from '../../../shared/types/role';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-account-settings',
   imports: [ReactiveFormsModule],
@@ -15,41 +19,52 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class AccountSettingsComponent {
   //services
   _instructorService = inject(InstructorsService);
+  _studentService = inject(StudentService);
   _PID = inject(PLATFORM_ID);
   _auth = inject(AuthService);
+  _router = inject(Router);
+  role: role = this._auth.UserData.getValue().role;
   //variables
-  instructorData: Instructor = {} as Instructor;
+  userInfo: Instructor | Student = {} as Instructor;
   editForm = new FormGroup({
-    userName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    bio: new FormControl('', [Validators.required, Validators.minLength(10)]),
-    image: new FormControl(''),
-  });
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
+      bio: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      image: new FormControl(''),
+    });
   ngOnInit() {
+
     if (isPlatformBrowser(this._PID)) {
-      this.loadInstructorData();
+      if (this.role == 'Instructor') {
+        this.loadInstructorData();
+      } else if (this.role == 'Student') {
+        this.loadStudentData();
+      }
     }
   }
 
-  intialValues()
-  {
-    this.editForm.get('userName')?.setValue(this.instructorData.name);
-    this.editForm.get('bio')?.setValue(this.instructorData.bio);
+  intialValues() {
+    this.editForm.get('userName')?.setValue(this.userInfo.name);
+    if (this.role == 'Instructor') {
+      this.editForm.get('bio')?.setValue((this.userInfo as Instructor).bio);
+    } else {
+      (this.editForm as FormGroup).removeControl('bio');
+    }
   }
 
   handleImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.instructorData.image = URL.createObjectURL(file);
+      this.userInfo.image = URL.createObjectURL(file);
       this.editForm.patchValue({
         image: file,
       });
     }
   }
 
-  submitForm() {
+  submitFormInstructor() {
     if (this.editForm.valid) {
       const formData = new FormData();
       formData.append('Name', this.editForm.get('userName')?.value as string);
@@ -61,8 +76,25 @@ export class AccountSettingsComponent {
       formData.append('Id', this._auth.UserData.getValue().roleId.toString());
       formData.append('Email', this._auth.UserData.getValue().Email as string);
       this._instructorService.updateInstructor(formData).subscribe(() => {
-        console.log('done');
+        this._router.navigate(['/home']);
       });
+    }
+  }
+
+  submitFormStudent() {
+    if (this.editForm.valid) {
+      const formData = new FormData();
+      formData.append('Name', this.editForm.get('userName')?.value as string);
+      formData.append(
+        'Image',
+        this.editForm.get('image')?.value as unknown as File
+      );
+      formData.append('Email', this._auth.UserData.getValue().Email as string);
+      this._studentService
+        .updateStudent(this._auth.UserData.getValue().roleId, formData)
+        .subscribe(() => {
+          this._router.navigate(['/home']);
+        });
     }
   }
 
@@ -71,7 +103,21 @@ export class AccountSettingsComponent {
       .getSpecificInstructor(this._auth.UserData.getValue().roleId.toString())
       .subscribe({
         next: (res: Instructor) => {
-          this.instructorData = res;
+          this.userInfo = res;
+          this.intialValues();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  loadStudentData() {
+    this._studentService
+      .getStudentData(this._auth.UserData.getValue().roleId)
+      .subscribe({
+        next: (res: Student) => {
+          this.userInfo = res;
           this.intialValues();
         },
         error: (err) => {
@@ -81,7 +127,7 @@ export class AccountSettingsComponent {
   }
 
   removeImage() {
-    this.instructorData.image = '';
+    this.userInfo.image = '';
     this.editForm.get('image')?.setValue('');
   }
 }

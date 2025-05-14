@@ -1,3 +1,4 @@
+import { isStudentGuard } from './core/guards/is-student.guard';
 import { ChooseRoleComponent } from './features/components/choose-role/choose-role.component';
 import { Routes } from '@angular/router';
 import { CourseComponent } from './features/components/course/course.component';
@@ -23,6 +24,7 @@ import { CartComponent } from './features/components/cart/cart.component';
 import { AddQuizComponent } from './features/components/add-quiz/add-quiz.component';
 import { EditQuizComponent } from './features/components/edit-quiz/edit-quiz.component';
 import { QuizRoomComponent } from './features/components/quiz-room/quiz-room.component';
+import { MyCoursesComponent } from './features/components/my-courses/my-courses.component';
 
 
 export const routes: Routes = [
@@ -123,13 +125,19 @@ export const routes: Routes = [
     path: 'quizRoom/:quizId',
     component: QuizRoomComponent,
     title: 'Quiz Room',
-    canActivate: [isloggedGuard],
+    canActivate: [isStudentGuard],
   },
   {
     path: 'cart',
     component: CartComponent,
     title: 'cart',
-    canActivate: [isloggedGuard],
+    canActivate: [isStudentGuard],
+  },
+  {
+    path: "myCourses",
+    component: MyCoursesComponent,
+    title: "My Courses",
+    canActivate: [isStudentGuard],
   },
   {
     path: 'accountSettings',

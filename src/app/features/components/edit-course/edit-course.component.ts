@@ -16,7 +16,6 @@ import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { VideoService } from '../../../core/services/video.service';
-import { HttpEventType } from '@angular/common/http';
 import { VideoPlayerComponent } from '../../helpers/video-player/video-player.component';
 import { QuizService } from '../../../core/services/quiz.service';
 
@@ -148,13 +147,15 @@ export class EditCourseComponent {
     }
   }
 
-  onFileChange(event: any) {
+  onFileChange(event: any)
+  {
     if (event.target.files[0].type.includes('video')) {
       this.selectedVideoFile = event.target.files[0];
     }
   }
 
-  removeSelectedFile() {
+  removeSelectedFile()
+  {
     this.selectedVideoFile = undefined;
   }
 
