@@ -16,6 +16,8 @@ export class StudentService {
   }
 
   updateStudent(studentId: number, student: FormData): Observable<any> {
-    return this._http.put(`${this.Url}/${studentId}`, student);
+    return this._http.put(`${this.Url}/${studentId}`, student, {
+      responseType: 'text',
+    });
   }
 }

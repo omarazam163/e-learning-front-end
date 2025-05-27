@@ -25,6 +25,7 @@ import { AddQuizComponent } from './features/components/add-quiz/add-quiz.compon
 import { EditQuizComponent } from './features/components/edit-quiz/edit-quiz.component';
 import { QuizRoomComponent } from './features/components/quiz-room/quiz-room.component';
 import { MyCoursesComponent } from './features/components/my-courses/my-courses.component';
+import { AccountConfimedComponent } from './features/components/account-confimed/account-confimed.component';
 
 
 export const routes: Routes = [
@@ -126,6 +127,11 @@ export const routes: Routes = [
     component: QuizRoomComponent,
     title: 'Quiz Room',
     canActivate: [isStudentGuard],
+  },
+  {
+    path:"accountConfimed",
+    component:AccountConfimedComponent,
+    title:'Account Confimed'
   },
   {
     path: 'cart',

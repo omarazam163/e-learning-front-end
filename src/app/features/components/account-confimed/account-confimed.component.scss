@@ -1,0 +1,61 @@
+    @keyframes checkmark {
+      0% {
+        stroke-dashoffset: 100;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+    
+    @keyframes circle {
+      0% {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-checkmark {
+      animation: checkmark 0.8s ease-in-out forwards 0.6s;
+    }
+
+    .animate-circle {
+      animation: circle 0.6s ease-in-out forwards;
+    }
+
+    .animate-fadeInUp-1 {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-in-out forwards 0.4s;
+    }
+
+    .animate-fadeInUp-2 {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-in-out forwards 0.6s;
+    }
+
+    .animate-fadeInUp-3 {
+      opacity: 0;
+      animation: fadeInUp 0.6s ease-in-out forwards 0.8s;
+    }

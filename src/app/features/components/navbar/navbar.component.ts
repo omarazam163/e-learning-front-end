@@ -52,7 +52,8 @@ export class NavbarComponent {
     this._StudentService
     .getStudentData(this._auth.UserData.getValue().roleId)
     .subscribe((res) => {
-      if(res.image != null) this.Image = res.image
+      if (res.image != null) this.Image = res.image;
+      else this.Image = '';
     })
   }
 
@@ -62,6 +63,7 @@ export class NavbarComponent {
     .getSpecificInstructor(this._auth.UserData.getValue().roleId.toString())
     .subscribe((res) => {
       if(res.image != null) this.Image = res.image
+      else this.Image = "";
     })
   }
 

@@ -153,7 +153,10 @@ export class AccountSettingsComponent {
       console.log(this.editForm.value);
       formData.append('Name', this.editForm.get('userName')?.value as string);
       formData.append('Bio', this.editForm.get('bio')?.value as string);
-      formData.append('Position', this.editForm.get('position')?.value as string);
+      formData.append(
+        'Position',
+        this.editForm.get('position')?.value as string
+      );
       formData.append(
         'Image',
         this.editForm.get('image')?.value as unknown as File
